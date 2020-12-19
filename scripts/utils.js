@@ -34,8 +34,9 @@ async function getAllProducts() {
                             <br />
                             <p><strong>Price: $</strong> ${productPrice}</p>
                         </div>
-                        <div class="card-footer bg-transparent text-center">
-                            <button type="button" class="btn btn-outline-warning btn-lg btn-block" id="buy-btn">Buy Product</button>
+                        <div class="card-footer bg-transparent text-center row">
+                            <button type="button" class="btn btn-outline-warning btn-sm col" id="buy-btn">Buy Product</button>
+                            <button type="button" class="btn btn-outline-warning btn-sm col offset-md-1" id="edit-btn">Edit Product</button>
                         </div>
                     </div>
                 </div>
@@ -65,4 +66,52 @@ async function createNewProduct(product) {
     .catch(_ => result = false);
 
     return result;
+}
+
+// Update product
+async function updateProduct(id, product) {
+    var result = false;
+
+    await fetch(`http://remotedevs.org:8080/api/product/update/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(product),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(_ => result = true)
+    .catch(_ => result = false);
+
+    return result;
+}
+
+// Get a single product
+async function getProduct(id) {
+    var products = [];
+    
+    await fetch('http://remotedevs.org:8080/api/product/', {
+        method: 'GET',
+        mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(data => products = data)
+    .catch(_ => {});
+
+    if (products.length > 0) {
+        for (const index in products) {
+            var product = products[index];
+
+            if (product.id == id) {
+                console.log("Product match!");
+                return {
+                    "name": product.name,
+                    "imageURL": product.imageURL,
+                    "price": product.price,
+                    "description": product.description
+                };
+            }
+        }
+    }
+
+    return {};
 }
