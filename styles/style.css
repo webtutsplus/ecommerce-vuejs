@@ -1,3 +1,10 @@
+.form-product {
+  width: 100%;
+  max-width: 700px;
+  padding: 15px;
+  margin: auto;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;

@@ -12,14 +12,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!--Custom Stylesheet-->
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
     <title>WebTutsPlus E-Commerce</title>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">  
     <header>
         <!--Navigation bar-->
         <div class="navbar navbar-dark bg-dark shadow-sm">
@@ -28,37 +28,35 @@
                     <img src="/assets/favicon-32x32.png" alt="icon" width="35" height="35">
                     <strong>WebTutsPlus E-Commerce</strong>
                 </a>
-                <button class="btn btn-outline-warning" type="button" id="add-product">Add Product</button>
             </div>
         </div>
     </header>
 
-    <main class="container main">
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-              <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Tutorial Merchandise</h1>
-                <p class="lead text-muted">The best tutorial guides that money can buy!</p>
-              </div>
+    <main class="form-product">
+        <form id="product-form">
+            <div class="mb-3">
+                <label for="productNameInput" class="form-label">Name</label>
+                <input type="text" class="form-control" id="productNameInput" placeholder="Product Name" required>
             </div>
-        </section>
-
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row" id="card-container">
-                    <!--More cards will be add here-->
-
-                </div>
+            <div class="mb-3">
+                <label for="productNameInput" class="form-label">Image URL</label>
+                <input type="url" class="form-control" id="productImageURLInput" placeholder="Product Image URL" required>
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="productNameInput" class="form-label">Price</label>
+                <input type="number" class="form-control" id="productPriceInput" placeholder="Product Price" required>
+            </div>
+            <div class="mb-3">
+                <label for="productNameInput" class="form-label">Description</label>
+                <input type="text" class="form-control" id="productDescriptionInput" placeholder="Product Description" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
     </main>
 
     <footer class="mt-auto text-muted py-5">
         <div class="container">
-          <p class="float-end mb-1">
-            <a href="#">Back to top</a>
-          </p>
-          <p class="mb-1">Tutorial made for and by <a href="https://www.webtutsplus.com">WebTutsPlus</a>.   </p>
+          <p class="mb-1">Tutorial made for and by <a href="https://www.webtutsplus.com">WebTutsPlus</a>.</p>
         </div>
     </footer>
     
