@@ -18,7 +18,6 @@ $("#card-container").on("click", "#buy-btn", function() {
 // Handle page changes to add-product.html
 $("#add-product").on("click", function() {
     window.location.href = "add-product.html";
-    console.log("Page should have changed");
 });
 
 // Handle form submit for add-product.html
