@@ -1,0 +1,32 @@
+<template>
+  <div class="categories-box container">
+    <h2>All Categories</h2>
+    <router-link :to="{name : 'AddCategory'}">
+        <button type="button" class="btn btn-success add-btn btn-lg">Add a new Category</button>
+    </router-link>
+    <div v-for="category of categories" :key="category.id">
+      <CategoryBox :category="category">
+      </CategoryBox>
+    </div>
+  </div>
+</template>
+
+<script>
+import CategoryBox from '../../components/CategoryBox';
+export default {
+  name: 'Category',
+  components : {CategoryBox}, 
+  props : [ "baseURL" , "categories" ],
+}
+</script>
+
+<style>
+.categories-box h2{
+  text-align : center;
+  font-size : 60px;
+  margin : 30px 0;
+}
+.add-btn{
+  margin : 20px 0;
+}
+</style>
