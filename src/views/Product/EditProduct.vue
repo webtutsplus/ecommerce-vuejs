@@ -3,8 +3,10 @@
     <h2>Edit Product</h2>
     <form>
       <div class="form-group">
-        <label>Category ID</label>
-        <input type="number" class="form-control" v-model="category_id" required>
+        <label>Category</label>
+        <select class="form-control" v-model="category_id" required>
+          <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label>Name</label>
@@ -40,7 +42,7 @@ export default {
       id : null
     }
   },
-  props : ["baseURL", "products"],
+  props : ["baseURL", "products", "categories"],
   methods : {
     editProduct : async function() {
       const newProduct = {
@@ -82,9 +84,10 @@ export default {
 
 <style>
 .editProduct h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>

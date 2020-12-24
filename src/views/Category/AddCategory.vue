@@ -56,9 +56,10 @@ export default {
 
 <style>
 .addCategory h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>

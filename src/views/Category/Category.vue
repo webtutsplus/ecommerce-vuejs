@@ -22,9 +22,10 @@ export default {
 
 <style>
 .categories-box h2{
-  text-align : center;
+  font-family: 'Courgette', cursive;
   font-size : 60px;
-  margin : 30px 0;
+  text-align : center;
+  margin : 70px 0;
 }
 .add-btn{
   margin : 20px 0;

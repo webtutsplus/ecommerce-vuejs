@@ -40,9 +40,8 @@ export default {
         imageURL : this.imageURL,
         products : []
       }
+
       const url = this.baseURL+"category/update/"+this.id.toString(10);
-      console.log(url);
-      console.log(newCategory);
       await fetch(url, {
           method : "POST",
           body : JSON.stringify(newCategory),
@@ -71,9 +70,10 @@ export default {
 
 <style>
 .editCategory h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>

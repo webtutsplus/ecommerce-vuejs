@@ -3,8 +3,10 @@
     <h2>Add new Product</h2>
     <form>
       <div class="form-group">
-        <label>Category ID</label>
-        <input type="number" class="form-control" v-model="category_id" required>
+        <label>Category</label>
+        <select class="form-control" v-model="category_id" required>
+          <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label>Name</label>
@@ -38,7 +40,7 @@ export default {
       price : null
     }
   },
-  props : ["baseURL", "products"],
+  props : ["baseURL", "products", "categories"],
   methods : {
     addProduct : async function() {
       const newProduct = {
@@ -48,6 +50,7 @@ export default {
         imageURL : this.imageURL,
         price : this.price 
       }
+      console.log(newProduct);
       await fetch(this.baseURL+"product/add", {
           method : "POST",
           body : JSON.stringify(newProduct),
@@ -68,9 +71,10 @@ export default {
 
 <style>
 .addProduct h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>
