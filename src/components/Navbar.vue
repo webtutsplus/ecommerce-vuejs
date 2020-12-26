@@ -1,19 +1,19 @@
 <template>
   <div class="nav">
     <router-link :to="{name : 'Home'}">
-    <img src="../assets/logo.png" alt="Webtutsplus logo" class="logo">
+      <img src="../assets/logo.png" alt="Webtutsplus logo" class="logo">
     </router-link>
     <ul class="main-nav">
-        <li><router-link :to="{name : 'Home'}" >HOME</router-link></li>
-        <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
-        <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>
+      <li><router-link :to="{name : 'Home'}" >HOME</router-link></li>
+      <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
+      <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-    name : "Navbar"
+  name : "Navbar"
 }
 </script>
 

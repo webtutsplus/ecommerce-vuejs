@@ -18,11 +18,16 @@ export default {
   components : {Footer, Navbar},
   mounted : async function mounted() {
     // fetch products
-    const response1  = await fetch(this.baseURL + "product/");
-    this.products = await response1.json();
+    fetch(this.baseURL + "product/")
+      .then(res => res.json())
+      .then(data => this.products = data)
+      .catch(err => console.log(err));
+
     //fetch categories
-    const response2  = await fetch(this.baseURL + "category/");
-    this.categories = await response2.json();
+    fetch(this.baseURL + "category/")
+      .then(res => res.json())
+      .then(data => this.categories = data)
+      .catch(err => console.log(err));
   }
 }
 </script>
