@@ -6,6 +6,7 @@ import EditProduct from '../views/Product/EditProduct.vue'
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
+import Signup from '../views/Signup/Signup.vue'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/category/update/:id',
     name: 'EditCategory',
     component: EditCategory
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   }
 ]
 
