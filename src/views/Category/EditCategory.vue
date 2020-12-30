@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <label>ImageURL</label>
-        <input type="url" class="form-control" v-model="imageURL" required>
+        <input type="url" class="form-control" v-model="imageUrl" required>
       </div>
       <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
     </form>
@@ -23,11 +23,11 @@
 export default {
   data(){
     return {
+      id : null,
       categoryName : null, 
       description : null,
-      imageURL : null,
-      categoryIndex : null,
-      id : null
+      imageUrl : null,
+      categoryIndex : null
     }
   },
   props : ["baseURL", "categories"],
@@ -37,8 +37,8 @@ export default {
         id : this.id,
         categoryName : this.categoryName, 
         description : this.description,
-        imageURL : this.imageURL,
-        products : []
+        imageUrl : this.imageUrl,
+        products : null
       }
 
       const url = this.baseURL+"category/update/"+this.id.toString(10);
@@ -50,7 +50,11 @@ export default {
           }
       })
       .then((res) => {
-          this.categories[this.categoryIndex] = newCategory;
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/category");
           alert("Category Updated Successfully!");
       })
@@ -63,7 +67,7 @@ export default {
     //input fields
     this.categoryName = this.categories[this.categoryIndex].categoryName;
     this.description = this.categories[this.categoryIndex].description;
-    this.imageURL = this.categories[this.categoryIndex].imageURL;
+    this.imageUrl = this.categories[this.categoryIndex].imageUrl;
   }
 }
 </script>
@@ -75,5 +79,4 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-
 </style>

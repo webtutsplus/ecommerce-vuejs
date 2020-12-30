@@ -4,7 +4,7 @@
     <form>
       <div class="form-group">
         <label>Category</label>
-        <select class="form-control" v-model="category_id" required>
+        <select class="form-control" v-model="categoryId" required>
           <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
         </select>
       </div>
@@ -33,7 +33,8 @@
 export default {
   data(){
     return {
-      category_id : null,
+      id : null,
+      categoryId : null,
       name : null, 
       description : null,
       imageURL : null, 
@@ -44,13 +45,14 @@ export default {
   methods : {
     addProduct : async function() {
       const newProduct = {
-        category_id : this.category_id,
+        id : this.id,
+        categoryId : this.categoryId,
         name : this.name, 
         description : this.description,
         imageURL : this.imageURL,
         price : this.price 
       }
-      console.log(newProduct);
+
       await fetch(this.baseURL+"product/add", {
           method : "POST",
           body : JSON.stringify(newProduct),
@@ -59,7 +61,11 @@ export default {
           }
       })
       .then((res) => {
-          this.products.push(newProduct);
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/product");
           alert("Product Added Successfully!");
       })

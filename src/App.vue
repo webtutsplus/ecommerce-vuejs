@@ -1,6 +1,11 @@
 <template>
   <Navbar/>
-  <router-view :baseURL="baseURL" :products="products" :categories="categories"></router-view>
+  <router-view 
+    :baseURL="baseURL" 
+    :products="products" 
+    :categories="categories"
+    @fetchData = "fetchData">
+  </router-view>
   <Footer v-show="this.$route.name != 'Home'" />
 </template>
 
@@ -10,24 +15,30 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      baseURL : "http://104.236.26.66:8080/api/",
+      // baseURL : "http://104.236.26.66:8080/api/",
+      baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
     }
   },
   components : {Footer, Navbar},
-  mounted : async function mounted() {
-    // fetch products
-    fetch(this.baseURL + "product/")
-      .then(res => res.json())
-      .then(data => this.products = data)
-      .catch(err => console.log(err));
+  methods : {
+    fetchData : function() {
+      // fetch products
+      fetch(this.baseURL + "product/")
+        .then(res => res.json())
+        .then(data => this.products = data)
+        .catch(err => console.log(err));
 
-    //fetch categories
-    fetch(this.baseURL + "category/")
-      .then(res => res.json())
-      .then(data => this.categories = data)
-      .catch(err => console.log(err));
+      //fetch categories
+      fetch(this.baseURL + "category/")
+        .then(res => res.json())
+        .then(data => this.categories = data)
+        .catch(err => console.log(err));
+    }
+  },
+  mounted() {
+    this.fetchData();
   }
 }
 </script>

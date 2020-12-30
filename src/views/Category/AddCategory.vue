@@ -44,7 +44,11 @@ export default {
           }
       })
       .then((res) => {
-          this.categories.push(newCategory);
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/category");
           alert("Category Added Successfully!");
       })
@@ -61,5 +65,4 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-
 </style>
