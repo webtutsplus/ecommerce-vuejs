@@ -15,8 +15,8 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      // baseURL : "http://104.236.26.66:8080/api/",
-      baseURL : "http://localhost:8080/api/",
+      baseURL : "http://104.236.26.66:8080/api/",
+      //baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
     }

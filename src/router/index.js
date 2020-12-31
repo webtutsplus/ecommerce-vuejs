@@ -6,6 +6,7 @@ import EditProduct from '../views/Product/EditProduct.vue'
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
+import ListProducts from '../views/Category/ListProducts.vue'
 
 const routes = [
   {
@@ -20,12 +21,12 @@ const routes = [
     component: Product
   },
   {
-    path: '/product/add',
+    path: '/admin/product',
     name: 'AddProduct',
     component: AddProduct
   },
   {
-    path: '/product/edit/:id',
+    path: '/admin/product/:id',
     name: 'EditProduct',
     component: EditProduct,
   },
@@ -36,12 +37,17 @@ const routes = [
     component: Category
   },
   {
-    path: '/category/add',
+    path : '/category/show/:id',
+    name : 'ListProducts',
+    component: ListProducts
+  },
+  {
+    path: '/admin/category',
     name: 'AddCategory',
     component: AddCategory
   },
   {
-    path: '/category/update/:id',
+    path: '/admin/category/:id',
     name: 'EditCategory',
     component: EditCategory
   }

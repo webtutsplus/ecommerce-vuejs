@@ -10,7 +10,9 @@
             </router-link>
             <h3 class="category_name">{{category.categoryName}}</h3>
             <h3 class="category_description">{{category.description}}</h3>
-            <button type="button" class="see_btn btn btn-lg btn-info">See All Products</button>
+            <router-link :to="{name : 'ListProducts', params : {id : category.id} }">
+                <button type="button" class="see_btn btn btn-lg btn-info">See All Products</button>
+            </router-link>
         </div>
     </div>
   </div>

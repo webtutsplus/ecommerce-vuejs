@@ -19,7 +19,7 @@ export default {
 
 <style>
 .nav{
-  background-image: url("../assets/nav-back.png");
+  background-image: url("../assets/nav-back.jpg");
   justify-content: center;
   font-size: 25px;
 }
