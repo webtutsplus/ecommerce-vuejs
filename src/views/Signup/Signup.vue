@@ -70,7 +70,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .signup h2{
   text-align : center;
   font-size : 60px;
