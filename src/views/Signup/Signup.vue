@@ -1,7 +1,7 @@
 <template>
   <div class="signup container">
     <h2>Signup</h2>
-    <form>
+    <form @submit="signup">
       <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control" v-model="email" required>
@@ -22,7 +22,7 @@
         <label>Confirm Password</label>
         <input type="password" class="form-control" v-model="passwordConfirm" required>
       </div>
-      <button type="submit" class="btn btn-primary" @submit="signup">Signup</button>
+      <button type="submit" class="btn btn-primary">Signup</button>
   </form>
   </div>
 </template>
@@ -41,7 +41,9 @@ export default {
       }
   },
   methods : {
-    signup : async function() {
+    signup : async function(e) {
+      e.preventDefault();
+      if (this.password == this.passwordConfirm) {
         const user = {
             email: this.email,
             firstName: this.firstName,
@@ -60,6 +62,9 @@ export default {
             alert("User signup successful. Please Login");
         })
         .catch((err) => console.log(err));
+      } else {
+        alert("Error! Passwords are not matching.")
+      }
     }
   }
 }
