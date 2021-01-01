@@ -58,10 +58,16 @@ export default {
             }
         })
         .then((res) => {
+          if (res.ok) {
             this.$router.replace("/");
             alert("User signup successful. Please Login");
+          } else {
+            alert("Error occurred while signup");
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          alert(err);
+        });
       } else {
         alert("Error! Passwords are not matching.")
       }

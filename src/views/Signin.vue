@@ -40,11 +40,17 @@ export default {
             }
         })
         .then((res) => {
+          if (res.ok) {
             this.$router.replace("/");
             alert("User signin successful.");
+          } else{
+            alert("Error occurred while signing in");
+          }
         })
-        .catch((err) => console.log(err));
-        }
+        .catch((err) => {
+          alert(err);
+        });
+    }
   }
 }
 </script>
