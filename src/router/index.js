@@ -7,6 +7,7 @@ import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
 import Signup from '../views/Signup.vue'
+import Signin from '../views/Signin.vue'
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: Signin
   }
 ]
 

@@ -7,7 +7,9 @@
             <li><router-link :to="{name : 'Home'}" >Home</router-link></li>
             <li><router-link :to="{name : 'Product'}">Product</router-link></li>
             <li><router-link :to="{name : 'Category'}">Category</router-link></li>
+            <li>|</li>
             <li><router-link :to="{name : 'Signup'}">Signup</router-link></li>
+            <li><router-link :to="{name : 'Signin'}">Signin</router-link></li>
         </ul>
     </div>
     <router-view :baseURL="baseURL" :products="products" :categories="categories"></router-view>
