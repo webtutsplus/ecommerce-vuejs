@@ -6,7 +6,7 @@ import EditProduct from '../views/Product/EditProduct.vue'
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
-import Signup from '../views/Signup/Signup.vue'
+import Signup from '../views/Signup.vue'
 
 const routes = [
   {
