@@ -43,7 +43,7 @@ export default {
   methods : {
     signup : async function(e) {
       e.preventDefault();
-      if (this.password == this.passwordConfirm) {
+      if (this.password === this.passwordConfirm) {
         const user = {
             email: this.email,
             firstName: this.firstName,
