@@ -82,7 +82,4 @@ export default {
   font-size : 60px;
   margin : 30px 0;
 }
-.signup-btn{
-  margin : 20px 0;
-}
 </style>
