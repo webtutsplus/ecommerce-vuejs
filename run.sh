@@ -1,5 +1,5 @@
-#apt install npm
-#npm install
+apt install npm
+npm install
 git checkout master
 git pull origin master
 sudo kill -9 `sudo lsof -t -i:8000`

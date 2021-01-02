@@ -21,7 +21,7 @@ npm run build
 
 ###login in digital ocene
 
-ssh root@104.236.26.66
+ssh root@167.99.37.15
 
 (use password: webTuts9plus)
 
