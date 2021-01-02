@@ -19,5 +19,11 @@ npm run serve -- --port 8003
 npm run build
 ```
 
+###login in digital ocene
+
+ssh root@104.236.26.66
+
+(use password: webTuts9plus)
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
