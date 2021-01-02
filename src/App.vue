@@ -1,12 +1,12 @@
 <template>
   <Navbar/>
-  <router-view 
+  <router-view v-if="products && categories"
     :baseURL="baseURL" 
     :products="products" 
     :categories="categories"
     @fetchData = "fetchData">
   </router-view>
-  <Footer v-show="this.$route.name != 'Home'" />
+  <Footer/>
 </template>
 
 <script>

@@ -1,22 +1,44 @@
 <template>
-  <section>
+  <div class="home-landing">
     <div class="welcome">
       <h1>Webtutsplus Market</h1>
       <p>Shop from a wide range of categories</p>
       <button class="myBtn"><router-link :to="{name : 'Product'}">Start Shopping</router-link></button>
     </div>
-  </section>
+  </div>
+
+  <div class="listing">
+    <h1>Popular Categories</h1>
+    <div class="display-categories" v-if="products">
+      <div v-for="index in 4" :key="index">
+        <CategoryCard :category="categories[index-1]"/>
+      </div>
+    </div>
+
+    <h1>Best Products</h1>
+    <div class="display-products" v-if="categories">
+      <div v-for="index in 4" :key="index">
+        <ProductCard :product="products[index-1]"/>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
+import ProductCard from "../components/ProductCard"
+import CategoryCard from "../components/CategoryCard"
 export default {
   name: 'Home',
-  props : ["baseURL"],
+  components : {ProductCard, CategoryCard},
+  props : ["baseURL", "products", "categories"],
+  emits : ["fetchData"]
 }
 </script>
 
 <style>
-section{
+/* Home Landing */
+.home-landing{
   padding : 100px;
   background-image: url("../assets/6.jpg");
   height : 85.5vh;
@@ -55,5 +77,26 @@ section{
 .myBtn a:hover{
   color : white;
   text-decoration: none;
+}
+
+/* Listing */
+.listing h1{
+  text-align: center;
+  margin-top: 70px;
+}
+.listing h1:after {
+  display: block;
+  height: 2px;
+  background-color: #95673f;
+  content:" ";
+  width:100px;
+  margin : 30px auto;
+}
+.display-categories,
+.display-products{
+  margin-top : 70px;
+  display : flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 </style>

@@ -16,7 +16,7 @@ import ProductBox from '../../components/ProductBox';
 export default {
   name: 'Product',
   components : {ProductBox}, 
-  props : [ "baseURL" , "products" ],
+  props : [ "baseURL" , "products" ]
 }
 </script>
 
