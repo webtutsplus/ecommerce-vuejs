@@ -1,3 +1,6 @@
+#check read.me to how to log in
+#cd to ecommere-ui
+#sh run.sh
 apt install npm
 npm install
 git checkout master
