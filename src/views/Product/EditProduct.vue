@@ -3,8 +3,10 @@
     <h2>Edit Product</h2>
     <form>
       <div class="form-group">
-        <label>Category ID</label>
-        <input type="number" class="form-control" v-model="category_id" required>
+        <label>Category</label>
+        <select class="form-control" v-model="categoryId" required>
+          <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label>Name</label>
@@ -31,27 +33,27 @@
 export default {
   data(){
     return {
-      category_id : 0,
+      id : null,
+      categoryId : 0,
       name : null, 
       description : null,
       imageURL : null,
       price : 0,
-      productIndex : null,
-      id : null
+      productIndex : null
     }
   },
-  props : ["baseURL", "products"],
+  props : ["baseURL", "products", "categories"],
   methods : {
     editProduct : async function() {
       const newProduct = {
-        category_id : this.category_id,
+        id : this.id,
+        categoryId : this.categoryId,
         name : this.name, 
         description : this.description,
         imageURL : this.imageURL,
         price : this.price 
       }
       const url = this.baseURL+"product/update/"+this.id.toString(10);
-
       await fetch(url, {
           method : "POST",
           body : JSON.stringify(newProduct),
@@ -60,7 +62,11 @@ export default {
           }
       })
       .then((res) => {
-          this.products[this.productIndex] = newProduct;
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/product");
           alert("Product Updated Successfully!");
       })
@@ -71,7 +77,7 @@ export default {
     this.id = this.$route.params.id;
     this.productIndex = this.products.findIndex(product => product.id == this.id);
     //input fields
-    this.category_id = this.products[this.productIndex].category_id;
+    this.categoryId = this.products[this.productIndex].categoryId;
     this.name = this.products[this.productIndex].name;
     this.description = this.products[this.productIndex].description;
     this.imageURL = this.products[this.productIndex].imageURL;
@@ -82,9 +88,10 @@ export default {
 
 <style>
 .editProduct h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>

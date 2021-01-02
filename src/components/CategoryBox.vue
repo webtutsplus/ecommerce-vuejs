@@ -2,15 +2,15 @@
   <div class="category-box">
       <div class="row">
         <div class="col-4">
-            <img class="img-fluid" v-bind:src="category.imageUrl" :alt="category.categoryName">
+            <img class="img-fluid" v-bind:src="category.imageUrl" :alt="category.categoryName" @click="listProducts">
         </div>
         <div class="col-8">
             <router-link :to="{name : 'EditCategory', params : {id : category.id} }">
                 <button class="btn btn-primary edit_btn">Edit</button>
             </router-link>
-            <h3 class="category_name">{{category.categoryName}}</h3>
+            <h3 class="category_name" @click="listProducts">{{category.categoryName}}</h3>
             <h3 class="category_description">{{category.description}}</h3>
-            <button type="button" class="see_btn btn btn-lg btn-info">See All Products</button>
+            <button type="button" class="see_btn btn btn-lg btn-info" @click="listProducts">See All Products</button>
         </div>
     </div>
   </div>
@@ -19,13 +19,18 @@
 <script>
 export default {
     name : "CategoryBox",
-    props : ["category"]
+    props : ["category"],
+    methods : {
+        listProducts(){
+            this.$router.push({ name: 'ListProducts', params: { id : this.category.id } })
+        }
+    }
 }
 </script>
 
 <style>
 .category-box{
-    background-color: rgb(246, 241, 245);
+    background-color: rgb(234, 249, 255);
     border-radius: 10px;
     margin: 20px 0;
     padding: 15px 15px;
@@ -33,11 +38,15 @@ export default {
 .category-box img{
     border-radius : 10px;
 }   
+.category-box img:hover{
+    cursor:pointer;
+}
 .category_name{
     font-size: 35px;
 }
 .category_name:hover{
-    color:rgb(43, 107, 226);
+    color:rgb(243, 126, 31);
+    cursor:pointer;
 }
 .category_description{
     font-size: 20px;
