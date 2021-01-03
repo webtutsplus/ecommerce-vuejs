@@ -5,7 +5,7 @@
             <img class="img-fluid" v-bind:src="product.imageURL" alt="product-image">
         </div>
         <div class="col-8">
-            <router-link :to="{name : 'EditProduct', params : {id : product.id} }" v-show="this.$route.name === 'Product'">
+            <router-link :to="{name : 'EditProduct', params : {id : product.id} }" v-show="this.$route.name=='AdminProduct'">
                 <button class="btn btn-primary edit_btn">Edit</button>
             </router-link>
             <h3 class="product_name" @click="showDetails">{{product.name}}</h3>

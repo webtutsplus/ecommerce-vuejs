@@ -5,7 +5,7 @@
             <img class="img-fluid" v-bind:src="category.imageUrl" :alt="category.categoryName" @click="listProducts">
         </div>
         <div class="col-8">
-            <router-link :to="{name : 'EditCategory', params : {id : category.id} }">
+            <router-link :to="{name : 'EditCategory', params : {id : category.id} }" v-show="this.$route.name=='AdminCategory'">
                 <button class="btn btn-primary edit_btn">Edit</button>
             </router-link>
             <h3 class="category_name" @click="listProducts">{{category.categoryName}}</h3>
