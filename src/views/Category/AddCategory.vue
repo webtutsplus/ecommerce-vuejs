@@ -44,7 +44,11 @@ export default {
           }
       })
       .then((res) => {
-          this.categories.push(newCategory);
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/category");
           alert("Category Added Successfully!");
       })
@@ -56,9 +60,9 @@ export default {
 
 <style>
 .addCategory h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
-
 </style>

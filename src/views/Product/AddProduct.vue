@@ -3,8 +3,10 @@
     <h2>Add new Product</h2>
     <form>
       <div class="form-group">
-        <label>Category ID</label>
-        <input type="number" class="form-control" v-model="category_id" required>
+        <label>Category</label>
+        <select class="form-control" v-model="categoryId" required>
+          <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label>Name</label>
@@ -31,23 +33,26 @@
 export default {
   data(){
     return {
-      category_id : null,
+      id : null,
+      categoryId : null,
       name : null, 
       description : null,
       imageURL : null, 
       price : null
     }
   },
-  props : ["baseURL", "products"],
+  props : ["baseURL", "products", "categories"],
   methods : {
     addProduct : async function() {
       const newProduct = {
-        category_id : this.category_id,
+        id : this.id,
+        categoryId : this.categoryId,
         name : this.name, 
         description : this.description,
         imageURL : this.imageURL,
         price : this.price 
       }
+
       await fetch(this.baseURL+"product/add", {
           method : "POST",
           body : JSON.stringify(newProduct),
@@ -56,7 +61,11 @@ export default {
           }
       })
       .then((res) => {
-          this.products.push(newProduct);
+          if(!res.ok){
+            throw Error("Status code error!!");
+          }
+          //sending the event to parent to handle
+          this.$emit("fetchData");
           this.$router.replace("/product");
           alert("Product Added Successfully!");
       })
@@ -68,9 +77,10 @@ export default {
 
 <style>
 .addProduct h2 {
+  font-family: 'Courgette', cursive;
   font-size : 60px;
   text-align : center;
-  margin : 30px 0 30px 0;
+  margin : 70px 0;
 }
 
 </style>
