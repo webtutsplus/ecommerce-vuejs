@@ -23,7 +23,7 @@ export default {
 <style>
 .card{
   width : 20rem;
-  height : 22rem;
+  height : 24rem;
 }
 
 .product-card img:hover{

@@ -1,7 +1,7 @@
 <template>
   <div class="categories-box container">
     <h2>All Categories</h2>
-    <router-link :to="{name : 'AddCategory'}">
+    <router-link :to="{name : 'AddCategory'}" v-show="this.$route.name=='AdminCategory'">
         <button type="button" class="btn btn-success add-btn btn-lg">Add a new Category</button>
     </router-link>
     <div v-for="category of categories" :key="category.id">
