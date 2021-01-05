@@ -50,10 +50,14 @@ export default {
         })
         .then((res) => {
           if (res.ok) {
-            this.$router.replace("/");
-            alert("User signin successful.");
+            res.json().then(json => {
+              localStorage.setItem('token', json.token);
+              this.$router.back();
+            });
           } else{
-            alert("Error occurred while signing in");
+            res.json().then(json => {
+              alert("Error occurred while signing in. " + json.message);
+            });
           }
         })
         .catch((err) => {
