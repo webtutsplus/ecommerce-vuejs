@@ -24,6 +24,8 @@
       </div>
       <button type="submit" class="btn btn-primary">Signup</button>
   </form>
+  <br/>
+  Already have an account?&nbsp;&nbsp;<router-link :to="{name: 'Signin'}">Signin Here</router-link>
   </div>
 </template>
 
