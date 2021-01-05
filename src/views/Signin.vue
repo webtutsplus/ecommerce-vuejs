@@ -52,6 +52,7 @@ export default {
           if (res.ok) {
             res.json().then(json => {
               localStorage.setItem('token', json.token);
+              this.$emit("refreshNav");
               this.$router.back();
             });
           } else{
