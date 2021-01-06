@@ -32,7 +32,7 @@ export default {
   name: 'Home',
   components : {ProductCard, CategoryCard},
   props : ["baseURL", "products", "categories"],
-  emits : ["fetchData"]
+  emits : ["fetchData", "refreshNav"]
 }
 </script>
 
