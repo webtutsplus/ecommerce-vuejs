@@ -63,15 +63,6 @@ export default {
 .edit_btn{
     float : right;
 }
-
-.favourite{
-    float : right;
-    font-size : 30px;
-    margin : 4px 15px 0 0;
-    color : red;
-    cursor : pointer;
-}
-
 .buy_btn{
     margin-top : 60px;
 }

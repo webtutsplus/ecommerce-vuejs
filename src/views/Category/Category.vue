@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CategoryBox from '../../components/CategoryBox';
+import CategoryBox from '../../components/Category/CategoryBox';
 export default {
   name: 'Category',
   components : {CategoryBox}, 

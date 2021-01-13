@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ProductBox from '../../components/ProductBox';
+import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'ListProducts',
   data(){

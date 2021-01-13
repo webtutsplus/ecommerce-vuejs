@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ProductBox from '../../components/ProductBox';
+import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'Product',
   components : {ProductBox}, 
@@ -27,7 +27,7 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-.add-btn{
+.products-box .add-btn{
   margin : 20px 0;
 }
 </style>

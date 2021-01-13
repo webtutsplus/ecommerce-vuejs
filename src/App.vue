@@ -16,14 +16,14 @@ export default {
   data() {
     return {
       baseURL : "http://remotedevs.org:8080//api/",
-      //baseURL : "http://localhost:8080/api/",
+      // baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
     }
   },
   components : {Footer, Navbar},
   methods : {
-    fetchData : function() {
+    fetchData() {
       // fetch products
       fetch(this.baseURL + "product/")
         .then(res => res.json())
