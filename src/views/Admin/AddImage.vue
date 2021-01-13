@@ -41,7 +41,11 @@ export default {
                 //sending the event to parent to handle
                 // this.$emit("fetchData");
                 // this.$router.replace("/product");
-                alert("Image Added Successfully!");
+                swal({
+                    text: "Image Added Successfully!",
+                    icon: "success",
+                    closeOnClickOutside: false,
+                });
             })
             .catch((err) => console.log(err));
         }

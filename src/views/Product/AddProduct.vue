@@ -67,7 +67,11 @@ export default {
           //sending the event to parent to handle
           this.$emit("fetchData");
           this.$router.replace("/product");
-          alert("Product Added Successfully!");
+          swal({
+            text: "Product Added Successfully!",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
       })
       .catch((err) => console.log(err));
     }

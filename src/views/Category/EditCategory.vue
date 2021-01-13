@@ -56,7 +56,11 @@ export default {
           //sending the event to parent to handle
           this.$emit("fetchData");
           this.$router.replace("/category");
-          alert("Category Updated Successfully!");
+          swal({
+            text: "Category Updated Successfully!",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
       })
       .catch((err) => console.log(err));
     }
