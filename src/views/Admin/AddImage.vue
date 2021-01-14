@@ -24,30 +24,33 @@ export default {
         async onUpload(){
             if(this.selectedFile.type !== "image/jpeg") {
                 //file format is not correct
-                alert("Select a image/jpeg file!");
+                swal({
+                    text: "Select a image/jpeg file!",
+                    icon: "error",
+                    closeOnClickOutside: false,
+                });
                 return;
             }
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
+
             await fetch(this.baseURL + "fileUpload/",{
                 method : "POST",
-                body : this.selectedFile,
-                headers : {
-                    'Content-Type': 'multipart/form-data'
-                }
+                body : formData
             })
             .then((res) => {
                 if(!res.ok){
                     throw Error("Status code error!!");
                 }
-                //sending the event to parent to handle
-                // this.$emit("fetchData");
-                // this.$router.replace("/product");
+                
+                this.$router.push({name : "Gallery"});
                 swal({
                     text: "Image Added Successfully!",
                     icon: "success",
                     closeOnClickOutside: false,
                 });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log("Hello",err));
         }
     }
 }

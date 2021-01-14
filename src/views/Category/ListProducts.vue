@@ -2,7 +2,7 @@
   <div class="list-products container">
     <h2>{{category.categoryName}}</h2>
     <div class="msg">
-        <h3>{{msg}}</h3>
+      <h3>{{msg}}</h3>
     </div>
     <img v-show="len == 0" class="img-fluid" src="../../assets/sorry.jpg" alt="Sorry">
     <div v-for="product of category.products" :key="product.id">
@@ -17,13 +17,13 @@ import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'ListProducts',
   data(){
-      return {
-        id : null,
-        categoryIndex : null,
-        category : {},
-        len : 0,
-        msg : null
-      }
+    return {
+      id : null,
+      categoryIndex : null,
+      category : {},
+      len : 0,
+      msg : null
+    }
   },
   components : {ProductBox}, 
   props : [ "baseURL" , "categories" ],

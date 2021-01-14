@@ -49,7 +49,7 @@ export default {
           }
           //sending the event to parent to handle
           this.$emit("fetchData");
-          this.$router.replace("/category");
+          this.$router.push({name:'AdminCategory'});
           swal({
             text: "Category Added Successfully!",
             icon: "success",

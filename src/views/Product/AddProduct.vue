@@ -54,24 +54,24 @@ export default {
       }
 
       await fetch(this.baseURL+"product/add", {
-          method : "POST",
-          body : JSON.stringify(newProduct),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+        method : "POST",
+        body : JSON.stringify(newProduct),
+        headers: {
+            'Content-Type': 'application/json'
+        }
       })
       .then((res) => {
-          if(!res.ok){
-            throw Error("Status code error!!");
-          }
-          //sending the event to parent to handle
-          this.$emit("fetchData");
-          this.$router.replace("/product");
-          swal({
-            text: "Product Added Successfully!",
-            icon: "success",
-            closeOnClickOutside: false,
-          });
+        if(!res.ok){
+          throw Error("Status code error!!");
+        }
+        //sending the event to parent to handle
+        this.$emit("fetchData");
+        this.$router.push({name : 'AdminProduct'});
+        swal({
+          text: "Product Added Successfully!",
+          icon: "success",
+          closeOnClickOutside: false,
+        });
       })
       .catch((err) => console.log(err));
     }
@@ -86,5 +86,4 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-
 </style>

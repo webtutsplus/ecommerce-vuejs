@@ -58,7 +58,7 @@ export default {
           method : "POST",
           body : JSON.stringify(newProduct),
           headers: {
-              'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
           }
       })
       .then((res) => {
@@ -67,7 +67,7 @@ export default {
           }
           //sending the event to parent to handle
           this.$emit("fetchData");
-          this.$router.replace("/product");
+          this.$router.push({name : 'AdminProduct'});
           swal({
             text: "Product Updated Successfully!",
             icon: "success",
