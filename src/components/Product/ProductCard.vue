@@ -2,8 +2,8 @@
   <div class="card product-card">
     <img :src="product.imageURL" class="card-img-top" alt="image" @click="showDetails">
     <div class="card-body">
-        <p class="name" @click="showDetails">{{product.name}}</p>
-        <p class="card-text">{{product.description}}</p>
+      <p class="name" @click="showDetails">{{product.name}}</p>
+      <p class="card-text">{{product.description}}</p>
     </div>
   </div>
 </template>
@@ -13,10 +13,10 @@ export default {
   name : "ProductCard",
   props : ["product"],
   methods : {
-      showDetails(){
-        this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
-      }
+    showDetails(){
+      this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
     }
+  }
 }
 </script>
 

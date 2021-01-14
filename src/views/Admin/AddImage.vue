@@ -34,15 +34,12 @@ export default {
             const formData = new FormData();
             formData.append('file', this.selectedFile);
 
-            await fetch(this.baseURL + "fileUpload/",{
-                method : "POST",
-                body : formData
+            await axios({
+                method: 'post',
+                url: this.baseURL + "fileUpload/",
+                data : formData,
             })
-            .then((res) => {
-                if(!res.ok){
-                    throw Error("Status code error!!");
-                }
-                
+            .then(res => {
                 this.$router.push({name : "Gallery"});
                 swal({
                     text: "Image Added Successfully!",
@@ -50,7 +47,7 @@ export default {
                     closeOnClickOutside: false,
                 });
             })
-            .catch((err) => console.log("Hello",err));
+            .catch(err => console.log(err))
         }
     }
 }

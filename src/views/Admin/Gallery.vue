@@ -3,13 +3,13 @@
     <h2>Gallery</h2>
 
     <router-link :to="{name : 'AddImage'}">
-        <button type="button" class="btn btn-success add-btn btn-lg">Add a new Image</button>
+      <button type="button" class="btn btn-success add-btn btn-lg">Add a new Image</button>
     </router-link>
 
     <div v-if="images" class="images-display">
-        <div v-for="image of images" :key="image.name">
-            <ImageBox :image="image"></ImageBox>
-        </div>
+      <div v-for="image of images" :key="image.name">
+        <ImageBox :image="image"></ImageBox>
+      </div>
     </div>
   </div>
 </template>
@@ -26,16 +26,15 @@ export default {
   },
   props : ["baseURL"],
   methods : {
-      fetchImages(){
-        // fetch products
-        fetch(this.baseURL + "fileUpload/")
-            .then(res => res.json())
-            .then(data => this.images = data)
-            .catch(err => console.log(err));
-      }
+    async fetchImages(){
+      // fetch products
+      await axios.get(this.baseURL + "fileUpload/")
+        .then(res => this.images = res.data)
+        .catch(err => console.log(err));
+    }
   },
   mounted() {
-      this.fetchImages();
+    this.fetchImages();
   }
 }
 </script>

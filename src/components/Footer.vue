@@ -3,19 +3,19 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-            <ul class="footer-nav">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Android App</a></li>
-                <li><a href="#">iOS App</a></li>
-            </ul>
+          <ul class="footer-nav">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Android App</a></li>
+            <li><a href="#">iOS App</a></li>
+          </ul>
         </div>
         <div class="col-6">
-            <ul class="social-links">
-              <li><a href="#"><ion-icon name="logo-facebook" v-pre></ion-icon></a></li>
-              <li><a href="#"><ion-icon name="logo-twitter" v-pre></ion-icon></a></li>
-              <li><a href="#"><ion-icon name="logo-instagram" v-pre></ion-icon></a></li>
-              <li><a href="#"><ion-icon name="logo-google" v-pre></ion-icon></a></li>
-            </ul>
+          <ul class="social-links">
+            <li><a href="#"><ion-icon name="logo-facebook" v-pre></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter" v-pre></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-instagram" v-pre></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-google" v-pre></ion-icon></a></li>
+          </ul>
         </div>
       </div>
       <div>

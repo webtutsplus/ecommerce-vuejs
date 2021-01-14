@@ -7,13 +7,39 @@
       <li><router-link :to="{name : 'Home'}" >HOME</router-link></li>
       <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
       <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>
+      <li>|</li>
+      <li><router-link :to="{name: 'Admin'}">ADMIN</router-link></li>
+      <li>
+        <router-link v-if="!token" :to="{name: 'Signin'}">SIGNIN</router-link>
+        <a v-if="token" href="#" @click="signout">SIGNOUT</a>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name : "Navbar"
+  name : "Navbar",
+  data() {
+    return {
+      token: null
+    }
+  },
+  methods: {
+    signout() {
+      localStorage.removeItem('token');
+      this.token = null;
+      this.$router.push({name:'Home'});
+      swal({
+        text: "Visit Again",
+        icon: "success",
+        closeOnClickOutside: false,
+      });
+    }
+  },
+  mounted() {
+    this.token = localStorage.getItem('token');
+  }
 }
 </script>
 

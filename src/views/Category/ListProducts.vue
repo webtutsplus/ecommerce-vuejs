@@ -28,18 +28,18 @@ export default {
   components : {ProductBox}, 
   props : [ "baseURL" , "categories" ],
   mounted() {
-      this.id = this.$route.params.id;
-      this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
-      this.category = this.categories[this.categoryIndex];
-      
-      this.len = this.category.products.length;    
-      if(this.len == 0) {
-        this.msg = "Sorry, no products found";
-      } else if(this.len == 1) {
-        this.msg = "Only 1 product found";
-      } else {
-        this.msg = this.len + " products found";
-      }
+    this.id = this.$route.params.id;
+    this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
+    this.category = this.categories[this.categoryIndex];
+    
+    this.len = this.category.products.length;    
+    if(this.len == 0) {
+      this.msg = "Sorry, no products found";
+    } else if(this.len == 1) {
+      this.msg = "Only 1 product found";
+    } else {
+      this.msg = this.len + " products found";
+    }
   }
 }
 </script>
