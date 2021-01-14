@@ -2,6 +2,11 @@
 ```
 The base URL of API is present in App.vue
 ```
+## Important GuideLines
+* All the api requests should be made using axios module.
+
+
+
 ## Project setup
 ```
 npm install
