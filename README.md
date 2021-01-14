@@ -19,7 +19,7 @@ npm run serve -- --port 8003
 npm run build
 ```
 
-###login in digital ocene
+### Deploy on digital ocean Server
 
 ssh root@167.99.37.15
 
