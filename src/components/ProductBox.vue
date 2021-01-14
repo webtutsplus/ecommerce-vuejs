@@ -11,19 +11,39 @@
             <h3 class="product_name" @click="showDetails">{{product.name}}</h3>
             <h3 class="product_description">{{product.description}}</h3>
             <h3 class="product_price"><span>$</span>{{product.price}}</h3>
+            <button @click="addToWishList(product.id)">Add to wishlist</button>
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name : "ProductBox",
+    data() {
+        return {
+            token: null
+        }
+    },
     props : ["product"],
     methods : {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
+        },
+        addToWishList(id){
+            axios.post("http://remotedevs.org:8080/api/wishlist/add?token="+this.token, {
+                id:this.id
+            }).then(function (response) {
+                console.log(response)
+            }).error(function(error){
+                console.log(error)
+            });
         }
+
+    },
+    mounted() {
+        this.token = localStorage.getItem('token');
     }
 }
 </script>
