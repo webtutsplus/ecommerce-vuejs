@@ -16,9 +16,9 @@
           <span class="sr-only">Loading...</span>
         </div>
       </button>
-  </form>
-  <br/>
-  Don't have an account?&nbsp;&nbsp;<router-link :to="{name: 'Signup'}">Signup Here</router-link>
+    </form>
+    <br/>
+    Don't have an account?&nbsp;&nbsp;<router-link :to="{name: 'Signup'}">Signup Here</router-link>
   </div>
 </template>
 
@@ -27,46 +27,46 @@ export default {
   name: 'Signin',
   props : [ "baseURL"],
   data() {
-      return {
-          email: null,
-          password: null,
-          loading: null
-      }
+    return {
+      email: null,
+      password: null,
+      loading: null
+    }
   },
   methods : {
-    signin : async function(e) {
-        e.preventDefault();
-        this.loading = true;
-        const user = {
-            email: this.email,
-            password: this.password
+    async signin(e) {
+      e.preventDefault();
+      this.loading = true;
+
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+
+      await axios({
+        method: 'post',
+        url: this.baseURL + "user/signIn",
+        data : JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json'
         }
-        await fetch(this.baseURL + "user/signIn", {
-            method : "POST",
-            body : JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => {
-          if (res.ok) {
-            res.json().then(json => {
-              localStorage.setItem('token', json.token);
-              this.$emit("refreshNav");
-              this.$router.back();
-            });
-          } else{
-            res.json().then(json => {
-              alert("Error occurred while signing in. " + json.message);
-            });
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        })
-        .finally(() => {
-          this.loading = false;
+      })
+      .then(res => {
+        localStorage.setItem('token', res.data.token);
+        this.$emit("refreshNav");
+        this.$router.back();
+      })
+      .catch(err => {
+        swal({
+          text: "Unable to Log you in!",
+          icon: "error",
+          closeOnClickOutside: false,
         });
+        console.log(err);
+      })
+      .finally(() => {
+        this.loading = false;
+      })
     }
   },
   mounted() {

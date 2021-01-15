@@ -2,7 +2,7 @@
   <div class="list-products container">
     <h2>{{category.categoryName}}</h2>
     <div class="msg">
-        <h3>{{msg}}</h3>
+      <h3>{{msg}}</h3>
     </div>
     <img v-show="len == 0" class="img-fluid" src="../../assets/sorry.jpg" alt="Sorry">
     <div v-for="product of category.products" :key="product.id">
@@ -13,33 +13,33 @@
 </template>
 
 <script>
-import ProductBox from '../../components/ProductBox';
+import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'ListProducts',
   data(){
-      return {
-        id : null,
-        categoryIndex : null,
-        category : {},
-        len : 0,
-        msg : null
-      }
+    return {
+      id : null,
+      categoryIndex : null,
+      category : {},
+      len : 0,
+      msg : null
+    }
   },
   components : {ProductBox}, 
   props : [ "baseURL" , "categories" ],
   mounted() {
-      this.id = this.$route.params.id;
-      this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
-      this.category = this.categories[this.categoryIndex];
-      
-      this.len = this.category.products.length;    
-      if(this.len == 0) {
-        this.msg = "Sorry, no products found";
-      } else if(this.len == 1) {
-        this.msg = "Only 1 product found";
-      } else {
-        this.msg = this.len + " products found";
-      }
+    this.id = this.$route.params.id;
+    this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
+    this.category = this.categories[this.categoryIndex];
+    
+    this.len = this.category.products.length;    
+    if(this.len == 0) {
+      this.msg = "Sorry, no products found";
+    } else if(this.len == 1) {
+      this.msg = "Only 1 product found";
+    } else {
+      this.msg = this.len + " products found";
+    }
   }
 }
 </script>

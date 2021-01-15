@@ -30,29 +30,37 @@ export default {
   },
   props : ["baseURL", "categories"],
   methods : {
-    addCategory : async function() {
+    async addCategory() {
       const newCategory = {
         categoryName : this.categoryName,
         description : this.description,
         imageUrl : this.imageURL,
       }
-      await fetch(this.baseURL+"category/create", {
-          method : "POST",
-          body : JSON.stringify(newCategory),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+
+      await axios({
+        method: 'post',
+        url: this.baseURL+"category/create",
+        data : JSON.stringify(newCategory),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .then((res) => {
-          if(!res.ok){
-            throw Error("Status code error!!");
-          }
-          //sending the event to parent to handle
-          this.$emit("fetchData");
-          this.$router.replace("/category");
-          alert("Category Added Successfully!");
+      .then(res => {
+        //sending the event to parent to handle
+        this.$emit("fetchData");
+        this.$router.push({name:'AdminCategory'});
+        swal({
+          text: "Category Added Successfully!",
+          icon: "success",
+          closeOnClickOutside: false,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
+    }
+  },
+  mounted(){
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
     }
   }
 }

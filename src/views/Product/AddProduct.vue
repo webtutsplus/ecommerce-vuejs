@@ -43,7 +43,7 @@ export default {
   },
   props : ["baseURL", "products", "categories"],
   methods : {
-    addProduct : async function() {
+    async addProduct() {
       const newProduct = {
         id : this.id,
         categoryId : this.categoryId,
@@ -53,23 +53,30 @@ export default {
         price : this.price 
       }
 
-      await fetch(this.baseURL+"product/add", {
-          method : "POST",
-          body : JSON.stringify(newProduct),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+      await axios({
+        method: 'post',
+        url: this.baseURL+"product/add",
+        data : JSON.stringify(newProduct),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .then((res) => {
-          if(!res.ok){
-            throw Error("Status code error!!");
-          }
-          //sending the event to parent to handle
-          this.$emit("fetchData");
-          this.$router.replace("/product");
-          alert("Product Added Successfully!");
+      .then(res => {
+        //sending the event to parent to handle
+        this.$emit("fetchData");
+        this.$router.push({name : 'AdminProduct'});
+        swal({
+          text: "Product Added Successfully!",
+          icon: "success",
+          closeOnClickOutside: false,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
+    }
+  },
+  mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
     }
   }
 }
@@ -82,5 +89,4 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-
 </style>

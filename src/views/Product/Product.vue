@@ -2,7 +2,7 @@
   <div class="products-box container">
     <h2>Our Products</h2>
     <router-link :to="{name : 'AddProduct'}" v-show="this.$route.name=='AdminProduct'">
-        <button type="button" class="btn btn-success add-btn btn-lg">Add a new Product</button>
+      <button type="button" class="btn btn-success add-btn btn-lg">Add a new Product</button>
     </router-link>
     <div v-for="product of products" :key="product.id">
       <ProductBox :product="product">
@@ -12,11 +12,16 @@
 </template>
 
 <script>
-import ProductBox from '../../components/ProductBox';
+import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'Product',
   components : {ProductBox}, 
-  props : [ "baseURL" , "products" ]
+  props : [ "baseURL" , "products" ],
+  mounted(){
+    if (this.$route.name=='AdminProduct' && !localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+    }
+  }
 }
 </script>
 
@@ -27,7 +32,7 @@ export default {
   text-align : center;
   margin : 70px 0;
 }
-.add-btn{
+.products-box .add-btn{
   margin : 20px 0;
 }
 </style>

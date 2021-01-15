@@ -32,7 +32,7 @@ export default {
   },
   props : ["baseURL", "categories"],
   methods : {
-    editCategory : async function() {
+    async editCategory() {
       const newCategory = {
         id : this.id,
         categoryName : this.categoryName, 
@@ -40,28 +40,33 @@ export default {
         imageUrl : this.imageUrl,
         products : null
       }
-
-      const url = this.baseURL+"category/update/"+this.id.toString(10);
-      await fetch(url, {
-          method : "POST",
-          body : JSON.stringify(newCategory),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+      
+      await axios({
+        method: 'post',
+        url: this.baseURL+"category/update/"+this.id,
+        data : JSON.stringify(newCategory),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .then((res) => {
-          if(!res.ok){
-            throw Error("Status code error!!");
-          }
+      .then(res => {
           //sending the event to parent to handle
-          this.$emit("fetchData");
-          this.$router.replace("/category");
-          alert("Category Updated Successfully!");
+        this.$emit("fetchData");
+        this.$router.push({name:'AdminCategory'});
+        swal({
+          text: "Category Updated Successfully!",
+          icon: "success",
+          closeOnClickOutside: false,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
     }
   },
   mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+      return;
+    }
     this.id = this.$route.params.id;
     this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
     //input fields

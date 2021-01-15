@@ -32,53 +32,59 @@
 <script>
 export default {
   name: 'Signup',
-  props : [ "baseURL"],
+  props : ["baseURL"],
   data() {
-      return {
-          email: null,
-          firstName: null,
-          lastName: null,
-          password: null,
-          passwordConfirm: null
-      }
+    return {
+      email: null,
+      firstName: null,
+      lastName: null,
+      password: null,
+      passwordConfirm: null
+    }
   },
   methods : {
-    signup : async function(e) {
+    async signup(e) {
       e.preventDefault();
       if (this.password === this.passwordConfirm) {
         const user = {
-            email: this.email,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            password: this.password
+          email: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          password: this.password
         }
-        await fetch(this.baseURL + "user/signup", {
-            method : "POST",
-            body : JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => {
-          if (res.ok) {
-            this.$router.replace("/");
-            alert("User signup successful. Please Login");
-          } else {
-            alert("Error occurred while signup");
+
+        await axios({
+          method : 'post',
+          url : this.baseURL + "user/signup",
+          data : JSON.stringify(user),
+          headers: {
+            'Content-Type': 'application/json'
           }
         })
-        .catch((err) => {
-          alert(err);
+        .then(res => {
+          this.$router.replace("/");
+          swal({
+            text: "User signup successful. Please Login",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
+        })
+        .catch(err => {
+          console.log(err);
         });
       } else {
-        alert("Error! Passwords are not matching.")
+        swal({
+          text: "Error! Passwords are not matching",
+          icon: "error",
+          closeOnClickOutside: false,
+        });
       }
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .signup h2{
   text-align : center;
   font-size : 60px;

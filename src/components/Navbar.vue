@@ -26,10 +26,15 @@ export default {
     }
   },
   methods: {
-    signout: function () {
+    signout() {
       localStorage.removeItem('token');
       this.token = null;
-      this.$router.go();
+      this.$router.push({name:'Home'});
+      swal({
+        text: "Logged you out. Visit Again",
+        icon: "success",
+        closeOnClickOutside: false,
+      });
     }
   },
   mounted() {

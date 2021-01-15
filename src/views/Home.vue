@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import ProductCard from "../components/ProductCard"
-import CategoryCard from "../components/CategoryCard"
+import ProductCard from "../components/Product/ProductCard.vue"
+import CategoryCard from "../components/Category/CategoryCard.vue"
 export default {
   name: 'Home',
   components : {ProductCard, CategoryCard},

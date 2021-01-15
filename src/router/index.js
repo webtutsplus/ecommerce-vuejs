@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Admin from '../views/Admin.vue'
+
+import Admin from '../views/Admin/Admin.vue'
+import Gallery from '../views/Admin/Gallery.vue'
+import AddImage from '../views/Admin/AddImage.vue'
+
+import PageNotFound from '../views/PageNotFound.vue'
 
 import Product from '../views/Product/Product.vue'
 import AddProduct from '../views/Product/AddProduct.vue'
@@ -20,10 +25,21 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  //Admin routes
   {
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path : '/admin/gallery',
+    name : 'Gallery',
+    component : Gallery
+  },
+  {
+    path : '/admin/gallery/add',
+    name : 'AddImage',
+    component : AddImage 
   },
   //Product routes
   {
@@ -77,6 +93,13 @@ const routes = [
     name : 'ListProducts',
     component: ListProducts
   },
+  //Page Not found
+  {
+    path : '/:catchAll(.*)',
+    name : 'PageNotFound',
+    component : PageNotFound
+  },
+  //Signin and Signup
   {
     path: '/signup',
     name: 'Signup',

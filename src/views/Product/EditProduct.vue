@@ -44,7 +44,7 @@ export default {
   },
   props : ["baseURL", "products", "categories"],
   methods : {
-    editProduct : async function() {
+    async editProduct() {
       const newProduct = {
         id : this.id,
         categoryId : this.categoryId,
@@ -53,27 +53,33 @@ export default {
         imageURL : this.imageURL,
         price : this.price 
       }
-      const url = this.baseURL+"product/update/"+this.id.toString(10);
-      await fetch(url, {
-          method : "POST",
-          body : JSON.stringify(newProduct),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+      
+      await axios({
+        method: 'post',
+        url: this.baseURL+"product/update/"+this.id,
+        data : JSON.stringify(newProduct),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .then((res) => {
-          if(!res.ok){
-            throw Error("Status code error!!");
-          }
-          //sending the event to parent to handle
-          this.$emit("fetchData");
-          this.$router.replace("/product");
-          alert("Product Updated Successfully!");
+      .then(res => {
+        //sending the event to parent to handle
+        this.$emit("fetchData");
+        this.$router.push({name : 'AdminProduct'});
+        swal({
+          text: "Product Updated Successfully!",
+          icon: "success",
+          closeOnClickOutside: false,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log("Hello", err));
     }
   },
   mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+      return;
+    }
     this.id = this.$route.params.id;
     this.productIndex = this.products.findIndex(product => product.id == this.id);
     //input fields
