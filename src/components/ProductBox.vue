@@ -31,9 +31,9 @@ export default {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
         },
-        addToWishList(id){
+        addToWishList(productId){
             axios.post("http://remotedevs.org:8080/api/wishlist/add?token="+this.token, {
-                id:this.id
+                id:productId
             }).then(function (response) {
                 console.log(response)
             }).error(function(error){
