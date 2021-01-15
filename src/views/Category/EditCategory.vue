@@ -63,6 +63,10 @@ export default {
     }
   },
   mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+      return;
+    }
     this.id = this.$route.params.id;
     this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
     //input fields

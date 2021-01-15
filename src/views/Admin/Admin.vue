@@ -16,7 +16,7 @@
 export default {
   mounted() {
     if (!localStorage.getItem('token')) {
-      this.$router.push('Signin');
+      this.$router.push({name : 'Signin'});
     }
   }
 }

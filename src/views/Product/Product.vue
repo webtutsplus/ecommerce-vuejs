@@ -16,7 +16,12 @@ import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'Product',
   components : {ProductBox}, 
-  props : [ "baseURL" , "products" ]
+  props : [ "baseURL" , "products" ],
+  mounted(){
+    if (this.$route.name=='AdminProduct' && !localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+    }
+  }
 }
 </script>
 

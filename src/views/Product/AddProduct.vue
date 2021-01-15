@@ -73,6 +73,11 @@ export default {
       })
       .catch(err => console.log(err));
     }
+  },
+  mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({name : 'Signin'});
+    }
   }
 }
 </script>

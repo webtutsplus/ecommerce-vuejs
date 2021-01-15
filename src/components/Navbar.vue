@@ -31,7 +31,7 @@ export default {
       this.token = null;
       this.$router.push({name:'Home'});
       swal({
-        text: "Visit Again",
+        text: "Logged you out. Visit Again",
         icon: "success",
         closeOnClickOutside: false,
       });

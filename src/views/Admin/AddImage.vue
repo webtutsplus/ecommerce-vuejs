@@ -22,6 +22,14 @@ export default {
             this.selectedFile = event.target.files[0];
         },
         async onUpload(){
+            if(!this.selectedFile) {
+                swal({
+                    text: "Select a file first",
+                    icon: "warning",
+                    closeOnClickOutside: false,
+                });
+                return;
+            }
             if(this.selectedFile.type !== "image/jpeg") {
                 //file format is not correct
                 swal({
@@ -48,6 +56,11 @@ export default {
                 });
             })
             .catch(err => console.log(err))
+        }
+    },
+    mounted() {
+        if (!localStorage.getItem('token')) {
+            this.$router.push({name : 'Signin'});
         }
     }
 }

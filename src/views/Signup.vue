@@ -52,8 +52,11 @@ export default {
           lastName: this.lastName,
           password: this.password
         }
-        await axios.post(this.baseURL + "user/signup", {
-          body : JSON.stringify(user),
+
+        await axios({
+          method : 'post',
+          url : this.baseURL + "user/signup",
+          data : JSON.stringify(user),
           headers: {
             'Content-Type': 'application/json'
           }
