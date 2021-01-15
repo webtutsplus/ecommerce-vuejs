@@ -11,7 +11,7 @@
             <h3 class="product_name" @click="showDetails">{{product.name}}</h3>
             <h3 class="product_description">{{product.description}}</h3>
             <h3 class="product_price"><span>$</span>{{product.price}}</h3>
-            <button @click="addToWishList(product.id)">Add to wishlist</button>
+            <button :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(product.id)">{{wishlistString}}</button>
         </div>
     </div>
   </div>
@@ -23,7 +23,9 @@ export default {
     name : "ProductBox",
     data() {
         return {
-            token: null
+            token: null,
+            isAddedToWishlist: false,
+            wishlistString:"Add to wishlist"
         }
     },
     props : ["product"],
@@ -32,11 +34,17 @@ export default {
             this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
         },
         addToWishList(productId){
+            console.log(this.isAddedToWishlist);
             axios.post("http://remotedevs.org:8080/api/wishlist/add?token="+this.token, {
                 id:productId
-            }).then(function (response) {
-                console.log(response)
-            }).error(function(error){
+            }).then((response) => {
+                console.log(response);
+                if(response.status==201) {
+                    this.isAddedToWishlist = true;
+                    console.log(this.isAddedToWishlist);
+                    this.wishlistString = "Added to WishList"
+                }
+            },(error) =>{
                 console.log(error)
             });
         }
@@ -99,4 +107,8 @@ export default {
     outline: none;
     box-shadow: none;
 }
+.product_added_wishlist{
+    background-color: darkolivegreen;
+}
+
 </style>
