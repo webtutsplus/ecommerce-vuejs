@@ -12,6 +12,7 @@
 
 <script>
 import ProductBox from '../../components/ProductBox';
+import axios from 'axios';
 export default {
   data() {
       return {
@@ -24,16 +25,11 @@ export default {
   props : [ "baseURL"],
   methods : {
     fetchWishlist : function() {
+      
+      
       // fetch products
-      fetch(this.baseURL + "wishlist/"+this.token)
-        .then(res => res.json())
-        .then(data => this.products = data)
-        .catch(err => console.log(err));
-
-      //fetch categories
-      fetch(this.baseURL + "category/")
-        .then(res => res.json())
-        .then(data => this.categories = data)
+      axios.get(this.baseURL + "wishlist/"+this.token)
+        .then(data => this.products = data.data)
         .catch(err => console.log(err));
     },
     refreshNav : function () {
