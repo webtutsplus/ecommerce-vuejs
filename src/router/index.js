@@ -6,6 +6,7 @@ import Product from '../views/Product/Product.vue'
 import AddProduct from '../views/Product/AddProduct.vue'
 import EditProduct from '../views/Product/EditProduct.vue'
 import ShowDetails from '../views/Product/ShowDetails.vue'
+import Wishlist from '../views/Product/Wishlist.vue'
 
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
@@ -86,6 +87,11 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: Wishlist
   }
 ]
 

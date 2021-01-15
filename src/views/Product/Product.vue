@@ -1,9 +1,6 @@
 <template>
   <div class="products-box container">
     <h2>Our Products</h2>
-    <router-link :to="{name : 'AddProduct'}" v-show="this.$route.name=='AdminProduct'">
-        <button type="button" class="btn btn-success add-btn btn-lg">Add a new Product</button>
-    </router-link>
     <div v-for="product of products" :key="product.id">
       <ProductBox :product="product">
       </ProductBox>
