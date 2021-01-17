@@ -1,6 +1,6 @@
 <template>
   <div class="products-box container">
-    <h2>Our Products</h2>
+    <h2>Your WishList</h2>
     <div v-if="products">
         <div v-for="product of products" :key="product.id">
         <ProductBox :product="product">
