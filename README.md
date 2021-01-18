@@ -25,13 +25,13 @@ npm run build
 ```
 
 ### Deploy on digital ocean Server
-
+```
 ssh root@167.99.37.15
 
 (use password: webTuts9plus)
 
 cd ecommere-vuejs
 sh run.sh
-
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
