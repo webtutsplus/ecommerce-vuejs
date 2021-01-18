@@ -4,6 +4,10 @@
       <img src="../assets/logo.png" alt="Webtutsplus logo" class="logo">
     </router-link>
     <ul class="main-nav">
+      <li>
+        <router-link v-if="!token" :to="{name: 'Signin'}">WISHLIST</router-link>
+        <router-link v-else :to="{name : 'Wishlist'}" >WISHLIST</router-link>
+      </li>
       <li><router-link :to="{name : 'Home'}" >HOME</router-link></li>
       <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
       <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>

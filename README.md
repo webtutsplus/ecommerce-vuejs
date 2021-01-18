@@ -2,6 +2,11 @@
 ```
 The base URL of API is present in App.vue
 ```
+## Important GuideLines
+* All the api requests should be made using axios module.
+
+
+
 ## Project setup
 ```
 npm install
@@ -19,7 +24,7 @@ npm run serve -- --port 8003
 npm run build
 ```
 
-###login in digital ocene
+### Deploy on digital ocean Server
 
 ssh root@167.99.37.15
 
