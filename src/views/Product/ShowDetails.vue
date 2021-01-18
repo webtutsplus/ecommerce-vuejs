@@ -29,6 +29,7 @@
           Add to Cart   
           <ion-icon name="cart-outline" v-pre></ion-icon>
         </button>
+        <button :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(this.id)">{{wishlistString}}</button>
       </div>
     </div>
     <hr>
@@ -36,20 +37,41 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   data(){
     return {
       product : {},
       category : {},
-      id : null
+      id : null,
+      token: null,
+      isAddedToWishlist: false,
+      wishlistString:"Add to wishlist"
     }
   },
   props : ["products", "categories"],
+  methods:{
+    addToWishList(productId){
+            console.log(this.isAddedToWishlist);
+            axios.post("http://remotedevs.org:8080/api/wishlist/add?token="+this.token, {
+                id:productId
+            }).then((response) => {
+                console.log(response);
+                if(response.status==201) {
+                    this.isAddedToWishlist = true;
+                    console.log(this.isAddedToWishlist);
+                    this.wishlistString = "Added to WishList"
+                }
+            },(error) =>{
+                console.log(error)
+            });
+        }
+  },
   mounted() {
     this.id = this.$route.params.id;
     this.product = this.products.find(product => product.id == this.id);
     this.category = this.categories.find(category => category.id == this.product.categoryId);
+    this.token = localStorage.getItem('token');
   }
 }
 </script>
@@ -85,6 +107,10 @@ h5 span{
 .product-display button{
   width : 100%;
   margin-bottom : 10px;
+}
+
+.product_added_wishlist{
+    background-color: darkolivegreen;
 }
 
 </style>
