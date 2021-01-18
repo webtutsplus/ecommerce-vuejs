@@ -30,7 +30,7 @@ ssh root@167.99.37.15
 
 (use password: webTuts9plus)
 
-cd ecommere-ui
+cd ecommere-vuejs
 sh run.sh
 
 ### Customize configuration
