@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ProductBox from '../../components/ProductBox';
+import ProductBox from '../../components/Product/ProductBox';
 import axios from 'axios';
 export default {
   data() {
