@@ -29,7 +29,7 @@ spec:
   template:
     metadata:
       labels:
-        app: gke-test
+        app: ecommerce-vue-js
     spec:
       containers:
       - name: ecommerce-vue-js
