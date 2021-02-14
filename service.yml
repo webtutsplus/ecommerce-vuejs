@@ -15,11 +15,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gke-test-service
+  name: gke-ecommerce-vue-js-service
 spec:
   type: LoadBalancer
   ports:
     - port: 80
       targetPort: 5000
   selector:
-    app: gke-test
+    app: ecommerce-vue-js
