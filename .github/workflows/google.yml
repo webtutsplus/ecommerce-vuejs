@@ -21,7 +21,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ecommerce-vue-js
   GKE_ZONE: europe-north1-a  
-  DEPLOYMENT_NAME: deploy-ecommerce-vue-js
+  DEPLOYMENT_NAME: ecommerce-vue-js
   IMAGE: static-site
 
 jobs:
