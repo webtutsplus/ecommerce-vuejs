@@ -33,6 +33,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
@@ -50,6 +51,12 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_SA_KEY }}
+
+    - name: Build Dist Neel
+      run: |-
+        apt install npm
+        npm install
+        npm run build
 
     # Build the Docker image
     - name: Build
