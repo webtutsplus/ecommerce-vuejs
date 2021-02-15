@@ -54,9 +54,9 @@ jobs:
 
     - name: Build Dist Neel
       run: |-
-        apt install npm
-        npm install
-        npm run build
+        sudo apt install npm
+        sudo npm install
+        sudo npm run build
 
     # Build the Docker image
     - name: Build
