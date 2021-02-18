@@ -21,6 +21,7 @@ export default {
   },
   name: 'Cart',
   props: ["baseURL"],
+  components : {CartItemBox}, 
   methods: {
      listCartItems(){
       alert("List cart items");
@@ -36,6 +37,7 @@ export default {
       });
 
     }
+
   },
   mounted() {
     this.token = localStorage.getItem("token");

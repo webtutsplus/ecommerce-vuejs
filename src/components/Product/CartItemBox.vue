@@ -1,27 +1,29 @@
 <template>
-    <h2>Hello there</h2>
-  <!-- <div class="product-box">
+  <div class="product-box">
+     
       <div class="row">
         <div class="col-4" @click="showDetails">
-            <img class="img-fluid" v-bind:src="product.imageURL" alt="product-image">
+            <img class="img-fluid" v-bind:src="cart.product.imageURL" alt="product-image">
         </div>
         <div class="col-8">
          
             <h3 class="product_name" @click="showDetails">{{cart.product.name}}</h3>
             <h3 class="product_description">{{cart.product.description}}</h3>
             <h3 class="product_price"><span>$</span>{{cart.product.price}}</h3>
+            <h3 class="product_description">{{cart.quantity}}</h3>
         </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
 export default {
     name : "CartItemBox",
     props : ["cart"],
+    emits : ['delete'],
     methods : {
         showDetails(){
-            this.$router.push({ name: 'ShowDetails', params: { id : this.cart.id } })
+            this.$router.push({ name: 'ShowDetails', params: { id : this.cart.product.id } })
         }
     }
 }
