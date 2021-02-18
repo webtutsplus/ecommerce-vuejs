@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="addCategory container">
     <h2>Create new Category</h2>
     <form>

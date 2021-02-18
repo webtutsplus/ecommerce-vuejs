@@ -9,6 +9,11 @@
         <h6 class="category">{{category.categoryName}}</h6>
         <h5>Price: <span>$ {{product.price}}</span></h5>
         <h5>{{product.description}}</h5>
+        <div>
+        <label>Quantity</label>
+        <input type="number" v-model="quantity"/>
+        </div>
+
         <div class="features">
           <h5><strong>Features</strong></h5>
           <ul>
@@ -25,11 +30,15 @@
           Buy Now 
           <ion-icon name="card-outline" v-pre></ion-icon>
         </button>
-        <button type="button" class="btn btn-primary btn-lg">
+        <button type="button" class="btn btn-primary btn-lg" @click="addToCart(this.id)">
           Add to Cart   
           <ion-icon name="cart-outline" v-pre></ion-icon>
         </button>
         <button :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(this.id)">{{wishlistString}}</button>
+        <button type="button" class="btn btn-primary btn-lg" @click="listCartItems()">
+          Show Cart
+          <ion-icon name="cart-outline" v-pre></ion-icon>
+        </button>
       </div>
     </div>
     <hr>
@@ -45,14 +54,15 @@ export default {
       id : null,
       token: null,
       isAddedToWishlist: false,
-      wishlistString:"Add to wishlist"
+      wishlistString:"Add to wishlist",
+      quantity: 1,
     }
   },
   props : ["products", "categories"],
   methods:{
     addToWishList(productId){
             console.log(this.isAddedToWishlist);
-            axios.post("http://remotedevs.org:8080/api/wishlist/add?token="+this.token, {
+            axios.post("http://localhost:8080/api/wishlist/add?token="+this.token, {
                 id:productId
             }).then((response) => {
                 console.log(response);
@@ -64,7 +74,33 @@ export default {
             },(error) =>{
                 console.log(error)
             });
+        },
+    addToCart(productId,quantity){
+      alert("Added to cart");
+      axios.post("http://localhost:8080/api/cart/add?token="+this.token,{
+          productId : productId,
+          quantity : this.quantity
+      }).then((response) => {
+        console.log(response)
+        if(response.status==201){
+          console.log("Here man");
         }
+      },(error) =>{
+        console.log(error)
+      });
+    },
+
+    listCartItems(){
+      axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
+        console.log(response)
+        if(response.status==200){
+          console.log("Success")
+        }
+      },(error)=>{
+        console.log(error)
+      });
+
+    }
   },
   mounted() {
     this.id = this.$route.params.id;
