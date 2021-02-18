@@ -3,7 +3,8 @@
     <h2>Cart</h2>
     <div v-if="carts">
         <div v-for="cart of carts" :key="cart.id">
-        <CartItemBox :cart="cart">
+        <CartItemBox :cart="cart"
+        @delete="deleteItem">
         </CartItemBox>
         </div>
     </div>
@@ -16,7 +17,7 @@ export default {
   data() {
     return {
       carts: null,
-      token: null,
+      token: null
     }
   },
   name: 'Cart',
@@ -24,7 +25,6 @@ export default {
   components : {CartItemBox}, 
   methods: {
      listCartItems(){
-      alert("List cart items");
       axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
         console.log(response)
         if(response.status==200){
@@ -36,7 +36,19 @@ export default {
         console.log(error)
       });
 
+    },
+    deleteItem(itemId){
+      axios.delete("http://localhost:8080/api/cart/delete/"+ itemId+ "/?token="+this.token)
+        .then((response)=>{
+          if(response.status==200){
+            console.log("Deleted successfully")
+            this.$router.go(0);
+          }
+        },(error)=>{
+          console.log(error)
+        })
     }
+
 
   },
   mounted() {

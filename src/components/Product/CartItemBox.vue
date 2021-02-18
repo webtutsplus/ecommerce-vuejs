@@ -11,6 +11,8 @@
             <h3 class="product_description">{{cart.product.description}}</h3>
             <h3 class="product_price"><span>$</span>{{cart.product.price}}</h3>
             <h3 class="product_description">{{cart.quantity}}</h3>
+            <button class="button_delete" @click="$emit('delete',cart.id)">Delete item</button>
+            <button class="button_update" @click="$emit('update',cart.id)">Update Quantity</button>
         </div>
     </div>
   </div>
@@ -20,7 +22,7 @@
 export default {
     name : "CartItemBox",
     props : ["cart"],
-    emits : ['delete'],
+    emits : ['delete','update'],
     methods : {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.cart.product.id } })
@@ -61,15 +63,30 @@ export default {
 .product_price span{
     font-size:15px;
 }
-.edit_btn{
-    float : right;
+
+.button_delete {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 16px;
 }
-.buy_btn{
-    margin-top : 60px;
-}
-.btn:focus {
-    outline: none;
-    box-shadow: none;
+.button_update {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 16px;
 }
 
 </style>
