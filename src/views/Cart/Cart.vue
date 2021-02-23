@@ -44,6 +44,7 @@ export default {
           if(response.status==200){
             console.log("Deleted successfully")
             this.$router.go(0);
+            //implement refrsh
           }
         },(error)=>{
           console.log(error)

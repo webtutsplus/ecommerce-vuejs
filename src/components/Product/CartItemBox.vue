@@ -14,7 +14,7 @@
                 <h3 class="product_name" @click="showDetails">{{this.pName}}</h3>
                 <h3 class="product_description">{{this.pDescription}}</h3>
                 <h3 class="product_price"><span>$</span>{{this.pPrice}}</h3>
-                <h3 class="product_description">{{this.pQuantity}}</h3>
+                <h3 class="product_description">Quantity : {{this.pQuantity}}</h3>
                 <button class="button_delete" @click="$emit('delete',this.id)">Delete item</button>
                 <button class="button_update" @click="$emit('update',this.id)">Update Quantity</button>
 
@@ -51,22 +51,15 @@ export default {
     },
     mounted(){
         console.log("Entering fir loop of " + this.cart)
-            //console.log('==>'+this.item+'\n')
-            /* this.cartData[this.len].imgUrl = this.cart[this.len].product.imageURL
-            this.cartData[this.len].itemId = this.cart[this.len].productId
-            this.cartData[this.len].pName = this.cart[this.len].product.name
-            this.cartData[this.len].pDescription = this.cart[this.len].product.description
-            this.cartData[this.len].pPrice = this.cart[this.len].product.price
-            this.cartData[this.len].pQuantity = this.cart[this.len].quantity 
-            this.cartData[this.len].id = this.cart[this.len].id; */
             console.log("Initially Len =  " + this.len)
             this.imgUrl = this.cart.product.imageURL
             this.pName = this.cart.product.name
             this.pDescription = this.cart.product.description
-            this.pPrice = this.cart.price
+            this.pPrice = this.cart.product.price
             this.pQuantity = this.cart.quantity 
             this.id = this.cart.id
             this.len += 1;
+            console.log('Price = ' + this.pPrice + ' with desc ' + this.pDescription)
             console.log("Finally Len =  " + this.len)
     }
 }
