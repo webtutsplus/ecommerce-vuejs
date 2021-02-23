@@ -75,7 +75,7 @@ export default {
                 console.log(error)
             });
         },
-    addToCart(productId,quantity){
+    addToCart(productId){
       alert("Added to cart");
       axios.post("http://localhost:8080/api/cart/add?token="+this.token,{
           productId : productId,
@@ -94,7 +94,7 @@ export default {
     listCartItems(){
       axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
         console.log(response)
-        if(response.status==200){
+        if(response.status===200){
           console.log("Success")
           this.$router.push('/cart')
         }

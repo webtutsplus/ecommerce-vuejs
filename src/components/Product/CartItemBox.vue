@@ -1,29 +1,34 @@
 <template>
+
+  <div v-for="itr in this.len" :key="itr">
   
+  <p>itr : {{itr}}</p>
+
   <div class="product-box">
-     
 
         <div class="row">
 
-            <div class="col-4" @click="showDetails">
-                <img class="img-fluid" v-bind:src="this.imgUrl" alt="product-image">
+            <div class="col-4" @click="showDetails(itr-1)">
+                <img class="img-fluid" v-bind:src="this.cartItem[itr-1].imgUrl" alt="product-image">
             </div>
 
             <div class="col-8">
             
-                <h3 class="product_name" @click="showDetails">{{this.pName}}</h3>
-                <h3 class="product_description">{{this.pDescription}}</h3>
-                <h3 class="product_price"><span>$</span>{{this.pPrice}}</h3>
-                <h3 class="product_description">Quantity : {{this.pQuantity}}</h3>
-                <button class="button_delete" @click="$emit('delete',this.id)">Delete from cart</button>
-                <button class="button_update" @click="$emit('update',this.id)">Update Quantity</button>
+                <h3 class="product_name" @click="showDetails(itr-1)">{{this.cartItem[itr-1].pName}}</h3>
+                <h3 class="product_description">{{this.cartItem[itr-1].pDescription}}</h3>
+                <h3 class="product_price"><span>$</span>{{this.cartItem[itr-1].pPrice}}</h3>
+                <h3 class="product_description">Quantity : {{this.cartItem[itr-1].pQuantity}}</h3>
+                <button class="button_delete" @click="$emit('delete',this.cartItem[itr-1].id)">Delete from cart</button>
+                <input v-model="this.pQuantity" @click="$emit('update',this.id,this.pQuantity)" placeholder="update quantity" />
 
             </div>
 
         </div>
 
+  </div>
 
   </div>
+
 </template>
 
 <script>
@@ -32,35 +37,53 @@ export default {
     props : ['cart'],
     emits : ['delete','update'],
     data(){
-        return { 
-                
-                    imgUrl:'',
-                    pName:'',
-                    pDescription:'',
-                    pPrice:'',
-                    pQuantity:'',
-                    id:'',
-                
-            len:0
-        }
+        return {
+                cartItem : [ 
+                    {
+                        imgUrl:'',
+                        pName:'',
+                        pDescription:'',
+                        pPrice:'',
+                        pQuantity:'',
+                        pId:'',
+                        id:''
+                    }
+                ],
+                len:0,
+                totalcost:0,
+               }
     },
     methods : {
-        showDetails(){
-            this.$router.push({ name: 'ShowDetails', params: { id : this.cart.product.id } })
+        showDetails(itr){
+            this.$router.push({ name: 'ShowDetails', params: { id : this.cartItems[itr].pId } })
+        },
+        setData(){
+            this.totalcost = this.cart.totalCost
+            this.len = Object.keys(this.cart.cartItems).length
+            console.log('Entering for loop ' + this.len)
+            let i;
+            for(i=0;i<this.len;i++){
+                    console.log("i "+ i + ' len ' + this.len)
+                    console.log('img ' + this.cart.cartItems[i].product.imageURL)
+                    this.cartItem[i].imgUrl = this.cart.cartItems[i].product.imageURL
+                    this.cartItem[i].pName = this.cart.cartItems[i].product.name
+                    this.cartItem[i].pDescription = this.cart.cartItems[i].product.description
+                    this.cartItem[i].pPrice = this.cart.cartItems[i].product.price
+                    this.cartItem[i].pQuantity = this.cart.cartItems[i].quantity 
+                    this.cartItem[i].id = this.cart.cartItems[i].id
+                    this.cartItem[i].pId = this.cart.cartItems[i].product.id;
+                }
+            console.log('Exiting for loop')
         }
     },
+    created(){
+        this.setData()
+    },
+    updated(){
+        this.setData()
+    },
     mounted(){
-        console.log("Entering fir loop of " + this.cart)
-            console.log("Initially Len =  " + this.len)
-            this.imgUrl = this.cart.product.imageURL
-            this.pName = this.cart.product.name
-            this.pDescription = this.cart.product.description
-            this.pPrice = this.cart.product.price
-            this.pQuantity = this.cart.quantity 
-            this.id = this.cart.id
-            this.len += 1;
-            console.log('Price = ' + this.pPrice + ' with desc ' + this.pDescription)
-            console.log("Finally Len =  " + this.len)
+        this.setData()
     }
 }
 </script>
