@@ -90,11 +90,13 @@ export default {
       });
     },
 
+    //display the items in the loggedin user cart
     listCartItems(){
       axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
         console.log(response)
         if(response.status==200){
           console.log("Success")
+          this.$router.push('/cart')
         }
       },(error)=>{
         console.log(error)

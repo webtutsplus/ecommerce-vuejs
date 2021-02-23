@@ -3,7 +3,7 @@
     <h2>Cart</h2>
     <div v-if="carts">
         <div v-for="cart of carts" :key="cart.id">
-        <CartItemBox :cart="cart"
+        <CartItemBox :cart='cart'
         @delete="deleteItem">
         </CartItemBox>
         </div>
@@ -29,8 +29,9 @@ export default {
         console.log(response)
         if(response.status==200){
           console.log("Success")
-          this.carts= response.data;
-          console.log("cart ::::: " + this.carts)
+          this.carts=response.data.cartItems;
+          console.log(Object.keys(this.carts).length)
+          //console.log("cart ::::: " + this.carts)
         }
       },(error)=>{
         console.log(error)
@@ -47,8 +48,11 @@ export default {
         },(error)=>{
           console.log(error)
         })
-    }
+    },
+//add update item mthd;
+    updateItem(){
 
+    }
 
   },
   mounted() {

@@ -1,32 +1,73 @@
 <template>
+  
   <div class="product-box">
      
-      <div class="row">
-        <div class="col-4" @click="showDetails">
-            <img class="img-fluid" v-bind:src="cart.product.imageURL" alt="product-image">
+
+        <div class="row">
+
+            <div class="col-4" @click="showDetails">
+                <img class="img-fluid" v-bind:src="this.imgUrl" alt="product-image">
+            </div>
+
+            <div class="col-8">
+            
+                <h3 class="product_name" @click="showDetails">{{this.pName}}</h3>
+                <h3 class="product_description">{{this.pDescription}}</h3>
+                <h3 class="product_price"><span>$</span>{{this.pPrice}}</h3>
+                <h3 class="product_description">{{this.pQuantity}}</h3>
+                <button class="button_delete" @click="$emit('delete',this.id)">Delete item</button>
+                <button class="button_update" @click="$emit('update',this.id)">Update Quantity</button>
+
+            </div>
+
         </div>
-        <div class="col-8">
-         
-            <h3 class="product_name" @click="showDetails">{{cart.product.name}}</h3>
-            <h3 class="product_description">{{cart.product.description}}</h3>
-            <h3 class="product_price"><span>$</span>{{cart.product.price}}</h3>
-            <h3 class="product_description">{{cart.quantity}}</h3>
-            <button class="button_delete" @click="$emit('delete',cart.id)">Delete item</button>
-            <button class="button_update" @click="$emit('update',cart.id)">Update Quantity</button>
-        </div>
-    </div>
+
+
   </div>
 </template>
 
 <script>
 export default {
     name : "CartItemBox",
-    props : ["cart"],
+    props : ['cart'],
     emits : ['delete','update'],
+    data(){
+        return { 
+                
+                    imgUrl:'',
+                    pName:'',
+                    pDescription:'',
+                    pPrice:'',
+                    pQuantity:'',
+                    id:'',
+                
+            len:0
+        }
+    },
     methods : {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.cart.product.id } })
         }
+    },
+    mounted(){
+        console.log("Entering fir loop of " + this.cart)
+            //console.log('==>'+this.item+'\n')
+            /* this.cartData[this.len].imgUrl = this.cart[this.len].product.imageURL
+            this.cartData[this.len].itemId = this.cart[this.len].productId
+            this.cartData[this.len].pName = this.cart[this.len].product.name
+            this.cartData[this.len].pDescription = this.cart[this.len].product.description
+            this.cartData[this.len].pPrice = this.cart[this.len].product.price
+            this.cartData[this.len].pQuantity = this.cart[this.len].quantity 
+            this.cartData[this.len].id = this.cart[this.len].id; */
+            console.log("Initially Len =  " + this.len)
+            this.imgUrl = this.cart.product.imageURL
+            this.pName = this.cart.product.name
+            this.pDescription = this.cart.product.description
+            this.pPrice = this.cart.price
+            this.pQuantity = this.cart.quantity 
+            this.id = this.cart.id
+            this.len += 1;
+            console.log("Finally Len =  " + this.len)
     }
 }
 </script>

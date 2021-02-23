@@ -30,7 +30,9 @@ export default {
                 });
                 return;
             }
-            if(this.selectedFile.type !== "image/jpeg") {
+            console.log('====================='+this.selectedFile.type)
+            if(this.selectedFile.type !== "image/jpeg" || this.selectedFile.type !== "image/png" ||
+               this.selectedFile.type !== "image/jpg") {
                 //file format is not correct
                 swal({
                     text: "Select a image/jpeg file!",
