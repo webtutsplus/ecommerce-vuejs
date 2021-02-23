@@ -15,7 +15,7 @@
                 <h3 class="product_description">{{this.pDescription}}</h3>
                 <h3 class="product_price"><span>$</span>{{this.pPrice}}</h3>
                 <h3 class="product_description">Quantity : {{this.pQuantity}}</h3>
-                <button class="button_delete" @click="$emit('delete',this.id)">Delete item</button>
+                <button class="button_delete" @click="$emit('delete',this.id)">Delete from cart</button>
                 <button class="button_update" @click="$emit('update',this.id)">Update Quantity</button>
 
             </div>
