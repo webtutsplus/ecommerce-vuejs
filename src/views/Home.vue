@@ -10,14 +10,14 @@
   <div class="listing">
     <h1>Popular Categories</h1>
     <div class="display-categories" v-if="products">
-      <div v-for="index in 4" :key="index">
+      <div v-for="index in this.len" :key="index">
         <CategoryCard :category="categories[index-1]"/>
       </div>
     </div>
 
     <h1>Best Products</h1>
     <div class="display-products" v-if="categories">
-      <div v-for="index in 4" :key="index">
+      <div v-for="index in this.lenp" :key="index">
         <ProductCard :product="products[index-1]"/>
       </div>
     </div>
@@ -32,7 +32,17 @@ export default {
   name: 'Home',
   components : {ProductCard, CategoryCard},
   props : ["baseURL", "products", "categories"],
-  emits : ["fetchData", "refreshNav"]
+  emits : ["fetchData", "refreshNav"],
+  data(){
+    return{
+      len:0,
+      lenp:0
+    }
+  },
+  mounted(){
+    this.len = Object.keys(this.categories).length
+    this.lenp = Object.keys(this.products).length
+  }
 }
 </script>
 

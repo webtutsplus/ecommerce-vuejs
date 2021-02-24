@@ -33,7 +33,8 @@ export default {
 
       //fetch categories
       await axios.get(this.baseURL + "category/")
-      .then(res => this.categories = res.data)
+      .then(res => {this.categories = res.data
+                    console.log(res.data)})
       .catch(err => console.log(err))
     },
     refreshNav() {
