@@ -22,7 +22,10 @@
                     <h3 class="product_price"><span>$</span>{{this.cartItem[itr-1].pPrice}}</h3>
                     <h3 class="product_description">Quantity : {{this.cartItem[itr-1].pQuantity}}</h3>
                     <button class="button_delete" @click="deleteItem(this.cartItem[itr-1].id)">Delete from cart</button>
-                    <input v-model="this.pQuantity" @click="updateItem(this.id,this.pQuantity)" placeholder="update quantity" />
+                    <form @submit="updateItem(this.cartItem[itr-1].id,this.cartItem[itr-1].pQuantity)">
+                      <input v-model="this.cartItem[itr-1].pQuantity" placeholder="update quantity" />
+                      <button type="submit">Update</button>
+                    </form>
 
                 </div>
 
@@ -72,17 +75,18 @@ export default {
           this.len = Object.keys(this.carts.cartItems).length
           this.totalcost = this.carts.totalCost
           let i;
-            for(i=0;i<this.len;i++){
-                    this.cartItem.push({
-                      imgUrl:this.carts.cartItems[i].product.imageURL,
-                      pName:this.carts.cartItems[i].product.name,
-                      pDescription:this.carts.cartItems[i].product.description,
-                      pPrice:this.carts.cartItems[i].product.price,
-                      pQuantity:this.carts.cartItems[i].quantity ,
-                      id:this.carts.cartItems[i].id,
-                      pId:this.carts.cartItems[i].product.id
-                    })
-                }
+          for(i=0;i<this.len;i++){
+            this.cartItem.push({
+              imgUrl:this.carts.cartItems[i].product.imageURL,
+              pName:this.carts.cartItems[i].product.name,
+              pDescription:this.carts.cartItems[i].product.description,
+              pPrice:this.carts.cartItems[i].product.price,
+              pQuantity:this.carts.cartItems[i].quantity ,
+              id:this.carts.cartItems[i].id,
+              pId:this.carts.cartItems[i].product.id,
+              userId:this.carts.cartItems[i].userId
+            })
+          }
         }
       },
       (error)=>{
@@ -106,13 +110,25 @@ export default {
 
 //add update item mthd;
     updateItem(itemId,quantity){
-      axios.put("http://localhost:8080/api/cart/update/"+itemId+"/?token="+this.token,{
-        params:{
-          quantity
+      let i
+      for(i=0;i<this.len;i++){
+        console.log(this.cartItem[i].id + " ----> " +itemId)
+        if(this.cartItem[i].id === itemId){
+          break
         }
+      }
+      this.cartItem[i].pQuantity = quantity
+      let userId = this.cartItem[i].userId
+      let productId = this.cartItem[i].pId
+      axios.put("http://localhost:8080/api/cart/update/"+itemId+"/?token="+this.token,{
+        id:itemId,
+        userId,
+        productId,
+        quantity
       })
       .then((response)=>{
         console.log('=>'+response)
+
       })
     }
 
