@@ -19,12 +19,13 @@
 
                     <h3 class="product_name" @click="showDetails(itr-1)">{{this.cartItem[itr-1].pName}}</h3>
                     <h3 class="product_description">{{this.cartItem[itr-1].pDescription}}</h3>
-                    <h3 class="product_price"><span>$</span>{{this.cartItem[itr-1].pPrice}}</h3>
+                    <h3 class="product_price"><span>$</span>{{this.cartItem[itr-1].pPrice}} per unit</h3>
                     <h3 class="product_description">Quantity : {{this.cartItem[itr-1].pQuantity}}</h3>
+                    <h3 class="product_description">Total Price : {{this.cartItem[itr-1].pPrice*this.cartItem[itr-1].pQuantity}}</h3>
                     <button class="button_delete" @click="deleteItem(this.cartItem[itr-1].id)">Delete from cart</button>
                     <form @submit="updateItem(this.cartItem[itr-1].id,this.cartItem[itr-1].pQuantity)">
-                      <input v-model="this.cartItem[itr-1].pQuantity" placeholder="update quantity" />
-                      <button type="submit">Update</button>
+                      <input v-model="this.cartItem[itr-1].pQuantity"/>
+                      <button class="button_update" type="submit">Update</button>
                     </form>
 
                 </div>
@@ -63,7 +64,7 @@ export default {
   methods: {
 
      showDetails(itr){
-            this.$router.push({ name: 'ShowDetails', params: { id : this.carts.cartItems[itr].pId } })
+            this.$router.push({ name: 'ShowDetails', params: { id : this.cartItem[itr].pId } })
         },
 
      listCartItems(){
@@ -194,9 +195,10 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   margin: 16px;
+  border-radius: 15px;
 }
 .button_update {
   background-color: #4CAF50;
@@ -206,10 +208,9 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   margin: 16px;
+  border-radius: 15px;
 }
-
-
 </style>

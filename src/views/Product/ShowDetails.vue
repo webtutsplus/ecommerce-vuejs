@@ -76,14 +76,18 @@ export default {
             });
         },
     addToCart(productId){
-      alert("Added to cart");
       axios.post("http://localhost:8080/api/cart/add?token="+this.token,{
           productId : productId,
           quantity : this.quantity
       }).then((response) => {
         console.log(response)
         if(response.status==201){
-          console.log("Here man");
+          swal({
+            text: "Product Added to the cart!",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
+          console.log("prod added!!!");
         }
       },(error) =>{
         console.log(error)
