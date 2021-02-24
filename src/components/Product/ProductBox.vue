@@ -19,7 +19,7 @@
 <script>
 export default {
     name : "ProductBox",
-    props : ["product"],
+    props : ["baseURL","product"],
     methods : {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })

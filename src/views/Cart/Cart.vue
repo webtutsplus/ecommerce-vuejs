@@ -68,7 +68,7 @@ export default {
         },
 
      listCartItems(){
-      axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
+      axios.get(this.baseURL +"cart/?token="+this.token).then((response) => {
         console.log(response)
         if(response.status==200){
           console.log("Success")
@@ -97,23 +97,20 @@ export default {
     },
 
     deleteItem(itemId){
-      axios.delete("http://localhost:8080/api/cart/delete/"+ itemId+ "/?token="+this.token)
+      axios.delete(this.baseURL+"cart/delete/"+ itemId+ "/?token="+this.token)
         .then((response)=>{
           if(response.status==200){
             console.log("Deleted successfully")
             this.$router.go(0);
-            //implement refrsh
           }
         },(error)=>{
           console.log(error)
         })
     },
 
-//add update item mthd;
     updateItem(itemId,quantity){
       let i
       for(i=0;i<this.len;i++){
-        console.log(this.cartItem[i].id + " ----> " +itemId)
         if(this.cartItem[i].id === itemId){
           break
         }
@@ -121,7 +118,7 @@ export default {
       this.cartItem[i].pQuantity = quantity
       let userId = this.cartItem[i].userId
       let productId = this.cartItem[i].pId
-      axios.put("http://localhost:8080/api/cart/update/"+itemId+"/?token="+this.token,{
+      axios.put(this.baseURL+"cart/update/"+itemId+"/?token="+this.token,{
         id:itemId,
         userId,
         productId,

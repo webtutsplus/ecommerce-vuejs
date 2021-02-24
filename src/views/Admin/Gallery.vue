@@ -6,8 +6,6 @@
       <button type="button" class="btn btn-success add-btn btn-lg">Add a new Image</button>
     </router-link>
 
-    <p>images: {{images}}</p>
-
     <div v-if="images" class="images-display">
       <div v-for="image of images" :key="image.name">
         <ImageBox :image="image"></ImageBox>

@@ -58,11 +58,11 @@ export default {
       quantity: 1,
     }
   },
-  props : ["products", "categories"],
+  props : ["baseURL","products", "categories"],
   methods:{
     addToWishList(productId){
             console.log(this.isAddedToWishlist);
-            axios.post("http://localhost:8080/api/wishlist/add?token="+this.token, {
+            axios.post(this.baseURL+"wishlist/add?token="+this.token, {
                 id:productId
             }).then((response) => {
                 console.log(response);
@@ -76,7 +76,7 @@ export default {
             });
         },
     addToCart(productId){
-      axios.post("http://localhost:8080/api/cart/add?token="+this.token,{
+      axios.post(this.baseURL+"cart/add?token="+this.token,{
           productId : productId,
           quantity : this.quantity
       }).then((response) => {
@@ -94,9 +94,8 @@ export default {
       });
     },
 
-    //display the items in the loggedin user cart
     listCartItems(){
-      axios.get("http://localhost:8080/api/cart/?token="+this.token).then((response) => {
+      axios.get(this.baseURL+"cart/?token="+this.token).then((response) => {
         console.log(response)
         if(response.status===200){
           console.log("Success")
