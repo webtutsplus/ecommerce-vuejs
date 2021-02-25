@@ -1,6 +1,6 @@
 <template>
   <div class="card category-card">
-    <img :src="this.imageUrl" class="card-img-top" alt="image" @click="listProducts">
+    <img :src="category.imageUrl" class="card-img-top" alt="image" @click="listProducts">
     <div class="card-body">
       <p class="name" @click="listProducts">{{category.categoryName}}</p>
       <p class="card-text">{{category.description}}</p>
@@ -16,14 +16,6 @@ export default {
     listProducts(){
       this.$router.push({ name: 'ListProducts', params: { id : this.category.id } })
     }
-  },
-  data(){
-    return{
-      imageUrl:''
-    }
-  },
-  mounted(){
-    this.imageUrl = this.category.imageUrl
   }
 }
 </script>

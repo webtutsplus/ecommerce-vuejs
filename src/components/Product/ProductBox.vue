@@ -2,7 +2,7 @@
   <div class="product-box">
       <div class="row">
         <div class="col-4" @click="showDetails">
-            <img class="img-fluid" v-bind:src="this.imgUrl" alt="product-image">
+            <img class="img-fluid" :src="product.imageURL" alt="product-image">
         </div>
         <div class="col-8">
             <router-link :to="{name : 'EditProduct', params : {id : product.id} }" v-show="this.$route.name=='AdminProduct'">
@@ -24,14 +24,6 @@ export default {
         showDetails(){
             this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })
         }
-    },
-    data(){
-        return{
-            imgUrl:''
-        }
-    },
-    mounted(){
-        this.imgUrl = this.product.imageURL
     }
 }
 </script>
