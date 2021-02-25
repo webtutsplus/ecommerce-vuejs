@@ -10,14 +10,14 @@
   <div class="listing">
     <h1>Popular Categories</h1>
     <div class="display-categories" v-if="products">
-      <div v-for="index in this.len" :key="index">
+      <div v-for="index in this.category_size" :key="index">
         <CategoryCard :category="categories[index-1]"/>
       </div>
     </div>
 
     <h1>Best Products</h1>
     <div class="display-products" v-if="categories">
-      <div v-for="index in this.lenp" :key="index">
+      <div v-for="index in this.product_size" :key="index">
         <ProductCard :product="products[index-1]"/>
       </div>
     </div>
@@ -35,13 +35,13 @@ export default {
   emits : ["fetchData", "refreshNav"],
   data(){
     return{
-      len:0,
-      lenp:0
+      category_size:0,
+      product_size:0
     }
   },
   mounted(){
-    this.len = Object.keys(this.categories).length
-    this.lenp = Object.keys(this.products).length
+    this.category_size = Object.keys(this.categories).length
+    this.product_size = Object.keys(this.products).length
   }
 }
 </script>

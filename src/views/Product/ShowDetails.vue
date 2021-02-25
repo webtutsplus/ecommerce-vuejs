@@ -65,7 +65,6 @@ export default {
             axios.post(this.baseURL+"wishlist/add?token="+this.token, {
                 id:productId
             }).then((response) => {
-                console.log(response);
                 if(response.status==201) {
                     this.isAddedToWishlist = true;
                     console.log(this.isAddedToWishlist);
@@ -80,14 +79,12 @@ export default {
           productId : productId,
           quantity : this.quantity
       }).then((response) => {
-        console.log(response)
         if(response.status==201){
           swal({
             text: "Product Added to the cart!",
             icon: "success",
             closeOnClickOutside: false,
           });
-          console.log("prod added!!!");
         }
       },(error) =>{
         console.log(error)
@@ -96,9 +93,7 @@ export default {
 
     listCartItems(){
       axios.get(this.baseURL+"cart/?token="+this.token).then((response) => {
-        console.log(response)
         if(response.status===200){
-          console.log("Success")
           this.$router.push('/cart')
         }
       },(error)=>{
