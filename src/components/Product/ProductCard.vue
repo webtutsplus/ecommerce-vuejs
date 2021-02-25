@@ -11,7 +11,7 @@
 <script>
 export default {
   name : "ProductCard",
-  props : ["baseURL","product"],
+  props : ["product"],
   methods : {
     showDetails(){
       this.$router.push({ name: 'ShowDetails', params: { id : this.product.id } })

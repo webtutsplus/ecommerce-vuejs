@@ -16,8 +16,8 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      baseURL : "http://remotedevs.org:8080/api/",
-    //  baseURL : "http://localhost:8080/api/",
+    //  baseURL : "http://remotedevs.org:8080/api/",
+      baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
       key : 0
@@ -33,8 +33,7 @@ export default {
 
       //fetch categories
       await axios.get(this.baseURL + "category/")
-      .then(res => {this.categories = res.data
-                    console.log(res.data)})
+      .then(res => this.categories = res.data)
       .catch(err => console.log(err))
     },
     refreshNav() {
