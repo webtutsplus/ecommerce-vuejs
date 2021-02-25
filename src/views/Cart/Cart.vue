@@ -68,10 +68,8 @@ export default {
         },
 
      listCartItems(){
-      axios.get(this.baseURL +"cart/?token="+this.token).then((response) => {
-        console.log(response)
+      axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
         if(response.status==200){
-          console.log("Success")
           this.carts=response.data;
           this.len = Object.keys(this.carts.cartItems).length
           this.totalcost = this.carts.totalCost
@@ -97,10 +95,9 @@ export default {
     },
 
     deleteItem(itemId){
-      axios.delete(this.baseURL+"cart/delete/"+ itemId+ "/?token="+this.token)
+      axios.delete(`${this.baseURL}cart/delete/${itemId}/?token=${this.token} `)
         .then((response)=>{
           if(response.status==200){
-            console.log("Deleted successfully")
             this.$router.go(0);
           }
         },(error)=>{
@@ -118,16 +115,13 @@ export default {
       this.cartItem[i].pQuantity = quantity
       let userId = this.cartItem[i].userId
       let productId = this.cartItem[i].pId
-      axios.put(this.baseURL+"cart/update/"+itemId+"/?token="+this.token,{
+      axios.put(`${this.baseURL}cart/update/${itemId}/?token=${this.token}`,{
         id:itemId,
         userId,
         productId,
         quantity
       })
-      .then((response)=>{
-        console.log('=>'+response)
-
-      })
+  
     }
 
   },

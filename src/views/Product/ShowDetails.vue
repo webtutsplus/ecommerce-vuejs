@@ -61,7 +61,7 @@ export default {
   props : ["baseURL","products", "categories"],
   methods:{
     addToWishList(productId){
-            axios.post(this.baseURL+"wishlist/add?token="+this.token, {
+            axios.post(`${this.baseURL}wishlist/add?token=${this.token}`, {
                 id:productId
             }).then((response) => {
                 if(response.status==201) {
@@ -73,7 +73,7 @@ export default {
             });
         },
     addToCart(productId){
-      axios.post(this.baseURL+"cart/add?token="+this.token,{
+      axios.post(`${this.baseURL}cart/add?token=${this.token}`,{
           productId : productId,
           quantity : this.quantity
       }).then((response) => {
@@ -90,7 +90,7 @@ export default {
     },
 
     listCartItems(){
-      axios.get(this.baseURL+"cart/?token="+this.token).then((response) => {
+      axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
         if(response.status===200){
           this.$router.push('/cart')
         }
