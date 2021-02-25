@@ -61,13 +61,11 @@ export default {
   props : ["baseURL","products", "categories"],
   methods:{
     addToWishList(productId){
-            console.log(this.isAddedToWishlist);
             axios.post(this.baseURL+"wishlist/add?token="+this.token, {
                 id:productId
             }).then((response) => {
                 if(response.status==201) {
                     this.isAddedToWishlist = true;
-                    console.log(this.isAddedToWishlist);
                     this.wishlistString = "Added to WishList"
                 }
             },(error) =>{
