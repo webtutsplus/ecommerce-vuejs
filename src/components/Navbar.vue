@@ -12,6 +12,7 @@
       <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
       <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>
       <li><router-link :to="{name : 'Cart'}">CART</router-link></li>
+      <li><router-link :to="{name : 'Checkout'}">CHECKOUT</router-link></li>
       <li>|</li>
       <li><router-link :to="{name: 'Admin'}">ADMIN</router-link></li>
       <li>
