@@ -1,103 +1,90 @@
 <template>
-      <div>
-        <h3>Manage Your Subscription</h3>
+  <div class="div_class">
+  <h3>This is the checkout page. Product details are hardcoded.Change it when integrated with Products</h3>
 
-        <label>Card Holder Name</label>
-        <input id="card-holder-name" type="text" v-model="name" class="form-control mb-2">
-
-        <label>Card</label>
-        <div id="card-element">
-
-        </div>
-
-          <button class="btn btn-primary mt-3" id="add-card-button" v-on:click="submitPaymentMethod()">
-            Save Payment Method
-        </button>
-    </div>
+    <button class="btn btn-primary mt-3" id="proceed-to-checkout" v-on:click="goToCheckout()">
+            Go to Checkout
+    </button>
+  </div>
 </template>
-
 <script>
 export default {
-   data(){
-        return {
-            stripeAPIToken: 'pk_test_51Hr18ILR0wfBoBqmrZFhIWWOk0CA8PFS3cEMwh4S1S6jRUzVucZ26dbGIYRk5ezdYlMgUkQmYHGJOsKR35uEHgvV00IXALUhYx',
-            
-          stripe: '',
-          elements: '',
-          card: '',
-          intentToken: '',
-           name: '',
-                addPaymentStatus: 0,
-                addPaymentStatusError: ''
-        }
-    },
-    methods: {
-    /*
-        Includes Stripe.js dynamically
-    */
-    includeStripe( URL, callback ){
-        let documentTag = document, tag = 'script',
-            object = documentTag.createElement(tag),
-            scriptTag = documentTag.getElementsByTagName(tag)[0];
-        object.src = '//' + URL;
-        if (callback) { object.addEventListener('load', function (e) { callback(null, e); }, false); }
-        scriptTag.parentNode.insertBefore(object, scriptTag);
-    },
-    configureStripe(){
-    this.stripe = Stripe( this.stripeAPIToken );
-
-    this.elements = this.stripe.elements();
-    this.card = this.elements.create('card');
-
-    this.card.mount('#card-element');
-  },
-
-  loadIntent(){
-    axios.get('http://localhost:8080/api/checkout/get-setup-intent')
-        .then( function( response ){
-          console.log("Load intent : " + response)
-            this.intentToken = response.data;
-        }.bind(this));
-},
-submitPaymentMethod(){
-  console.log("Triggered this");
-}
-  
-  // submitPaymentMethod(){
-  //   this.addPaymentStatus = 1;
-
-  //   this.stripe.confirmCardSetup(
-  //       this.intentToken.client_secret, {
-  //           payment_method: {
-  //               card: this.card,
-  //               billing_details: {
-  //                   name: this.name
-  //               }
-  //           }
-  //       }
-  //   ).then(function(result) {
-  //       if (result.error) {
-  //           this.addPaymentStatus = 3;
-  //           this.addPaymentStatusError = result.error.message;
-  //       } else {
-  //           this.savePaymentMethod( result.setupIntent.payment_method );
-  //           this.addPaymentStatus = 2;
-  //           this.card.clear();
-  //           this.name = '';
-  //       }
-  //   }.bind(this));
-
+        data(){
+            return {
+                stripeAPIToken: 'pk_test_51Hr18ILR0wfBoBqmrZFhIWWOk0CA8PFS3cEMwh4S1S6jRUzVucZ26dbGIYRk5ezdYlMgUkQmYHGJOsKR35uEHgvV00IXALUhYx',
     
+                stripe: '',
+                price : 20,
+                quantity : 7,
+                productName : "Writometer",
+                productId : 2
+            }
+        },
+    
+        mounted(){
+            this.includeStripe('js.stripe.com/v3/', function(){
+                this.configureStripe();
+            }.bind(this) );
+        },
+    
+        methods: {
+            /*
+                Includes Stripe.js dynamically
+            */
+            includeStripe( URL, callback ){
+                let documentTag = document, tag = 'script',
+                    object = documentTag.createElement(tag),
+                    scriptTag = documentTag.getElementsByTagName(tag)[0];
+                object.src = '//' + URL;
+                if (callback) { object.addEventListener('load', function (e) { callback(null, e); }, false); }
+                scriptTag.parentNode.insertBefore(object, scriptTag);
+            },
+    
+            /*
+                Configures Stripe by setting up the elements and 
+                creating the card element.
+            */
+            configureStripe(){
+                this.stripe = Stripe( this.stripeAPIToken );
+    
+                this.elements = this.stripe.elements();
+            
+            },
 
-    },
-    mounted(){
-    this.includeStripe('js.stripe.com/v3/', function(){
-        this.configureStripe();
-    }.bind(this) );
-     this.loadIntent();
-  }
+            goToCheckout(){
+                axios.post("http://localhost:8080/api/order/create-checkout-session",{
+                     price : this.price,
+                     quantity : this.quantity ,
+                     productName : this.productName,
+                     productId : this.productId
 
+                }).then((response)=>{
+                  console.log("Session id : " + JSON.stringify(response))
+                  return response.data;
+                }).then((session)=>{
+                   return this.stripe.redirectToCheckout({ sessionId: session.sessionId });
+                }).then((result)=>{
+                  console.log(result)
+                  
+                  axios.post("http://localhost:8080/api/order/add/?token="+this.token,{
+                      productId: this.productId,
+                      quantity: this.quantity 
+                  }).then((response)=>{
+                     console.log(response.data)
+                  },(error)=>{
+                    console.log(error);
+                  })
 
-
-}
+                })
+            }
+        }
+    
+    }
+    
 </script>
+ <style >
+.div_class{
+    margin-top: 5%;
+    margin-left: 40%;
+}
+</style>
