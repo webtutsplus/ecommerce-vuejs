@@ -5,6 +5,7 @@
     <button class="btn btn-primary mt-3" id="proceed-to-checkout" v-on:click="goToCheckout()">
             Go to Checkout
     </button>
+
   </div>
 </template>
 <script>
@@ -17,9 +18,12 @@ export default {
                 price : 20,
                 quantity : 7,
                 productName : "Writometer",
-                productId : 2
+                productId : 2,
             }
         },
+
+        name:'Checkout',
+        props:["products","totalPrice","baseURL"],
     
         mounted(){
             this.includeStripe('js.stripe.com/v3/', function(){
@@ -52,12 +56,12 @@ export default {
             },
 
             goToCheckout(){
-                axios.post("http://localhost:8080/api/order/create-checkout-session",{
-                     price : this.price,
+                axios.post(this.baseURL+"order/create-checkout-session",{
+                     /*price : this.price,
                      quantity : this.quantity ,
                      productName : this.productName,
-                     productId : this.productId
-
+                     productId : this.productId*/
+                     products:this.products
                 }).then((response)=>{
                   console.log("Session id : " + JSON.stringify(response))
                   return response.data;
@@ -66,7 +70,7 @@ export default {
                 }).then((result)=>{
                   console.log(result)
                   
-                  axios.post("http://localhost:8080/api/order/add/?token="+this.token,{
+                  axios.post(this.baseURL+"order/add/?token="+this.token,{
                       productId: this.productId,
                       quantity: this.quantity 
                   }).then((response)=>{
