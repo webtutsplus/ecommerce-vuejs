@@ -1,9 +1,9 @@
 <template>
   <div class="div_class">
-  <h3>This is the checkout page. Product details are hardcoded.Change it when integrated with Products</h3>
+  <h3>You will be redirected to payment page</h3>
 
     <button class="btn btn-primary mt-3" id="proceed-to-checkout" v-on:click="goToCheckout()">
-            Go to Checkout
+           Checkout
     </button>
 
   </div>
@@ -13,13 +13,10 @@ export default {
         data(){
             return {
                 stripeAPIToken: 'pk_test_51Hr18ILR0wfBoBqmrZFhIWWOk0CA8PFS3cEMwh4S1S6jRUzVucZ26dbGIYRk5ezdYlMgUkQmYHGJOsKR35uEHgvV00IXALUhYx',
-    
                 stripe: '',
-                price : 20,
-                quantity : 7,
-                productName : "Writometer",
-                productId : 2,
-            }
+                token:null,
+                sessionId:null
+                }
         },
 
         name:'Checkout',
@@ -54,38 +51,37 @@ export default {
                 this.elements = this.stripe.elements();
             
             },
-
+            
             goToCheckout(){
-                axios.post(this.baseURL+"order/create-checkout-session",{
-                     /*price : this.price,
-                     quantity : this.quantity ,
-                     productName : this.productName,
-                     productId : this.productId*/
-                     products:this.products
-                }).then((response)=>{
-                  console.log("Session id : " + JSON.stringify(response))
+                let checkoutBodyArray = [];
+                let i=0
+                for(i=0;i<Object.keys(this.products).length;i++){
+                    checkoutBodyArray.push({
+                        imageUrl:this.products[i].imgUrl ,
+                        productName:this.products[i].pName,
+                        quantity:this.products[i].pQuantity,
+                        price:this.products[i].pPrice,
+                        productId:this.products[i].pId,
+                        userId:this.products[i].userId
+                    })
+                }
+                axios.post(this.baseURL+"order/create-checkout-session/?baseURL=",
+                   checkoutBodyArray
+                ).then((response)=>{
+                  localStorage.setItem("sessionId",response.data.sessionId);
                   return response.data;
                 }).then((session)=>{
                    return this.stripe.redirectToCheckout({ sessionId: session.sessionId });
-                }).then((result)=>{
-                  console.log(result)
-                  
-                  axios.post(this.baseURL+"order/add/?token="+this.token,{
-                      productId: this.productId,
-                      quantity: this.quantity 
-                  }).then((response)=>{
-                     console.log(response.data)
-                  },(error)=>{
-                    console.log(error);
-                  })
-
                 })
+            },
+            mounted(){
+                this.token = localStorage.getItem("token");
             }
         }
-    
-    }
-    
+}
+        
 </script>
+
  <style >
 .div_class{
     margin-top: 5%;

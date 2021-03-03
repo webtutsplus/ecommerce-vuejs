@@ -3,10 +3,11 @@
   <div class="cart-box container">
 
     <div v-if="clicked">
-      <Checkout :products="this.cartItem" 
-                :totalPrice="this.totalcost" 
-                :baseURL="baseURL"/>
-    </div>
+      <Checkout :products="cartItem"
+                :baseURL="baseURL"
+                :totalPrice="totalcost"
+      />
+    </div>  
 
     <div v-else>
 
@@ -20,7 +21,7 @@
             <div class="row">
 
                 <div class="col-4" @click="showDetails(itr-1)">
-                  <img class="img-fluid" v-bind:src="this.cartItem[itr-1].imgUrl" alt="product-image">
+                  <img class="imgfluid" v-bind:src="this.cartItem[itr-1].imgUrl" alt="product-image">
                 </div>
 
                 <div class="col-8">
@@ -46,16 +47,16 @@
 
         <p>Total Cost : $ {{totalcost}}</p>
 
-        <button class="button_update" @click="checkout()">Checkout</button>
+        <button class="button_check" @click="checkout()">Confirm Order</button>
+        
+    </div>
 
     </div>
 
   </div>
 
-  </div>
-
 </template>
-
+ 
 <script>
 
 import Checkout from '../Checkout/Checkout.vue'
@@ -83,7 +84,7 @@ export default {
             this.$router.push({ name: 'ShowDetails', params: { id : this.cartItem[itr].pId } })
         },
 
-     checkout() {    
+     checkout() {
        this.clicked=!this.clicked
      }, 
 
@@ -165,7 +166,10 @@ export default {
 .add-btn {
   margin: 20px 0;
 }
-
+.imgfluid{
+  max-width: 270px;
+  max-height: 300px;
+}
 .product-box{
     background-color: rgb(253, 240, 250);
     border-radius: 10px;
@@ -210,6 +214,7 @@ export default {
   font-weight: bold;
   margin: 16px;
   border-radius: 15px;
+  outline: none;
 }
 .button_update {
   background-color: #4CAF50;
@@ -223,5 +228,20 @@ export default {
   font-weight: bold;
   margin: 16px;
   border-radius: 15px;
+  outline: none;
+}
+.button_check{
+  background-color: #5d3dec;
+  border: none;
+  color: white;
+  margin-left: 40%;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 15px;
+  outline: none;
 }
 </style>

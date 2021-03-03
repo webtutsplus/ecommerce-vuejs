@@ -23,6 +23,9 @@ import ListProducts from '../views/Category/ListProducts.vue'
 import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
 
+import Success from '../helper/payment/Success.vue'
+import Failed from '../helper/payment/Failed.vue'
+
 const routes = [
   {
     path: '/',
@@ -133,6 +136,16 @@ const routes = [
     path : '/order',
     name : 'Order',
     component : Order
+  },
+  {
+    path: '/payment/success',
+    name: 'PaymentSuccess',
+    component:Success
+  },
+  {
+    path: '/payment/failed',
+    name: 'FailedPayment',
+    component:Failed
   }
 ]
 

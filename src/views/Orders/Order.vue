@@ -6,26 +6,35 @@
     <div v-if="orders">
 
         <div v-for="itr in this.len" :key="itr">
+
+          <h4>Order No : {{itr}}</h4> 
+          <h5>Total Cost : $ {{totalCost[itr-1]}}</h5>
+
+          <div v-for="item in this.lenOfEachOrder[itr-1]" :key="item">
+
+            <h5>Product no: {{item}}</h5>
   
-        <div class="product-box">
+            <div class="product-box">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-4">
-                  <img class="img-fluid" v-bind:src="this.orderList[itr-1].imgUrl" alt="product-image">
+                    <div class="col-4">
+                      <img class="img-fluid" v-bind:src="this.orderList[itr-1][item-1].imgUrl" alt="product-image">
+                    </div>
+
+                    <div class="col-8">
+
+                        <h3 class="product_name">{{this.orderList[itr-1][item-1].pName}}</h3>
+                        <h3 class="product_description">{{this.orderList[itr-1][item-1].pDescription}}</h3>
+                        <h3 class="product_price"><span>$</span>{{this.orderList[itr-1][item-1].pPrice}} per unit</h3>
+                        <h3 class="product_description">Quantity : {{this.orderList[itr-1][item-1].pQuantity}}</h3>
+                        <h3 class="product_description">Total Price : $ {{this.orderList[itr-1][item-1].pPrice*this.orderList[itr-1][item-1].pQuantity}}</h3>
+
+                    </div>
+
                 </div>
 
-                <div class="col-8">
-
-                    <h3 class="product_name">{{this.orderList[itr-1].pName}}</h3>
-                    <h3 class="product_description">{{this.orderList[itr-1].pDescription}}</h3>
-                    <h3 class="product_price"><span>$</span>{{this.orderList[itr-1].pPrice}} per unit</h3>
-                    <h3 class="product_description">Quantity : {{this.orderList[itr-1].pQuantity}}</h3>
-                    <h3 class="product_description">Total Price : {{this.orderList[itr-1].pPrice*this.orderList[itr-1].pQuantity}}</h3>
-
-                </div>
-
-            </div>
+              </div>
 
           </div>
 
@@ -44,36 +53,40 @@ export default {
 
   data() {
     return {
-      orders: null,
+      orders: [],
       token: null,
       len:0,
-      totalcost:0,
-      orderList : []
+      lenOfEachOrder:[],
+      orderList : [],
+      totalCost:[]
     }
   },
+
+  props:["baseURL"],
 
   name: 'Order',
 
   methods: {    
-listOrders(){
-      axios.get(`http://localhost:8080/api/order/?token=${this.token}`).then((response) => {
-        console.log("yayyy")
+      listOrders(){
+      axios.get(`${this.baseURL}order/?token=${this.token}`).then((response) => {
         if(response.status==200){
           this.orders = response.data
-          console.log(response.data)
           this.len = Object.keys(this.orders).length
-          let i;
+          let i,j;   
           for(i=0;i<this.len;i++){
-              this.orderList.push({
-              imgUrl:this.orders[i].product.imageURL,
-              pName:this.orders[i].product.name,
-              pDescription:this.orders[i].product.description,
-              pPrice:this.orders[i].product.price,
-              pQuantity:this.orders[i].quantity ,
-              id:this.orders[i].id,
-              pId:this.orders[i].product.id,
-              userId:this.orders[i].userId
+              this.totalCost[i] = this.orders[i].totalPrice
+              this.lenOfEachOrder[i]=(Object.keys(this.orders[i].orderItems).length)
+              this.orderList[i]=[]
+              for(j=0;j<this.lenOfEachOrder[i];j++){
+                console.log('q212121212='+this.orders[i].orderItems[j].quantity+' p='+this.orders[i].orderItems[j].price);
+                this.orderList[i].push({
+                imgUrl:this.orders[i].orderItems[j].product.imageURL,
+                pName:this.orders[i].orderItems[j].product.name,
+                pDescription:this.orders[i].orderItems[j].product.description,
+                pPrice:this.orders[i].orderItems[j].product.price,
+                pQuantity:this.orders[i].orderItems[j].quantity ,
             })
+          }
           }
         }
       },
@@ -86,7 +99,6 @@ listOrders(){
 
   mounted() {
     this.token = localStorage.getItem("token");
-    //list the orders
     this.listOrders();
   },
 };
