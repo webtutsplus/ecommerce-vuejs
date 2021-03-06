@@ -51,9 +51,10 @@ export default {
 .home-landing{
   padding : 100px;
   background-image: url("../assets/6.jpg");
-  height : 85.5vh;
-  background-size: cover;
-  text-align: center;
+  height: 85vh;
+  width: 100%;
+  background-size: cover; 
+   text-align: center;
 }
 .welcome{
   padding : 50px;
@@ -72,6 +73,15 @@ export default {
   font-size : 30px;
   color: white;
 }
+
+@media only screen and (max-width: 700px) {
+
+   .welcome h1{ 
+      font-size: 40px; 
+   }
+
+}
+
 .myBtn{
   font-size: 20px;
   background: rgb(73, 76, 224);
@@ -109,4 +119,30 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+@media only screen and (max-width: 480px) {
+
+   .welcome h1{ 
+      font-size: 30px; 
+   }
+
+}
+
+@media only screen and (max-width: 450px) {
+
+   .welcome h1{ 
+      font-size: 20px; 
+   }
+   .welcome p{
+     font-size: 20px;
+   }
+   .welcome{
+     max-width: 300px;
+   }
+   .myBtn{
+     font-size:15px
+   }
+
+}
+
 </style>

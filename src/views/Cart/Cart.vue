@@ -4,10 +4,10 @@
 
     <div v-if="clicked">
       <Checkout :products="cartItem"
-                :baseURL="baseURL"
-                :totalPrice="totalcost"
+                  :baseURL="baseURL"
+                  :totalPrice="totalcost"
       />
-    </div>  
+    </div>
 
     <div v-else>
 
@@ -45,13 +45,13 @@
 
         </div>
 
-        <p>Total Cost : $ {{totalcost}}</p>
+        <h3>Total Cost : $ {{totalcost}}</h3>
 
-        <button class="button_check" @click="checkout()">Confirm Order</button>
+        <button :disabled="isDisabled()" class="button_check" @click="checkout()" >Confirm Order</button>
         
     </div>
 
-    </div>
+  </div>
 
   </div>
 
@@ -80,12 +80,19 @@ export default {
 
   methods: {
 
+     isDisabled(){
+       if(this.len === 0){
+         return true;
+       }
+       return false;
+     },
+
      showDetails(itr){
             this.$router.push({ name: 'ShowDetails', params: { id : this.cartItem[itr].pId } })
-        },
+     },
 
      checkout() {
-       this.clicked=!this.clicked
+      this.clicked=!this.clicked
      }, 
 
      listCartItems(){
@@ -157,91 +164,135 @@ export default {
 
 <style>
 
-.cart-box h2 {
-  font-family: "Courgette", cursive;
-  font-size: 60px;
-  text-align: center;
-  margin: 70px 0;
-}
-.add-btn {
-  margin: 20px 0;
-}
-.imgfluid{
-  max-width: 270px;
-  max-height: 300px;
-}
-.product-box{
-    background-color: rgb(253, 240, 250);
-    border-radius: 10px;
-    margin: 20px 0;
-    padding: 15px 15px;
-    min-height: 250px;
-}
-.product-box img{
-    border-radius : 10px;
-}   
-.product-box img:hover{
-    cursor: pointer;
-}
-.product_name{
-    font-size: 35px;
-    margin-right : 120px;
-}
-.product_name:hover{
-    color:rgb(243, 126, 31);
-    cursor: pointer;
-}
-.product_description{
-    font-size: 20px;
-}
-.product_price{
-    font-size: 20px;
-    color:red;
-}
-.product_price span{
-    font-size:15px;
-}
+  .cart-box h2 {
+    font-family: "Courgette", cursive;
+    font-size: 60px;
+    text-align: center;
+    margin: 70px 0;
+  }
 
-.button_delete {
-  background-color: #f44336;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 16px;
-  border-radius: 15px;
-  outline: none;
-}
-.button_update {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 16px;
-  border-radius: 15px;
-  outline: none;
-}
-.button_check{
-  background-color: #5d3dec;
-  border: none;
-  color: white;
-  margin-left: 40%;
-  padding: 15px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 15px;
-  outline: none;
-}
+  .cart-box h3{
+    font-family: 'Grand Hotel', cursive;
+  }
+
+  .add-btn {
+    margin: 20px 0;
+  }
+
+  .imgfluid{
+    max-width: 270px;
+    max-height: 300px;
+  }
+
+  .product-box{
+      background-color: rgb(253, 240, 250);
+      border-radius: 10px;
+      margin: 20px 0;
+      padding: 15px 15px;
+      min-height: 250px;
+  }
+
+  .product-box img{
+      border-radius : 10px;
+  }  
+
+  .product-box img:hover{
+      cursor: pointer;
+  }
+
+  .product_name{
+      font-size: 35px;
+      margin-right : 120px;
+  }
+
+  .product_name:hover{
+      color:rgb(243, 126, 31);
+      cursor: pointer;
+  }
+
+  .product_description{
+      font-size: 20px;
+  }
+
+  .product_price{
+      font-size: 20px;
+      color:red;
+  }
+
+  .product_price span{
+      font-size:15px;
+  }
+
+  .button_delete {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 16px;
+    border-radius: 15px;
+  }
+
+  .button_delete:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+  .button_update {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 16px;
+    border-radius: 15px;
+  }
+
+  .button_update:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+  .button_check{
+    background-color: #5d3dec;
+    border: none;
+    color: white;
+    margin-left: 40%;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+  }
+
+  .button_check:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+  .button_check:disabled{
+    background-color: #9b86f7;
+    border: none;
+    color: white;
+    margin-left: 40%;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor:not-allowed;
+  }
+
 </style>

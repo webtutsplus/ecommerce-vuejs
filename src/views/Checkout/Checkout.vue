@@ -65,7 +65,7 @@ export default {
                         userId:this.products[i].userId
                     })
                 }
-                axios.post(this.baseURL+"order/create-checkout-session/?baseURL=",
+                axios.post(this.baseURL+"order/create-checkout-session",
                    checkoutBodyArray
                 ).then((response)=>{
                   localStorage.setItem("sessionId",response.data.sessionId);

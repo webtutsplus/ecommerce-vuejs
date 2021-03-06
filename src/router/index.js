@@ -26,6 +26,8 @@ import Signin from '../views/Signin.vue'
 import Success from '../helper/payment/Success.vue'
 import Failed from '../helper/payment/Failed.vue'
 
+import OrderItemView from '../views/Orders/OrderItemView.vue'
+
 const routes = [
   {
     path: '/',
@@ -146,6 +148,11 @@ const routes = [
     path: '/payment/failed',
     name: 'FailedPayment',
     component:Failed
+  },
+  {
+    path:'/order/:id', 
+    name:'OrderItemView',
+    component:OrderItemView
   }
 ]
 
