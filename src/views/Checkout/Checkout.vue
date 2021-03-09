@@ -2,8 +2,8 @@
   <div class="div_class">
   <h3>You will be redirected to payment page</h3>
 
-    <button class="btn btn-primary mt-3" id="proceed-to-checkout" v-on:click="goToCheckout()">
-           Checkout
+    <button class="checkout_button" id="proceed-to-checkout" @click="goToCheckout()">
+           Make payment
     </button>
 
   </div>
@@ -12,20 +12,26 @@
 export default {
         data(){
             return {
-                stripeAPIToken: 'pk_test_51Hr18ILR0wfBoBqmrZFhIWWOk0CA8PFS3cEMwh4S1S6jRUzVucZ26dbGIYRk5ezdYlMgUkQmYHGJOsKR35uEHgvV00IXALUhYx',
+                stripeAPIToken: process.env.VUE_APP_STRIPETOKEN,
                 stripe: '',
                 token:null,
-                sessionId:null
+                sessionId:null,
+                checkoutBodyArray:[]
                 }
         },
 
         name:'Checkout',
-        props:["products","totalPrice","baseURL"],
+        props:["baseURL"],
     
         mounted(){
+            this.token = localStorage.getItem("token");
+            if(typeof( this.$route.params.id) === "undefined"){
+                this.$router.push({name:'Home'})
+            }
             this.includeStripe('js.stripe.com/v3/', function(){
                 this.configureStripe();
             }.bind(this) );
+            this.getAllItems()
         },
     
         methods: {
@@ -49,42 +55,86 @@ export default {
                 this.stripe = Stripe( this.stripeAPIToken );
     
                 this.elements = this.stripe.elements();
+
+                console.log("config"+this.stripe)
             
+            },
+
+            getAllItems(){
+                axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
+                    if(response.status==200){
+                        let products = response.data
+                        let len=Object.keys(products.cartItems).length
+                        for(let i=0;i<len;i++)
+                            this.checkoutBodyArray.push({
+                                imageUrl:products.cartItems[i].product.imageURL,
+                                productName:products.cartItems[i].product.name,
+                                quantity:products.cartItems[i].quantity,
+                                price:products.cartItems[i].product.price,
+                                productId:products.cartItems[i].product.id,
+                                userId:products.cartItems[i].userId
+                        })
+                    }
+                },err=>{
+                    console.log(err)
+                })
             },
             
             goToCheckout(){
-                let checkoutBodyArray = [];
-                let i=0
-                for(i=0;i<Object.keys(this.products).length;i++){
-                    checkoutBodyArray.push({
-                        imageUrl:this.products[i].imgUrl ,
-                        productName:this.products[i].pName,
-                        quantity:this.products[i].pQuantity,
-                        price:this.products[i].pPrice,
-                        productId:this.products[i].pId,
-                        userId:this.products[i].userId
-                    })
-                }
                 axios.post(this.baseURL+"order/create-checkout-session",
-                   checkoutBodyArray
+                   this.checkoutBodyArray
                 ).then((response)=>{
-                  localStorage.setItem("sessionId",response.data.sessionId);
-                  return response.data;
+                  localStorage.setItem("sessionId",response.data.sessionId)
+                  return response.data
                 }).then((session)=>{
-                   return this.stripe.redirectToCheckout({ sessionId: session.sessionId });
+                   return this.stripe.redirectToCheckout({ sessionId: session.sessionId })
                 })
-            },
-            mounted(){
-                this.token = localStorage.getItem("token");
             }
+           
         }
 }
         
 </script>
 
  <style >
+
 .div_class{
     margin-top: 5%;
     margin-left: 40%;
 }
+
+.checkout_button{
+    background-color: #5d3dec;
+    border: none;
+    color: white;
+    margin-left: 15%;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.checkout_button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.checkout_button:disabled{
+    background-color: #9b86f7;
+    border: none;
+    color: white;
+    margin-left: 15%;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor:not-allowed;
+}
+
 </style>

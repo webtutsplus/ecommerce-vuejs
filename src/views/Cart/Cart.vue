@@ -2,15 +2,6 @@
 
   <div class="cart-box container">
 
-    <div v-if="clicked">
-      <Checkout :products="cartItem"
-                  :baseURL="baseURL"
-                  :totalPrice="totalcost"
-      />
-    </div>
-
-    <div v-else>
-
     <h2>Cart</h2>
     <div v-if="carts">
 
@@ -53,13 +44,9 @@
 
   </div>
 
-  </div>
-
 </template>
  
 <script>
-
-import Checkout from '../Checkout/Checkout.vue'
 
 export default {
 
@@ -70,13 +57,12 @@ export default {
       len:0,
       totalcost:0,
       cartItem : [],
-      clicked:false
+      Id:-1
     }
   },
 
   name: 'Cart',
   props: ["baseURL"],
-  components:{Checkout},
 
   methods: {
 
@@ -88,12 +74,12 @@ export default {
      },
 
      showDetails(itr){
-            this.$router.push({ name: 'ShowDetails', params: { id : this.cartItem[itr].pId } })
+      this.$router.push({ name: 'ShowDetails', params: { id : this.cartItem[itr].pId } })
      },
 
-     checkout() {
-      this.clicked=!this.clicked
-     }, 
+     checkout(){
+      this.$router.push({ name: 'Checkout',params:{id:this.len}})
+     },
 
      listCartItems(){
       axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {

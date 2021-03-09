@@ -1,27 +1,36 @@
 <template>
-  <div class="nav">
-    <router-link :to="{name : 'Home'}">
-      <img src="../assets/logo.png" alt="Webtutsplus logo" class="logo">
-    </router-link>
-    <ul class="main-nav">
-      <li>
-        <router-link v-if="!token" :to="{name: 'Signin'}">WISHLIST</router-link>
-        <router-link v-else :to="{name : 'Wishlist'}" >WISHLIST</router-link>
-      </li>
-      <li><router-link :to="{name : 'Home'}" >HOME</router-link></li>
-      <li><router-link :to="{name : 'Product'}">PRODUCT</router-link></li>
-      <li><router-link :to="{name : 'Category'}">CATEGORY</router-link></li>
-      <li><router-link :to="{name : 'Cart'}">CART</router-link></li>
-      <li><router-link :to="{name : 'Checkout'}">CHECKOUT</router-link></li>
-      <li><router-link :to="{name : 'Order'}">ORDERS</router-link></li>
-      <li>|</li>
-      <li><router-link :to="{name: 'Admin'}">ADMIN</router-link></li>
-      <li>
-        <router-link v-if="!token" :to="{name: 'Signin'}">SIGNIN</router-link>
-        <a v-if="token" href="#" @click="signout">SIGNOUT</a>
-      </li>
-    </ul>
-  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top sticky-top">
+    <a class="navbar-brand" href="/"><img id="logo" src="../assets/logo.png" class="img-fluid" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+     aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+
+       <li class="nav-item">
+            <h5><strong><router-link class="nav-link" v-if="!token" :to="{name: 'Signin'}">WISHLIST</router-link>
+            <router-link class="nav-link" v-else :to="{name : 'Wishlist'}" >WISHLIST</router-link></strong></h5>
+       </li>
+
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name : 'Home'}" >HOME</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name : 'Product'}">PRODUCT</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name : 'Category'}">CATEGORY</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name : 'Cart'}">CART</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name : 'Order'}">ORDERS</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item"><router-link class="nav-link" :to="{name: 'Admin'}">ADMIN</router-link></li></strong></h5>
+        <h5><strong><li class="nav-item">
+          <router-link class="nav-link" v-if="!token" :to="{name: 'Signin'}">SIGNIN</router-link>
+          <a class="nav-link" v-if="token" href="#" @click="signout">SIGNOUT</a>
+        </li></strong></h5>
+
+
+      </ul>
+    </div>
+  </nav>
+
 </template>
 
 <script>
@@ -50,40 +59,11 @@ export default {
 }
 </script>
 
-<style>
-.nav{
-  background-image: url("../assets/nav-back.jpg");
-  justify-content: center;
-  font-size: 25px;
-}
-.nav img {
-  margin : 10px;
-  border-radius: 20px;
-}
-.logo{
-  height : 90px;
-  width : auto;
-  float : left;
-  margin-top : 20px;
-}
-.main-nav {
-  float : right;
-  list-style: none;
-  margin : 35px 0 0 640px;
-}
-.main-nav li {
-  display : inline-block;
-  margin-left:40px;
-  font-size : 19px;
-}
-.main-nav a,
-.main-nav a:hover{
-  font-weight:700;
-  color : rgb(85, 49, 25);
-  text-decoration : none;
-}
-.main-nav a:hover{
-  padding-bottom : 5px;
-  border-bottom:2px solid #4d380c;
-}
+<style scoped>
+ #logo {
+    width: 70%;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    color: rgb(233, 42, 42);
+  }
 </style>
