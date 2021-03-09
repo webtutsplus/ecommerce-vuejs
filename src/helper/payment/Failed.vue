@@ -1,5 +1,9 @@
 <template>
-    <h3>Payment Failed</h3>
+    <div class="text-center">
+        <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 </template>
 
 <script>

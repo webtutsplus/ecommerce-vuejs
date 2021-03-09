@@ -1,11 +1,14 @@
 <template>
   <div class="div_class">
-  <h3>You will be redirected to payment page</h3>
+    <h3>You will be redirected to payment page</h3>
 
-    <button class="checkout_button" id="proceed-to-checkout" @click="goToCheckout()">
-           Make payment
-    </button>
+        <div class="alert alert-primary" role="alert">
+            While making payment use card number 4242 4242 4242 4242 and enter random cvv(3 digit)
+        </div>
 
+        <button class="checkout_button" id="proceed-to-checkout" @click="goToCheckout()">
+            Make payment
+        </button>
   </div>
 </template>
 <script>
@@ -98,9 +101,13 @@ export default {
 
  <style >
 
+.alert{
+    width: 50%;
+}
+
 .div_class{
     margin-top: 5%;
-    margin-left: 40%;
+    margin-left: 30%;
 }
 
 .checkout_button{
