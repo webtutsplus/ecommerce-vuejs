@@ -2,21 +2,21 @@
   <div class="home-landing">
     <div class="welcome">
       <h1>Webtutsplus Market</h1>
-      <p>Shop from a wide range of categories</p>
+      <p><strong>Shop from a wide range of categories</strong></p>
       <button class="myBtn"><router-link :to="{name : 'Product'}">Start Shopping</router-link></button>
     </div>
   </div>
 
   <div class="listing">
     <h1>Popular Categories</h1>
-    <div class="display-categories" v-if="products">
+    <div class="display-categories" v-if="categories">
       <div v-for="index in this.category_size" :key="index">
         <CategoryCard :category="categories[index-1]"/>
       </div>
     </div>
 
     <h1>Best Products</h1>
-    <div class="display-products" v-if="categories">
+    <div class="display-products" v-if="products">
       <div v-for="index in this.product_size" :key="index">
         <ProductCard :product="products[index-1]"/>
       </div>
@@ -41,7 +41,15 @@ export default {
   },
   mounted(){
     this.category_size = Object.keys(this.categories).length
+    if(this.category_size>3){
+     this.category_size/=2
+     this.category_size = Math.floor(this.category_size)
+    }
     this.product_size = Object.keys(this.products).length
+    if(this.product_size>8){
+      this.product_size/=2
+      this.product_size = Math.floor(this.product_size)
+    }
   }
 }
 </script>
@@ -50,10 +58,11 @@ export default {
 /* Home Landing */
 .home-landing{
   padding : 100px;
-  background-image: url("../assets/6.jpg");
-  height : 85.5vh;
-  background-size: cover;
-  text-align: center;
+  background-image: url("../assets/home.png");
+  height: 85vh;
+  width: 100%;
+  background-size: cover; 
+   text-align: center;
 }
 .welcome{
   padding : 50px;
@@ -65,13 +74,22 @@ export default {
 }
 .welcome h1{
   font-size: 80px;
-  color : rgb(255, 255, 255);
+  color : rgb(241, 23, 132);
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .welcome p{
   font-size : 30px;
-  color: white;
+  color: rgb(226, 6, 61);
 }
+
+@media only screen and (max-width: 700px) {
+
+   .welcome h1{ 
+      font-size: 40px; 
+   }
+
+}
+
 .myBtn{
   font-size: 20px;
   background: rgb(73, 76, 224);
@@ -109,4 +127,30 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+@media only screen and (max-width: 480px) {
+
+   .welcome h1{ 
+      font-size: 30px; 
+   }
+
+}
+
+@media only screen and (max-width: 450px) {
+
+   .welcome h1{ 
+      font-size: 20px; 
+   }
+   .welcome p{
+     font-size: 20px;
+   }
+   .welcome{
+     max-width: 300px;
+   }
+   .myBtn{
+     font-size:15px
+   }
+
+}
+
 </style>
