@@ -1,48 +1,72 @@
 <template>
-  <div class = "product-display">
-    <div class="row">
-      <div class="col-6">
-        <img :src="product.imageURL" :alt="product.name" class="img-fluid">
-      </div>
-      <div class="col-4">
-        <h1>{{product.name}}</h1>
-        <h6 class="category">{{category.categoryName}}</h6>
-        <h5>Price: <span>$ {{product.price}}</span></h5>
-        <h5>{{product.description}}</h5>
-        <div>
-        <label>Quantity</label>
-        <input type="number" v-model="quantity"/>
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm">
+          <img :src="product.imageURL" :alt="product.name" class="img-fluid">
         </div>
 
-        <div class="features">
-          <h5><strong>Features</strong></h5>
-          <ul>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li> 
-            <li>Officia quas, officiis eius magni error magnam voluptatem</li>
-            <li>nesciunt quod! Earum voluptatibus quaerat dolorem doloribus</li>
-            <li>molestias ipsum ab, ipsa consectetur laboriosam soluta et</li>
-            <li>ut doloremque dolore corrupti, architecto iusto beatae.</li> 
-          </ul>
+        <div class="col-sm">
+
+          <h1>{{product.name}}</h1>
+          <h6 class="category">{{category.categoryName}}</h6>
+          <h5>Price: <span>$ {{product.price}}</span></h5>
+          <h5>{{product.description}}</h5>
+          <div>
+            <label>Quantity</label>
+            <input type="number" v-model="quantity"/>
+          </div>
+
+          <div class="features">
+            <h5><strong>Features</strong></h5>
+            <ul>
+              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li> 
+              <li>Officia quas, officiis eius magni error magnam voluptatem</li>
+              <li>nesciunt quod! Earum voluptatibus quaerat dolorem doloribus</li>
+              <li>molestias ipsum ab, ipsa consectetur laboriosam soluta et</li>
+              <li>ut doloremque dolore corrupti, architecto iusto beatae.</li> 
+            </ul>
+          </div>
+
         </div>
+
+        <div class="col-sm">
+
+            <div class="invisible">
+            <button type="button" class="btn btn-success btn-lg .d-none">
+              Buy Now 
+              <ion-icon name="card-outline" v-pre></ion-icon>
+            </button>
+            </div>
+
+            <div class="row mt-2">
+              <button type="button" class="btn btn-primary btn-lg" @click="addToCart(this.id)">
+                Add to Cart   
+                <ion-icon name="cart-outline" v-pre></ion-icon>
+              </button>
+            </div>
+
+            <div class="row mt-2">
+              <button class="btn btn-primary btn-lg" :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(this.id)">
+                {{wishlistString}}
+              </button>
+            </div>
+
+            <div class="row mt-2">
+              <button type="button" class="btn btn-primary btn-lg" @click="listCartItems()">
+                Show Cart
+                <ion-icon name="cart-outline" v-pre></ion-icon>
+              </button>
+            </div>
+          
+        </div>
+
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-success btn-lg">
-          Buy Now 
-          <ion-icon name="card-outline" v-pre></ion-icon>
-        </button>
-        <button type="button" class="btn btn-primary btn-lg" @click="addToCart(this.id)">
-          Add to Cart   
-          <ion-icon name="cart-outline" v-pre></ion-icon>
-        </button>
-        <button :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(this.id)">{{wishlistString}}</button>
-        <button type="button" class="btn btn-primary btn-lg" @click="listCartItems()">
-          Show Cart
-          <ion-icon name="cart-outline" v-pre></ion-icon>
-        </button>
-      </div>
+
     </div>
-    <hr>
-  </div>
+
 </template>
 
 <script>
@@ -108,42 +132,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.product-display{
-  margin : 50px;
-}
-
-.category{
-  background-color: rebeccapurple;
-  color : white;
-  width : fit-content;
-  padding : 5px 10px;
-  border-radius : 5px;
-}
-
-h5 span{
-  font-size: 25px;
-  color: red;
-}
-
-.product-display img{
-  width : 100%;
-  height : 100%;
-  border-radius : 10px;
-}
-
-.features{
-  margin-top:50px;
-}
-
-.product-display button{
-  width : 100%;
-  margin-bottom : 10px;
-}
-
-.product_added_wishlist{
-    background-color: darkolivegreen;
-}
-
-</style>
