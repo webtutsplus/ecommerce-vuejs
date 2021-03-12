@@ -55,12 +55,7 @@ export default {
                 creating the card element.
             */
             configureStripe(){
-                this.stripe = Stripe( this.stripeAPIToken );
-    
-                this.elements = this.stripe.elements();
-
-                console.log("config"+this.stripe)
-            
+                this.stripe = Stripe( this.stripeAPIToken );            
             },
 
             getAllItems(){
