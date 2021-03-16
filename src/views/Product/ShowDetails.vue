@@ -34,8 +34,8 @@
 
         <div class="col-sm">
 
-            <div class="invisible">
-            <button type="button" class="btn btn-success btn-lg .d-none">
+            <div>
+            <button type="button" class="btn btn-success btn-lg .d-none" v-on:click="buynow()">
               Buy Now 
               <ion-icon name="card-outline" v-pre></ion-icon>
             </button>
@@ -122,6 +122,9 @@ export default {
         console.log(error)
       });
 
+    },
+    buynow() {
+      this.$router.push({name: 'SingleCheckout',params: { id:this.product.id, quantity: this.quantity}})
     }
   },
   mounted() {
