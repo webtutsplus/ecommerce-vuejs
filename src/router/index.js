@@ -27,7 +27,7 @@ import Success from '../helper/payment/Success.vue'
 import Failed from '../helper/payment/Failed.vue'
 
 import OrderItemView from '../views/Orders/OrderItemView.vue'
-
+import SingleCheckout from '../views/Checkout/SingleCheckout'
 const routes = [
   {
     path: '/',
@@ -153,6 +153,10 @@ const routes = [
     path:'/order/:id', 
     name:'OrderItemView',
     component:OrderItemView
+  },{
+    path: '/singlecheckouthas ',
+    name: 'SingleCheckout',
+    component: SingleCheckout
   }
 ]
 
