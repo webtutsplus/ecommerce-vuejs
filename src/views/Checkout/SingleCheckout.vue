@@ -67,18 +67,7 @@ export default {
     configureStripe() {
       this.stripe = Stripe(this.stripeAPIToken);
     },
-    async getuserid() {
-      let id = -2
-      await axios.get(`${this.baseURL}user/getuserid?token=${this.token}`).then(resp => {
-        if (resp.status === 200) {
-          id = resp.data
-        }
-      });
-      return id
-    },
     getAllItems() {
-      this.userid = this.getuserid();
-      console.log(this.userid)
       this.quantity = this.$route.params.quantity;
       console.log(this.quantity)
       // axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
@@ -92,7 +81,6 @@ export default {
         quantity: this.quantity,
         price: this.product.price,
         productId: this.product.id,
-        userId: parseInt(this.userid)
       }
       //   }
       // }, err => {
@@ -101,7 +89,7 @@ export default {
     },
 
     goToCheckout() {
-      axios.post(this.baseURL + "order/single-checkout?token="+this.token,
+      axios.post(this.baseURL + "order/checkout-single-product?token="+this.token,
           this.checkoutBody
       ).then((response) => {
         localStorage.setItem("sessionId", response.data.sessionId)
