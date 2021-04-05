@@ -54,15 +54,15 @@ export default {
                   let j;
                   this.product = response.data
                   this.lengthofOrderItems = Object.keys(this.product.orderItems).length
-                  for(j=0;j<this.lengthofOrderItems;j++){
+                  this.product.orderItems.forEach(item => {
                     this.orderProducts.push({
-                      imgUrl:this.product.orderItems[j].product.imageURL,
-                      pName:this.product.orderItems[j].product.name,
-                      pDescription:this.product.orderItems[j].product.description,
-                      pPrice:this.product.orderItems[j].product.price,
-                      pQuantity:this.product.orderItems[j].quantity
+                      imgUrl:item.product.imageURL,
+                      pName:item.product.name,
+                      pDescription:item.product.description,
+                      pPrice:item.product.price,
+                      pQuantity:item.quantity
                     })
-                  }
+                  });
                 }
             },
             (err)=>{
