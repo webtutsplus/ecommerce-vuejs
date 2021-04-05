@@ -51,7 +51,6 @@ export default {
         getThePrducts(){
           axios.get(`${this.baseURL}order/${this.orderID}?token=${this.token}`).then((response) => {
                 if(response.status === 200) {
-                  let j;
                   this.product = response.data
                   this.lengthofOrderItems = Object.keys(this.product.orderItems).length
                   this.product.orderItems.forEach(item => {
