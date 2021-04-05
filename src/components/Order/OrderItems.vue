@@ -33,7 +33,7 @@
 <script>
 
 export default {
-    
+
     name:'OrderItems',
     props:["orderID","baseURL"],
 
@@ -49,28 +49,19 @@ export default {
     methods:{
 
         getThePrducts(){
-            axios.get(`${this.baseURL}order/?token=${this.token}`).then((response) => {
-                if(response.status === 200) { 
-                    this.products = response.data
-                    let len = Object.keys(this.products).length
-                    let i,j
-                    let paramId=parseInt(this.orderID)
-                    for(i=0;i<len;i++){
-                        let id=this.products[i].id 
-                        if(id === paramId){ 
-                            break
-                        }
-                    }
-                    this.lengthofOrderItems = Object.keys(this.products[i].orderItems).length
-                    for(j=0;j<this.lengthofOrderItems;j++){
-                        this.orderProducts.push({
-                            imgUrl:this.products[i].orderItems[j].product.imageURL,
-                            pName:this.products[i].orderItems[j].product.name,
-                            pDescription:this.products[i].orderItems[j].product.description,
-                            pPrice:this.products[i].orderItems[j].product.price,
-                            pQuantity:this.products[i].orderItems[j].quantity
-                        })
-                    }
+          axios.get(`${this.baseURL}order/${this.orderID}?token=${this.token}`).then((response) => {
+                if(response.status === 200) {
+                  this.product = response.data
+                  this.lengthofOrderItems = Object.keys(this.product.orderItems).length
+                  this.product.orderItems.forEach(item => {
+                    this.orderProducts.push({
+                      imgUrl:item.product.imageURL,
+                      pName:item.product.name,
+                      pDescription:item.product.description,
+                      pPrice:item.product.price,
+                      pQuantity:item.quantity
+                    })
+                  });
                 }
             },
             (err)=>{
@@ -105,7 +96,7 @@ h2{
 }
 .product-box img{
     border-radius : 10px;
-}   
+}
 .product-box img:hover{
     cursor: pointer;
 }

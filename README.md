@@ -8,6 +8,7 @@ The base URL of API is present in App.vue
 
 
 ## Project setup
+1. Rename ``.env.example`` to ``.env`` and paste your Stripe Token
 ```
 npm install
 ```
