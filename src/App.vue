@@ -1,12 +1,14 @@
 <template>
   <Navbar :key="key"/>
-  <router-view style="min-height: 60vh" v-if="products && categories"
+  <div style="min-height: 60vh">
+  <router-view v-if="products && categories"
     :baseURL="baseURL"
     :products="products"
     :categories="categories"
     @fetchData = "fetchData"
     @refreshNav = "refreshNav">
   </router-view>
+  </div>
   <Footer/>
 </template>
 
@@ -16,7 +18,7 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      baseURL : "http://remotedevs.org:8843/api/",
+      baseURL : "http://remotedevs.org:8443/api/",
       //baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
