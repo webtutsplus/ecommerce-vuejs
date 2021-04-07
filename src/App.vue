@@ -1,6 +1,6 @@
 <template>
   <Navbar :key="key"/>
-  <router-view v-if="products && categories"
+  <router-view style="min-height: 60vh" v-if="products && categories"
     :baseURL="baseURL"
     :products="products"
     :categories="categories"
@@ -16,8 +16,8 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      baseURL : "http://remotedevs.org:8080/api/",
-      //baseURL : "http://localhost:8080/api/",
+      //baseURL : "http://remotedevs.org:8080/api/",
+      baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
       key : 0
@@ -49,12 +49,5 @@ export default {
 <style>
 html{
   overflow-y: scroll;
-}
-#app {
-  font-family: 'Lato', 'Arial', sans-serif;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 </style>
