@@ -3,7 +3,9 @@
 <!--    Logo Div-->
     <div class="row">
       <div class="col-12 text-center pt-3">
-        <img id="logo" src="../assets/logo_black.png" />
+        <router-link :to="{name : 'Home'}">
+          <img id="logo" src="../assets/logo_black.png" />
+        </router-link>
       </div>
     </div>
 
@@ -38,10 +40,11 @@
               <label>Confirm Password</label>
               <input type="password" class="form-control" v-model="passwordConfirm" required>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Signup</button>
+            <button type="submit" class="btn btn-primary mt-2 py-0">Create Account</button>
           </form>
+          <hr>
           <small class="form-text text-muted pt-2 pl-4 text-center">Already Have an Account?</small>
-          <p class="text-center"><router-link class="btn btn-dark text-center mx-auto px-5 py-1" :to="{name: 'Signin'}">Signin Here</router-link></p>
+          <p class="text-center"><router-link class="btn btn-dark text-center mx-auto px-5 py-1 mb-2" :to="{name: 'Signin'}">Signin Here</router-link></p>
         </div>
       </div>
     </div>
@@ -111,6 +114,13 @@ export default {
   font-size: smaller;
   border-radius: 0;
   border-color: #adb1b8 #a2a6ac #a2a6ac;
+}
+
+.btn-primary {
+  background-color: #f0c14b;
+  color: black;
+  border-color: #a88734 #9c7e31 #846a29;
+  border-radius: 0;
 }
 
 @media only screen and (min-width: 992px) {
