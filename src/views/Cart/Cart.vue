@@ -6,7 +6,7 @@
     <div v-if="carts">
 
         <div v-for="itr in this.len" :key="itr">
-  
+
         <div class="product-box">
 
             <div class="row">
@@ -39,13 +39,13 @@
         <h3>Total Cost : $ {{totalcost}}</h3>
 
         <button :disabled="isDisabled()" class="button_check" @click="checkout()" >Confirm Order</button>
-        
+
     </div>
 
   </div>
 
 </template>
- 
+
 <script>
 
 export default {
@@ -135,7 +135,7 @@ export default {
         productId,
         quantity
       })
-  
+
     }
 
   },
@@ -148,7 +148,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
   .cart-box h2 {
     font-family: "Courgette", cursive;
@@ -180,7 +180,7 @@ export default {
 
   .product-box img{
       border-radius : 10px;
-  }  
+  }
 
   .product-box img:hover{
       cursor: pointer;

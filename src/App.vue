@@ -1,5 +1,5 @@
 <template>
-  <Navbar :key="key"/>
+  <Navbar :key="key"  v-if="!['Signup', 'Signin'].includes($route.name)"/>
   <div style="min-height: 60vh">
   <router-view v-if="products && categories"
     :baseURL="baseURL"
@@ -9,7 +9,7 @@
     @refreshNav = "refreshNav">
   </router-view>
   </div>
-  <Footer/>
+  <Footer v-if="!['Signup', 'Signin'].includes($route.name)"/>
 </template>
 
 <script>
@@ -18,8 +18,8 @@ import Footer from "./components/Footer.vue"
 export default {
   data() {
     return {
-      baseURL : "http://remotedevs.org:8443/api/",
-      //baseURL : "http://localhost:8080/api/",
+      //baseURL : "http://remotedevs.org:8443/api/",
+      baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
       key : 0
