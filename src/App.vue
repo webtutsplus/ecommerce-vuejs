@@ -23,6 +23,7 @@ export default {
       key : 0
     }
   },
+  
   components : {Footer, Navbar},
   methods : {
     async fetchData() {
