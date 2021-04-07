@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+<!--    Logo Div-->
     <div class="row">
       <div class="col-12 text-center pt-3">
         <img id="logo" src="../assets/logo_black.png" />
@@ -8,7 +9,7 @@
 
     <div class="row">
       <div class="col-12 justify-content-center d-flex flex-row pt-5">
-        <div id="signup-div" class="flex-item border">
+        <div id="signin-div" class="flex-item border">
           <h2 class="pt-4 pl-4">Sign-In</h2>
           <form @submit="signin" class="pt-4 pl-4 pr-4">
             <div class="form-group">
@@ -98,7 +99,7 @@ export default {
 }
 
 @media only screen and (min-width: 992px) {
-  #signup-div {
+  #signin-div {
     width: 40%;
   }
 }
