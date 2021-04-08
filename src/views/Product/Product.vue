@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-12 text-center">
         <h4 class="pt-3">Our Products</h4>
-        <router-link :to="{name : 'AddProduct'}" v-show="$route.name=='AdminProduct'">
-          <button type="button" class="btn btn-success add-btn btn-lg">Add a new Product</button>
+        <router-link id="add-product" :to="{name : 'AddProduct'}" v-show="$route.name=='AdminProduct'">
+          <button class="btn">Add a new Product</button>
         </router-link>
       </div>
     </div>
@@ -36,6 +36,11 @@ h4 {
   font-family: 'Roboto', sans-serif;
   color: #484848;
   font-weight: 700;
+}
+
+#add-product {
+  float: right;
+  font-weight: 500;
 }
 /*.products-box {*/
 /*  font-size : 60px;*/
