@@ -18,15 +18,15 @@ export default {
           products:null,
           token:null
       }
-  },  
+  },
   name: 'Product',
-  components : {ProductBox}, 
+  components : {ProductBox},
   props : [ "baseURL"],
   methods : {
     fetchWishlist : function() {
-      
+
       // fetch products
-      axios.get(`${this.baseURL}wishlist/${this.token}`) 
+      axios.get(`${this.baseURL}wishlist/${this.token}`)
         .then(data => this.products = data.data)
         .catch(err => console.log(err));
     },
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .products-box h2{
   font-family: 'Courgette', cursive;
   font-size : 60px;
