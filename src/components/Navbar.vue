@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 <!--    Logo-->
     <router-link class="navbar-brand" :to="{name : 'Home'}">
-      <img id="logo" src="../assets/logo.png" />
+      <img id="logo" src="../assets/icon.png" />
     </router-link>
 
 <!--    Burger Button-->
@@ -51,7 +51,8 @@
             <router-link class="dropdown-item" v-if="!token" :to="{name: 'Signin'}">Wishlist</router-link>
             <router-link class="dropdown-item" v-else :to="{name : 'Wishlist'}" >Wishlist</router-link>
             <router-link class="dropdown-item"  :to="{name: 'Admin'}">Admin</router-link>
-            <router-link class="dropdown-item" v-if="!token" :to="{name: 'Signin'}">Sign In</router-link>
+            <router-link class="dropdown-item" v-if="!token" :to="{name: 'Signin'}">Log In</router-link>
+            <router-link class="dropdown-item" v-if="!token" :to="{name: 'Signup'}">Sign Up</router-link>
             <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign Out</a>
           </div>
         </li>
@@ -96,7 +97,7 @@ export default {
 
 <style scoped>
   #logo {
-    width: 100px;
+    width: 150px;
     margin-left: 20px;
     margin-right: 20px;
   }

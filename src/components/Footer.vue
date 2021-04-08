@@ -43,7 +43,7 @@
       <div class="row">
         <div class="col-12">
           <div class="text-center py-5">
-            <img id="logo" src="../assets/logo.png" />
+            <img id="logo" src="../assets/icon.png" />
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ a {
 }
 
 #logo {
-  width: 100px;
+  width: 150px;
 }
 
 footer {

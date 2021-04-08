@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 text-center pt-3">
         <router-link :to="{name : 'Home'}">
-          <img id="logo" src="../assets/logo_black.png" />
+          <img id="logo" src="../assets/icon.png" />
         </router-link>
       </div>
     </div>
@@ -106,6 +106,10 @@ export default {
   color: black;
   border-color: #a88734 #9c7e31 #846a29;
   border-radius: 0;
+}
+
+#logo {
+  width: 150px;
 }
 
 @media only screen and (min-width: 992px) {
