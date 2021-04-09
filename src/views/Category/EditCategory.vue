@@ -1,21 +1,32 @@
 <template>
-  <div class="editCategory container">
-    <h2>Edit Category</h2>
-    <form>
-      <div class="form-group">
-        <label>Category Name</label>
-        <input type="text" class="form-control" v-model="categoryName" required>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Edit Category</h4>
       </div>
-      <div class="form-group">
-        <label>Description</label>
-        <input type="text" class="form-control" v-model="description" required>
+    </div>
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-md-6 px-5 px-md-0">
+        <form>
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" class="form-control" v-model="categoryName" required>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" v-model="description" required>
+          </div>
+          <div class="form-group">
+            <label>ImageURL</label>
+            <input type="url" class="form-control" v-model="imageUrl" required>
+          </div>
+          <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
+        </form>
       </div>
-      <div class="form-group">
-        <label>ImageURL</label>
-        <input type="url" class="form-control" v-model="imageUrl" required>
-      </div>
-      <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
-    </form>
+      <div class="col-3"></div>
+    </div>
   </div>
 </template>
 
@@ -24,7 +35,7 @@ export default {
   data(){
     return {
       id : null,
-      categoryName : null, 
+      categoryName : null,
       description : null,
       imageUrl : null,
       categoryIndex : null
@@ -35,12 +46,12 @@ export default {
     async editCategory() {
       const newCategory = {
         id : this.id,
-        categoryName : this.categoryName, 
+        categoryName : this.categoryName,
         description : this.description,
         imageUrl : this.imageUrl,
         products : null
       }
-      
+
       await axios({
         method: 'post',
         url: this.baseURL+"category/update/"+this.id,
