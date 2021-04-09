@@ -88,11 +88,10 @@ export default {
 }
 </script>
 
-<style>
-.editCategory h2 {
-  font-family: 'Courgette', cursive;
-  font-size : 60px;
-  text-align : center;
-  margin : 70px 0;
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
 </style>

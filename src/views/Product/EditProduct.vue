@@ -103,7 +103,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h4 {
   font-family: 'Roboto', sans-serif;
   color: #484848;
