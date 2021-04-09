@@ -42,12 +42,4 @@ h4 {
   float: right;
   font-weight: 500;
 }
-/*.products-box {*/
-/*  font-size : 60px;*/
-/*  text-align : center;*/
-/*  margin : 70px 0;*/
-/*}*/
-/*.products-box .add-btn{*/
-/*  margin : 20px 0;*/
-/*}*/
 </style>

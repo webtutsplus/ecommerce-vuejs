@@ -27,15 +27,6 @@
             </div>
           </div>
 
-<!--          <div class="invisible">-->
-<!--          <button type="button" class="btn btn-success btn-lg .d-none">-->
-<!--            Buy Now-->
-<!--            <ion-icon name="card-outline" v-pre></ion-icon>-->
-<!--          </button>-->
-<!--          </div>-->
-
-
-
           <div class="features pt-3">
             <h5><strong>Features</strong></h5>
             <ul>
@@ -50,7 +41,7 @@
             <button id="wishlist-button" class="btn mr-3 p-1 py-0" :class="{product_added_wishlist: isAddedToWishlist}" @click="addToWishList(this.id)">
               {{wishlistString}}
             </button>
-            <button id="show-cart-button" type="button" class="btn" @click="listCartItems()">
+            <button id="show-cart-button" type="button" class="btn mr-3 p-1 py-0" @click="listCartItems()">
               Show Cart
               <ion-icon name="cart-outline" v-pre></ion-icon>
             </button>
@@ -159,5 +150,6 @@ input[type=number] {
 #show-cart-button {
   background-color: #131921;
   color: white;
+  border-radius: 0;
 }
 </style>

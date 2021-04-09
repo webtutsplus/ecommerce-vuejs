@@ -1,4 +1,5 @@
 <template>
+<!--  For HomePage-->
   <div class="card product-card">
     <img :src="product.imageURL" class="card-img-top" alt="image" @click="showDetails">
     <div class="card-body">

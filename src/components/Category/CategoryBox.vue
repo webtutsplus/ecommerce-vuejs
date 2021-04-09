@@ -1,17 +1,15 @@
 <template>
-  <div class="category-box">
-      <div class="row">
-        <div class="col-4">
-            <img class="img-fluid" v-bind:src="category.imageUrl" :alt="category.categoryName" @click="listProducts">
-        </div>
-        <div class="col-8">
-            <router-link :to="{name : 'EditCategory', params : {id : category.id} }" v-show="this.$route.name=='AdminCategory'">
-                <button class="btn btn-primary edit_btn">Edit</button>
-            </router-link>
-            <h3 class="category_name" @click="listProducts">{{category.categoryName}}</h3>
-            <h3 class="category_description">{{category.description}}</h3>
-            <button type="button" class="see_btn btn btn-lg btn-info" @click="listProducts">See All Products</button>
-        </div>
+  <div class="card h-100">
+    <div class="embed-responsive embed-responsive-16by9">
+      <img class="card-img-top embed-responsive-item" :src="category.imageUrl" alt="Category Image">
+    </div>
+
+    <div class="card-body">
+      <router-link :to="{ name: 'ListProducts', params: { id : category.id } }"><h5 class="card-title">{{category.categoryName}}</h5></router-link>
+      <p class="card-text font-italic">{{category.description.substring(0,65)}}...</p>
+      <router-link id="edit-category" :to="{ name: 'EditCategory', params: { id : category.id } }" v-show="$route.name=='AdminCategory'">
+        Edit
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,44 +26,30 @@ export default {
 }
 </script>
 
-<style>
-.category-box{
-    background-color: rgb(234, 249, 255);
-    border-radius: 10px;
-    margin: 20px 0;
-    padding: 15px 15px;
+<style scoped>
+.embed-responsive .card-img-top {
+  object-fit: cover;
 }
-.category-box img{
-    border-radius : 10px;
-}   
-.category-box img:hover{
-    cursor:pointer;
+
+a {
+  text-decoration: none;
 }
-.category_name{
-    font-size: 35px;
+
+.card-title {
+  color: #484848;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
-.category_name:hover{
-    color:rgb(243, 126, 31);
-    cursor:pointer;
+
+.card-title:hover {
+  font-weight: bold;
 }
-.category_description{
-    font-size: 20px;
+
+.card-text {
+  font-size: 0.9rem;
 }
-.category_price{
-    font-size: 20px;
-    color:red;
-}
-.category_price span{
-    font-size:15px;
-}
-.edit_btn{
-    float : right;
-}
-.see_btn{
-    margin-top: 68px;
-}
-.btn:focus {
-    outline: none;
-    box-shadow: none;
+
+#edit-category {
+  float: right;
 }
 </style>
