@@ -1,13 +1,16 @@
 <template>
-  <div class="images-box container">
-    <h2>Gallery</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Gallery</h4>
+        <router-link id="add-image" :to="{name : 'AddImage'}">
+          <button class="btn">Add a new Image</button>
+        </router-link>
+      </div>
+    </div>
 
-    <router-link :to="{name : 'AddImage'}">
-      <button type="button" class="btn btn-success add-btn btn-lg">Add a new Image</button>
-    </router-link>
-
-    <div v-if="images" class="images-display">
-      <div v-for="image of images" :key="image.name">
+    <div class="row">
+      <div v-for="image of images" :key="image.name" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
         <ImageBox :image="image"></ImageBox>
       </div>
     </div>
@@ -58,5 +61,10 @@ export default {
 }
 .images-box .add-btn{
   margin : 20px;
+}
+
+#add-image {
+  float: right;
+  font-weight: 500;
 }
 </style>

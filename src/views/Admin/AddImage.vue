@@ -1,5 +1,5 @@
 <template>
-    <div class="image-upload container"> 
+    <div class="image-upload container">
         <h2>Add a new Image</h2>
         <label for="myfile"><h3>Select image :</h3></label>
         <input type="file" id="myfile" @change="onFileSelected">
@@ -30,7 +30,7 @@ export default {
                 });
                 return;
             }
-            if(this.selectedFile.type !== "image/jpeg" || this.selectedFile.type !== "image/png" ||
+            if(this.selectedFile.type !== "image/jpeg" && this.selectedFile.type !== "image/png" &&
                this.selectedFile.type !== "image/jpg") {
                 //file format is not correct
                 swal({
