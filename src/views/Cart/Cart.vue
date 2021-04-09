@@ -1,51 +1,42 @@
 <template>
-
-  <div class="cart-box container">
-
-    <h2>Cart</h2>
-    <div v-if="carts">
-
-        <div v-for="itr in this.len" :key="itr">
-  
-        <div class="product-box">
-
-            <div class="row">
-
-                <div class="col-4" @click="showDetails(itr-1)">
-                  <img class="imgfluid" v-bind:src="this.cartItem[itr-1].imgUrl" alt="product-image">
-                </div>
-
-                <div class="col-8">
-
-                    <h3 class="product_name" @click="showDetails(itr-1)">{{this.cartItem[itr-1].pName}}</h3>
-                    <h3 class="product_description">{{this.cartItem[itr-1].pDescription}}</h3>
-                    <h3 class="product_price"><span>$</span>{{this.cartItem[itr-1].pPrice}} per unit</h3>
-                    <h3 class="product_description">Quantity : {{this.cartItem[itr-1].pQuantity}}</h3>
-                    <h3 class="product_description">Total Price : {{this.cartItem[itr-1].pPrice*this.cartItem[itr-1].pQuantity}}</h3>
-                    <button class="button_delete" @click="deleteItem(this.cartItem[itr-1].id)">Delete from cart</button>
-                    <form @submit="updateItem(this.cartItem[itr-1].id,this.cartItem[itr-1].pQuantity)">
-                      <input v-model="this.cartItem[itr-1].pQuantity"/>
-                      <button class="button_update" type="submit">Update</button>
-                    </form>
-
-                </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <h3>Total Cost : $ {{totalcost}}</h3>
-
-        <button :disabled="isDisabled()" class="button_check" @click="checkout()" >Confirm Order</button>
-        
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Cart</h4>
+      </div>
     </div>
 
+    <div v-if="carts" v-for="itr in len" :key="itr" class="row mt-2 pt-3 justify-content-around">
+      <div class="col-2"></div>
+      <div class="col-md-3 embed-responsive embed-responsive-16by9">
+        <img v-bind:src="cartItem[itr-1].imgUrl" class="w-100 card-img-top embed-responsive-item">
+      </div>
+      <div class="col-md-5 px-3">
+        <div class="card-block px-3">
+          <h6 class="card-title" @click="showDetails(itr-1)">{{cartItem[itr-1].pName}}</h6>
+<!--          <p id="item-description" class="card-text font-italic mb-0">{{cartItem[itr-1].pDescription.substring(0,90)}}...</p>-->
+          <p id="item-price" class="mb-0 font-weight-bold"><sup>$</sup>{{cartItem[itr-1].pPrice}} per unit</p>
+          <p id="item-quantity" class="mb-0">
+            Quantity :
+            <input size="1" class="p-0 h-25 border-bottom border-top-0 border-left-0 border-right-0" v-model="cartItem[itr-1].pQuantity" @change="updateItem(cartItem[itr-1].id,cartItem[itr-1].pQuantity)"/></p>
+          <p id="item-total-price" class="mb-0">Total Price : <sup>$</sup><span class="font-weight-bold">{{cartItem[itr-1].pPrice*cartItem[itr-1].pQuantity}}</span></p>
+          <br><a href="#" class="text-right" @click="deleteItem(cartItem[itr-1].id)">Remove From Cart</a>
+        </div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-12"><hr></div>
+    </div>
+
+    <div class="total-cost pt-2 text-right">
+      <h5>Total Cost : $ {{totalcost}}</h5>
+      <button :disabled="isDisabled()" class="button_check" @click="checkout()" >Confirm Order</button>
+    </div>
   </div>
 
+
+
 </template>
- 
+
 <script>
 
 export default {
@@ -134,8 +125,10 @@ export default {
         userId,
         productId,
         quantity
+      }).then(() => {
+        this.listCartItems()
       })
-  
+
     }
 
   },
@@ -148,137 +141,31 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+h4, h5 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
+}
 
-  .cart-box h2 {
-    font-family: "Courgette", cursive;
-    font-size: 60px;
-    text-align: center;
-    margin: 70px 0;
-  }
+.embed-responsive .card-img-top {
+  object-fit: cover;
+}
 
-  .cart-box h3{
-    font-family: 'Grand Hotel', cursive;
-  }
+#item-description {
+  font-size: small;
+}
 
-  .add-btn {
-    margin: 20px 0;
-  }
+#item-price {
+  color: #232F3E;
+}
 
-  .imgfluid{
-    max-width: 270px;
-    max-height: 300px;
-  }
+#item-quantity{
+  float: left;
+}
 
-  .product-box{
-      background-color: rgb(253, 240, 250);
-      border-radius: 10px;
-      margin: 20px 0;
-      padding: 15px 15px;
-      min-height: 250px;
-  }
-
-  .product-box img{
-      border-radius : 10px;
-  }  
-
-  .product-box img:hover{
-      cursor: pointer;
-  }
-
-  .product_name{
-      font-size: 35px;
-      margin-right : 120px;
-  }
-
-  .product_name:hover{
-      color:rgb(243, 126, 31);
-      cursor: pointer;
-  }
-
-  .product_description{
-      font-size: 20px;
-  }
-
-  .product_price{
-      font-size: 20px;
-      color:red;
-  }
-
-  .product_price span{
-      font-size:15px;
-  }
-
-  .button_delete {
-    background-color: #f44336;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    font-weight: bold;
-    margin: 16px;
-    border-radius: 15px;
-  }
-
-  .button_delete:focus{
-    outline: none;
-    box-shadow: none;
-  }
-
-  .button_update {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    font-weight: bold;
-    margin: 16px;
-    border-radius: 15px;
-  }
-
-  .button_update:focus{
-    outline: none;
-    box-shadow: none;
-  }
-
-  .button_check{
-    background-color: #5d3dec;
-    border: none;
-    color: white;
-    margin-left: 40%;
-    padding: 15px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 15px;
-  }
-
-  .button_check:focus{
-    outline: none;
-    box-shadow: none;
-  }
-
-  .button_check:disabled{
-    background-color: #9b86f7;
-    border: none;
-    color: white;
-    margin-left: 40%;
-    padding: 15px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 15px;
-    cursor:not-allowed;
-  }
+#item-total-price {
+  float: right;
+}
 
 </style>

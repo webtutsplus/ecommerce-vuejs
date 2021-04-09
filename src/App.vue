@@ -1,5 +1,6 @@
 <template>
-  <Navbar :key="key"/>
+  <Navbar :key="key"  v-if="!['Signup', 'Signin'].includes($route.name)"/>
+  <div style="min-height: 60vh">
   <router-view v-if="products && categories"
     :baseURL="baseURL"
     :products="products"
@@ -7,7 +8,8 @@
     @fetchData = "fetchData"
     @refreshNav = "refreshNav">
   </router-view>
-  <Footer/>
+  </div>
+  <Footer v-if="!['Signup', 'Signin'].includes($route.name)"/>
 </template>
 
 <script>
@@ -50,12 +52,5 @@ export default {
 <style>
 html{
   overflow-y: scroll;
-}
-#app {
-  font-family: 'Lato', 'Arial', sans-serif;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 </style>

@@ -1,12 +1,18 @@
 <template>
-  <div class="products-box container">
-    <h2>Our Products</h2>
-    <router-link :to="{name : 'AddProduct'}" v-show="this.$route.name=='AdminProduct'">
-      <button type="button" class="btn btn-success add-btn btn-lg">Add a new Product</button>
-    </router-link>
-    <div v-for="product of products" :key="product.id">
-      <ProductBox :product="product">
-      </ProductBox>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Our Products</h4>
+        <router-link id="add-product" :to="{name : 'AddProduct'}" v-show="$route.name=='AdminProduct'">
+          <button class="btn">Add a new Product</button>
+        </router-link>
+      </div>
+    </div>
+    <div class="row">
+        <div v-for="product of products" :key="product.id" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+          <ProductBox :product="product">
+          </ProductBox>
+        </div>
     </div>
   </div>
 </template>
@@ -15,7 +21,7 @@
 import ProductBox from '../../components/Product/ProductBox';
 export default {
   name: 'Product',
-  components : {ProductBox}, 
+  components : {ProductBox},
   props : [ "baseURL" , "products" ],
   mounted(){
     if (this.$route.name=='AdminProduct' && !localStorage.getItem('token')) {
@@ -25,14 +31,15 @@ export default {
 }
 </script>
 
-<style>
-.products-box h2{
-  font-family: 'Courgette', cursive;
-  font-size : 60px;
-  text-align : center;
-  margin : 70px 0;
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
-.products-box .add-btn{
-  margin : 20px 0;
+
+#add-product {
+  float: right;
+  font-weight: 500;
 }
 </style>

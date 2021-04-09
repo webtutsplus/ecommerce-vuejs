@@ -1,11 +1,16 @@
 <template>
-  <div class="products-box container">
-    <h2>Your WishList</h2>
-    <div v-if="products">
-        <div v-for="product of products" :key="product.id">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Your WishList</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div v-for="product of products" :key="product.id" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
         <ProductBox :product="product">
         </ProductBox>
-        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,15 +23,15 @@ export default {
           products:null,
           token:null
       }
-  },  
+  },
   name: 'Product',
-  components : {ProductBox}, 
+  components : {ProductBox},
   props : [ "baseURL"],
   methods : {
     fetchWishlist : function() {
-      
+
       // fetch products
-      axios.get(`${this.baseURL}wishlist/${this.token}`) 
+      axios.get(`${this.baseURL}wishlist/${this.token}`)
         .then(data => this.products = data.data)
         .catch(err => console.log(err));
     },
@@ -41,14 +46,10 @@ export default {
 }
 </script>
 
-<style>
-.products-box h2{
-  font-family: 'Courgette', cursive;
-  font-size : 60px;
-  text-align : center;
-  margin : 70px 0;
-}
-.add-btn{
-  margin : 20px 0;
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
 </style>
