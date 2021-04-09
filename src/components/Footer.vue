@@ -2,7 +2,7 @@
   <footer>
     <div class="container pt-5">
       <div class="row">
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <ul style="list-style-type: none">
             <li class="text-light font-weight-bold pb-2">Get to Know Us</li>
             <li><a class="footer-link font-weight-light" href="#">About Us</a></li>
@@ -11,7 +11,7 @@
           </ul>
         </div>
 
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <ul style="list-style-type: none">
             <li class="text-light font-weight-bold">Connect With Us</li>
             <li><a class="footer-link font-weight-light" href="#">Facebook</a></li>
@@ -20,7 +20,7 @@
           </ul>
         </div>
 
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <ul style="list-style-type: none">
             <li class="text-light font-weight-bold">Make Money With Us</li>
             <li><a class="footer-link font-weight-light" href="#">Sell with Us</a></li>
@@ -29,7 +29,7 @@
           </ul>
         </div>
 
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <ul style="list-style-type: none">
             <li class="text-light font-weight-bold">Let Us Help You</li>
             <li><a class="footer-link font-weight-light" href="#">Return Centre</a></li>
