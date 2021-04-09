@@ -46,21 +46,11 @@ export default {
 }
 </script>
 
-<style>
-.images-box h2{
-  font-family: 'Courgette', cursive;
-  font-size : 60px;
-  text-align : center;
-  margin : 70px 0;
-}
-.images-display{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.images-box .add-btn{
-  margin : 20px;
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
 
 #add-image {

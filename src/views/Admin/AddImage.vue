@@ -1,11 +1,23 @@
 <template>
-    <div class="image-upload container">
-        <h2>Add a new Image</h2>
-        <label for="myfile"><h3>Select image :</h3></label>
-        <input type="file" id="myfile" @change="onFileSelected">
-        <br>
-        <button type="button" class="btn btn-info" @click="onUpload">Upload</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Add a new Image</h4>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-md-6 px-5 px-md-0 pt-5">
+        <div class="form-group">
+          <label for="myfile">Select image :</label>
+          <input type="file" id="myfile" class="form-control-file" @change="onFileSelected">
+        </div>
+        <button type="button" class="btn btn-info" @click="onUpload">Upload</button>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -67,15 +79,11 @@ export default {
 }
 </script>
 
-<style>
-.image-upload h2{
-  font-family: 'Courgette', cursive;
-  font-size : 60px;
-  text-align : center;
-  margin : 70px 0 90px 0;
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
-.image-upload,
-.image-upload input{
-    margin-left : 20px;
-}
+
 </style>
