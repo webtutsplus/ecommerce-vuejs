@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       baseURL : "https://limitless-lake-55070.herokuapp.com/",
+      
       //baseURL : "http://localhost:8080/api/",
       products : null,
       categories : null,
