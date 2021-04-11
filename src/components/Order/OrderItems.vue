@@ -1,32 +1,32 @@
 <template>
-
-    <div>
-
-        <h2>Products ordered</h2>
-
-        <div v-for="itr in this.lengthofOrderItems" :key="itr">
-
-            <div class="product-box">
-
-                <div class="col-4">
-                    <img class="img-fluid" v-bind:src="this.orderProducts[itr-1].imgUrl" alt="product-image">
-                </div>
-
-                <div class="col-8">
-
-                    <h3 class="product_name">{{this.orderProducts[itr-1].pName}}</h3>
-                    <h3 class="product_description">{{this.orderProducts[itr-1].pDescription}}</h3>
-                    <h3 class="product_price"><span>$</span>{{this.orderProducts[itr-1].pPrice}} per unit</h3>
-                    <h3 class="product_description">Quantity : {{this.orderProducts[itr-1].pQuantity}}</h3>
-                    <h3 class="product_description">Total Price : $ {{this.orderProducts[itr-1].pPrice*this.orderProducts[itr-1].pQuantity}}</h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="pt-3">Order Id: - {{orderID}}</h4>
+      </div>
     </div>
+
+    <div v-for="itr in lengthofOrderItems" :key="itr" class="row mt-2 pt-3 justify-content-around">
+      <div class="col-2"></div>
+      <div class="col-md-3 embed-responsive embed-responsive-16by9">
+        <img v-bind:src="orderProducts[itr-1].imgUrl" class="w-100 card-img-top embed-responsive-item">
+      </div>
+
+      <div class="col-md-5 px-3">
+        <div class="card-block px-3">
+          <h6 class="card-title" >{{orderProducts[itr-1].pName}}</h6>
+          <p id="item-price" class="mb-0 font-weight-bold"><sup>$</sup>{{orderProducts[itr-1].pPrice}} per unit</p>
+          <p id="item-quantity" class="mb-0">Quantity : Quantity : {{orderProducts[itr-1].pQuantity}}</p>
+          <p id="item-total-price" class="mb-0">Total Price : <sup>$</sup><span class="font-weight-bold">{{orderProducts[itr-1].pPrice*orderProducts[itr-1].pQuantity}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-cost pt-2 text-right">
+      <h5>Total Cost : $ {{totalCost}}</h5>
+    </div>
+  </div>
+
 
 </template>
 
@@ -40,6 +40,7 @@ export default {
     data() {
         return {
             lengthofOrderItems:0,
+            totalCost : "",
             orderProducts:[],
             products:[],
             token:null
@@ -53,6 +54,7 @@ export default {
                 if(response.status === 200) {
                   this.product = response.data
                   this.lengthofOrderItems = Object.keys(this.product.orderItems).length
+                  this.totalCost = this.product.totalPrice
                   this.product.orderItems.forEach(item => {
                     this.orderProducts.push({
                       imgUrl:item.product.imageURL,
@@ -82,41 +84,10 @@ export default {
 
 <style scoped>
 
-h2{
-    margin-left: 40%;
-    font-family: "Courgette", cursive;
-}
-
-.product-box{
-    background-color: rgb(253, 240, 250);
-    border-radius: 10px;
-    margin: 20px 0;
-    padding: 15px 15px;
-    min-height: 250px;
-}
-.product-box img{
-    border-radius : 10px;
-}
-.product-box img:hover{
-    cursor: pointer;
-}
-.product_name{
-    font-size: 35px;
-    margin-right : 120px;
-}
-.product_name:hover{
-    color:rgb(243, 126, 31);
-    cursor: pointer;
-}
-.product_description{
-    font-size: 20px;
-}
-.product_price{
-    font-size: 20px;
-    color:red;
-}
-.product_price span{
-    font-size:15px;
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
 }
 
 </style>
