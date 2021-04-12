@@ -1,36 +1,66 @@
 <template>
-  <div class="home-landing">
-    <div class="welcome">
-      <h1>Webtutsplus Market</h1>
-      <p><strong>Shop from a wide range of categories</strong></p>
-      <button class="myBtn"><router-link :to="{name : 'Product'}">Start Shopping</router-link></button>
+  <!-- Page Wrapper -->
+  <div id="background-div" class="page-holder bg-cover">
+
+    <div class="container py-5">
+      <header class="text-left text-white py-5">
+        <h3 class="mb-4 rounded"><a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Start Shopping</a></h3>
+        <p id="content" class="lead mb-0 bg-dark p-1 rounded">Simple Coding Market is for educational purposes only. It can be used by developers to learn about developing an ecommerce application complete with backend and frontend for Web and Android</p>
+<!--        <p class="font-italic">Snippet By <a href="https://bootstrapious.com" class="text-white">-->
+<!--          <u>Bootstrapious</u></a>-->
+<!--        </p>-->
+      </header>
+
+<!--      <div class="text-white">-->
+<!--        <p class="lead">It's not a good approch to deal directly with <code class="bg-white px-2 py-1 rounded">body</code> So, create a wrapper container and make it a full-window height.</p>-->
+<!--        <p class="lead">Set the wrapper initial height to full window height using <code class="bg-white px-2 py-1 rounded">min-height: 100vh</code></p>-->
+<!--        <p class="lead">Use <code class="bg-white px-2 py-1 rounded">.bg-cover</code> to make the background fit all viewports.</p>-->
+<!--      </div>-->
+
     </div>
   </div>
 
-  <div class="listing">
-    <h1>Popular Categories</h1>
-    <div class="display-categories" v-if="categories">
-      <div v-for="index in this.category_size" :key="index">
-        <CategoryCard :category="categories[index-1]"/>
+  <div id="start-shopping" class="container">
+    <div class="row">
+      <div class="col-12 text-left">
+        <h2 class="pt-3">Top Categories</h2>
       </div>
     </div>
-
-    <h1>Best Products</h1>
-    <div class="display-products" v-if="products">
-      <div v-for="index in this.product_size" :key="index">
-        <ProductCard :product="products[index-1]"/>
+    <div class="row">
+      <div v-for="index in this.category_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+        <CategoryBox :category="categories[index-1]">
+        </CategoryBox>
       </div>
     </div>
   </div>
+
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-left">
+        <h2 class="pt-3">Top Products</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div v-for="index in this.product_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+        <ProductBox :product="products[index-1]">
+        </ProductBox>
+      </div>
+    </div>
+  </div>
+
+
 
 </template>
 
 <script>
 import ProductCard from "../components/Product/ProductCard.vue"
 import CategoryCard from "../components/Category/CategoryCard.vue"
+import ProductBox from "../components/Product/ProductBox";
+import CategoryBox from "../components/Category/CategoryBox";
 export default {
   name: 'Home',
-  components : {ProductCard, CategoryCard},
+  components : {ProductCard, CategoryCard, ProductBox, CategoryBox},
   props : ["baseURL", "products", "categories"],
   emits : ["fetchData", "refreshNav"],
   data(){
@@ -55,102 +85,33 @@ export default {
 </script>
 
 <style>
-/* Home Landing */
-.home-landing{
-  padding : 100px;
-  background-image: url("../assets/home.png");
-  height: 85vh;
-  width: 100%;
-  background-size: cover; 
-   text-align: center;
-}
-.welcome{
-  padding : 50px;
-  max-width : 600px;
-  max-height : 600px;
-  background: rgba(255,255,255,.2);
-  border-radius : 20px;
-  box-shadow : 0 5px 15px rgba(0,0,0,0.5);
-}
-.welcome h1{
-  font-size: 80px;
-  color : rgb(241, 23, 132);
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
-.welcome p{
-  font-size : 30px;
-  color: rgb(226, 6, 61);
+
+
+.page-holder {
+  min-height: 100vh;
 }
 
-@media only screen and (max-width: 700px) {
-
-   .welcome h1{ 
-      font-size: 40px; 
-   }
-
+.bg-cover {
+  background-size: cover !important;
 }
 
-.myBtn{
-  font-size: 20px;
-  background: rgb(73, 76, 224);
-  border : none;
-  border-radius: 50px;
-  padding:10px 20px;
+#background-div {
+  background: url(../assets/homepage2.jpg)
 }
-.myBtn:focus{
-  outline: none;
-  box-shadow: none;
-}
-.myBtn a,
-.myBtn a:hover{
-  color : white;
+
+#heading {
   text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  opacity: 0.8;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
-/* Listing */
-.listing h1{
-  text-align: center;
-  margin-top: 70px;
-}
-.listing h1:after {
-  display: block;
-  height: 2px;
-  background-color: #95673f;
-  content:" ";
-  width:100px;
-  margin : 30px auto;
-}
-.display-categories,
-.display-products{
-  margin-top : 70px;
-  display : flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+#content {
+  opacity: 0.8;
 }
 
-@media only screen and (max-width: 480px) {
-
-   .welcome h1{ 
-      font-size: 30px; 
-   }
-
+h2 {
+  font-family: 'Josefin Sans', sans-serif;
 }
-
-@media only screen and (max-width: 450px) {
-
-   .welcome h1{ 
-      font-size: 20px; 
-   }
-   .welcome p{
-     font-size: 20px;
-   }
-   .welcome{
-     max-width: 300px;
-   }
-   .myBtn{
-     font-size:15px
-   }
-
-}
-
 </style>

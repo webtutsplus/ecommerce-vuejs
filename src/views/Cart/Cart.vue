@@ -152,10 +152,6 @@ h4, h5 {
   object-fit: cover;
 }
 
-#item-description {
-  font-size: small;
-}
-
 #item-price {
   color: #232F3E;
 }
