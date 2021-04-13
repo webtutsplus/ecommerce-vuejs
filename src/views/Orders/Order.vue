@@ -87,4 +87,7 @@ h4, h5 {
   font-weight: 700;
 }
 
+.embed-responsive .card-img-top {
+  object-fit: cover;
+}
 </style>
