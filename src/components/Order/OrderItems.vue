@@ -7,7 +7,7 @@
     </div>
 
     <div v-for="itr in lengthofOrderItems" :key="itr" class="row mt-2 pt-3 justify-content-around">
-      <div class="col-2"></div>
+      <div class="col-1"></div>
       <div class="col-md-3 embed-responsive embed-responsive-16by9">
         <img v-bind:src="orderProducts[itr-1].imgUrl" class="w-100 card-img-top embed-responsive-item">
       </div>
@@ -20,6 +20,7 @@
           <p id="item-total-price" class="mb-0">Total Price : <sup>$</sup><span class="font-weight-bold">{{orderProducts[itr-1].pPrice*orderProducts[itr-1].pQuantity}}</span></p>
         </div>
       </div>
+      <div class="col-1"></div>
     </div>
 
     <div class="total-cost pt-2 text-right">
