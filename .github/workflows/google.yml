@@ -13,14 +13,15 @@
 name: Build and Deploy to GKE
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - nilmadhab/gcloud-appengine
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ecommerce-vue-js
   GKE_ZONE: europe-north1-a  
-  DEPLOYMENT_NAME: gke-ecommerce-vue.js 
+  DEPLOYMENT_NAME: ecommerce-vue-js
   IMAGE: static-site
 
 jobs:
@@ -31,6 +32,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
@@ -49,6 +51,12 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_SA_KEY }}
+
+    - name: Build Dist Neel
+      run: |-
+        sudo apt install npm
+        sudo npm install
+        sudo npm run build
 
     # Build the Docker image
     - name: Build
