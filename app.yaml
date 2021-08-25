@@ -1,8 +1,0 @@
-runtime: nodejs14
-handlers:
-- url: /(.*\..+)$
-  static_files: dist/\1
-  upload: dist/(.*\..+)$
-- url: /.*
-  static_files: dist/index.html
-  upload: dist/index.html
