@@ -15,7 +15,7 @@
 export default {
     data(){
         return {
-            stripeAPIToken: 'pk_test_51Hr18ILR0wfBoBqmrZFhIWWOk0CA8PFS3cEMwh4S1S6jRUzVucZ26dbGIYRk5ezdYlMgUkQmYHGJOsKR35uEHgvV00IXALUhYx',//process.env.VUE_APP_STRIPETOKEN,
+            stripeAPIToken: process.env.VUE_APP_STRIPETOKEN,
             stripe: '',
             token:null,
             sessionId:null,
