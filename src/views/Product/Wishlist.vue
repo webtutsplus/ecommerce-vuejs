@@ -28,15 +28,12 @@ export default {
   components : {ProductBox},
   props : [ "baseURL"],
   methods : {
-    fetchWishlist : function() {
+    fetchWishlist() {
 
       // fetch products
       axios.get(`${this.baseURL}wishlist/${this.token}`)
         .then(data => this.products = data.data)
         .catch(err => console.log(err));
-    },
-    refreshNav : function () {
-      this.key += 1;
     }
   },
   mounted() {

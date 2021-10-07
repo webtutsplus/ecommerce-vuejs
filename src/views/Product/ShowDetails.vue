@@ -95,6 +95,8 @@ export default {
             icon: "success",
             closeOnClickOutside: false,
           });
+          // refresh nav bar
+          this.$emit("fetchData");
         }
       },(error) =>{
         console.log(error)

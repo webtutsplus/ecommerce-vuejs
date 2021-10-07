@@ -15,11 +15,11 @@
         <div class="card-block px-3">
           <h6 class="card-title" @click="showDetails(itr-1)">{{cartItem[itr-1].pName}}</h6>
 <!--          <p id="item-description" class="card-text font-italic mb-0">{{cartItem[itr-1].pDescription.substring(0,90)}}...</p>-->
-          <p id="item-price" class="mb-0 font-weight-bold"><sup>$</sup>{{cartItem[itr-1].pPrice}} per unit</p>
+          <p id="item-price" class="mb-0 font-weight-bold">$ {{cartItem[itr-1].pPrice}} per unit</p>
           <p id="item-quantity" class="mb-0">
             Quantity :
             <input size="1" class="p-0 h-25 border-bottom border-top-0 border-left-0 border-right-0" v-model="cartItem[itr-1].pQuantity" @change="updateItem(cartItem[itr-1].id,cartItem[itr-1].pQuantity)"/></p>
-          <p id="item-total-price" class="mb-0">Total Price : <sup>$</sup><span class="font-weight-bold">{{cartItem[itr-1].pPrice*cartItem[itr-1].pQuantity}}</span></p>
+          <p id="item-total-price" class="mb-0">Total Price : $ <span class="font-weight-bold">{{cartItem[itr-1].pPrice*cartItem[itr-1].pQuantity}}</span></p>
           <br><a href="#" class="text-right" @click="deleteItem(cartItem[itr-1].id)">Remove From Cart</a>
         </div>
       </div>
@@ -29,7 +29,7 @@
 
     <div class="total-cost pt-2 text-right">
       <h5>Total Cost : $ {{totalcost}}</h5>
-      <button :disabled="isDisabled()" class="button_check" @click="checkout()" >Confirm Order</button>
+      <button :disabled="isDisabled()" class="btn btn-primary confirm" @click="checkout()" >Confirm Order</button>
     </div>
   </div>
 
@@ -105,6 +105,7 @@ export default {
           if(response.status==200){
             this.$router.go(0);
           }
+          this.$emit("fetchData");
         },(error)=>{
           console.log(error)
         })
@@ -127,6 +128,7 @@ export default {
         quantity
       }).then(() => {
         this.listCartItems()
+        this.$emit("fetchData");
       })
 
     }

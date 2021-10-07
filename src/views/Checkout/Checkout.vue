@@ -13,85 +13,89 @@
 </template>
 <script>
 export default {
-        data(){
-            return {
-                stripeAPIToken: process.env.VUE_APP_STRIPETOKEN,
-                stripe: '',
-                token:null,
-                sessionId:null,
-                checkoutBodyArray:[]
+    data(){
+        return {
+            stripeAPIToken: process.env.VUE_APP_STRIPETOKEN,
+            stripe: '',
+            token:null,
+            sessionId:null,
+            checkoutBodyArray:[]
+            }
+    },
+
+    name:'Checkout',
+    props:["baseURL"],
+    methods: {
+        /*
+            Includes Stripe.js dynamically
+        */
+        includeStripe( URL, callback ){
+            let documentTag = document, tag = 'script',
+                object = documentTag.createElement(tag),
+                scriptTag = documentTag.getElementsByTagName(tag)[0];
+            object.src = '//' + URL;
+            if (callback) { object.addEventListener('load', function (e) { callback(null, e); }, false); }
+            scriptTag.parentNode.insertBefore(object, scriptTag);
+        },
+
+        /*
+            Configures Stripe by setting up the elements and
+            creating the card element.
+        */
+        configureStripe(){
+            this.stripe = Stripe( this.stripeAPIToken );
+        },
+
+        getAllItems(){
+            axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
+                if(response.status==200){
+                    let products = response.data
+                    let len=Object.keys(products.cartItems).length
+                    for(let i=0;i<len;i++)
+                        this.checkoutBodyArray.push({
+                            imageUrl:products.cartItems[i].product.imageURL,
+                            productName:products.cartItems[i].product.name,
+                            quantity:products.cartItems[i].quantity,
+                            price:products.cartItems[i].product.price,
+                            productId:products.cartItems[i].product.id,
+                            userId:products.cartItems[i].userId
+                    })
                 }
+            },err=>{
+                console.log(err)
+            })
         },
 
-        name:'Checkout',
-        props:["baseURL"],
-    
-        mounted(){
-            this.token = localStorage.getItem("token");
-            if(typeof( this.$route.params.id) === "undefined"){
-                this.$router.push({name:'Home'})
-            }
-            this.includeStripe('js.stripe.com/v3/', function(){
-                this.configureStripe();
-            }.bind(this) );
-            this.getAllItems()
-        },
-    
-        methods: {
-            /*
-                Includes Stripe.js dynamically
-            */
-            includeStripe( URL, callback ){
-                let documentTag = document, tag = 'script',
-                    object = documentTag.createElement(tag),
-                    scriptTag = documentTag.getElementsByTagName(tag)[0];
-                object.src = '//' + URL;
-                if (callback) { object.addEventListener('load', function (e) { callback(null, e); }, false); }
-                scriptTag.parentNode.insertBefore(object, scriptTag);
-            },
-    
-            /*
-                Configures Stripe by setting up the elements and 
-                creating the card element.
-            */
-            configureStripe(){
-                this.stripe = Stripe( this.stripeAPIToken );            
-            },
-
-            getAllItems(){
-                axios.get(`${this.baseURL}cart/?token=${this.token}`).then((response) => {
-                    if(response.status==200){
-                        let products = response.data
-                        let len=Object.keys(products.cartItems).length
-                        for(let i=0;i<len;i++)
-                            this.checkoutBodyArray.push({
-                                imageUrl:products.cartItems[i].product.imageURL,
-                                productName:products.cartItems[i].product.name,
-                                quantity:products.cartItems[i].quantity,
-                                price:products.cartItems[i].product.price,
-                                productId:products.cartItems[i].product.id,
-                                userId:products.cartItems[i].userId
-                        })
-                    }
-                },err=>{
-                    console.log(err)
-                })
-            },
-            
-            goToCheckout(){
-                axios.post(this.baseURL+"order/create-checkout-session",
-                   this.checkoutBodyArray
-                ).then((response)=>{
-                  localStorage.setItem("sessionId",response.data.sessionId)
-                  return response.data
-                }).then((session)=>{
-                   return this.stripe.redirectToCheckout({ sessionId: session.sessionId })
-                })
-            }
-           
+        goToCheckout(){
+            axios.post(this.baseURL+"order/create-checkout-session",
+               this.checkoutBodyArray
+            ).then((response)=>{
+              localStorage.setItem("sessionId",response.data.sessionId)
+              return response.data
+            }).then((session)=>{
+               return this.stripe.redirectToCheckout({ sessionId: session.sessionId })
+            })
         }
+
+    },
+    mounted(){
+        // get the token
+        this.token = localStorage.getItem("token");
+
+        if(typeof( this.$route.params.id) === "undefined"){
+            this.$router.push({name:'Home'})
+        }
+
+        // include stripe
+        this.includeStripe('js.stripe.com/v3/', function(){
+            this.configureStripe();
+        }.bind(this) );
+
+        // get all the cart items
+        this.getAllItems()
+    },
 }
-        
+
 </script>
 
  <style >

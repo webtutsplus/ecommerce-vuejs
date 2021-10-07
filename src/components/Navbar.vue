@@ -40,9 +40,6 @@
         </li>
 
 
-
-
-
         <li class="nav-item dropdown">
           <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Accounts
@@ -61,7 +58,10 @@
           <router-link class="nav-link text-light" :to="{name : 'Order'}">Orders</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="text-light" :to="{name : 'Cart'}"><i class="fa fa-shopping-cart" style="font-size:36px"></i></router-link>
+          <div id="cart">
+            <span id="nav-cart-count">{{cartCount}}</span>
+            <router-link class="text-light" :to="{name : 'Cart'}"><i class="fa fa-shopping-cart" style="font-size:36px"></i></router-link>
+          </div>
         </li>
       </ul>
     </div>
@@ -72,6 +72,7 @@
 <script>
 export default {
   name : "Navbar",
+  props: ["cartCount"],
   data() {
     return {
       token: null
@@ -111,5 +112,21 @@ export default {
     border-color: #febd69;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
+  }
+  #nav-cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+  #cart {
+    position: relative;
   }
 </style>
