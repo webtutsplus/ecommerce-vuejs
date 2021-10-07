@@ -22,7 +22,7 @@
               <label>Password</label>
               <input type="password" class="form-control" v-model="password" required>
             </div>
-            <small class="form-text text-muted">By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.</small>
+            <small class="form-text text-muted">By continuing, you agree to Simplecoding's Conditions of Use and Privacy Notice.</small>
             <button type="submit" class="btn btn-primary mt-2 py-0">
               Continue
               <div v-if="loading" class="spinner-border spinner-border-sm" role="status">
@@ -31,8 +31,8 @@
             </button>
           </form>
           <hr>
-          <small class="form-text text-muted pt-2 pl-4 text-center">New to Amazon?</small>
-          <p class="text-center"><router-link :to="{name: 'Signup'}" class="btn btn-dark text-center mx-auto px-5 py-1 mb-2">Create Your Amazon Account</router-link></p>
+          <small class="form-text text-muted pt-2 pl-4 text-center">New to Simplecoding?</small>
+          <p class="text-center"><router-link :to="{name: 'Signup'}" class="btn btn-dark text-center mx-auto px-5 py-1 mb-2">Create Your Simplecoding Account</router-link></p>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
       .then(res => {
         localStorage.setItem('token', res.data.token);
         this.$emit("refreshNav");
-        this.$router.back();
+        this.$router.push({name:'Home'});
       })
       .catch(err => {
         swal({

@@ -67,7 +67,10 @@ export default {
   methods : {
     async signup(e) {
       e.preventDefault();
+      // if the password matches
       if (this.password === this.passwordConfirm) {
+
+        // make the post body
         const user = {
           email: this.email,
           firstName: this.firstName,
@@ -75,6 +78,7 @@ export default {
           password: this.password
         }
 
+        // call the API
         await axios({
           method : 'post',
           url : this.baseURL + "user/signup",
@@ -84,6 +88,7 @@ export default {
           }
         })
         .then(res => {
+          // redirect to home page
           this.$router.replace("/");
           swal({
             text: "User signup successful. Please Login",
@@ -95,6 +100,7 @@ export default {
           console.log(err);
         });
       } else {
+        // passwords are not matching
         swal({
           text: "Error! Passwords are not matching",
           icon: "error",
