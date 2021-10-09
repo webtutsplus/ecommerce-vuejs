@@ -46,10 +46,6 @@ export default {
   object-fit: cover;
 }
 
-.card {
-  width: ;
-}
-
 a {
   text-decoration: none;
 }
