@@ -60,6 +60,7 @@
           @click="listCartItems()"
         >
           Show Cart
+
           <ion-icon name="cart-outline" v-pre></ion-icon>
         </button>
       </div>
