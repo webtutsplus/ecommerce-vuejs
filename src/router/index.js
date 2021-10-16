@@ -26,7 +26,7 @@ import Signin from '../views/Signin.vue'
 import Success from '../helper/payment/Success.vue'
 import Failed from '../helper/payment/Failed.vue'
 
-import OrderItemView from '../views/Orders/OrderItemView.vue'
+import OrderDetails from "../views/Orders/OrderDetails";
 
 const routes = [
   {
@@ -48,7 +48,7 @@ const routes = [
   {
     path : '/admin/gallery/add',
     name : 'AddImage',
-    component : AddImage 
+    component : AddImage
   },
   //Product routes
   {
@@ -150,9 +150,9 @@ const routes = [
     component:Failed
   },
   {
-    path:'/order/:id', 
-    name:'OrderItemView',
-    component:OrderItemView
+    path:'/order/:id',
+    name:'OrderDetails',
+    component: OrderDetails
   }
 ]
 
