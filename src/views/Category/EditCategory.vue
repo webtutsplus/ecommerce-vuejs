@@ -9,18 +9,18 @@
     <div class="row">
       <div class="col-3"></div>
       <div class="col-md-6 px-5 px-md-0">
-        <form>
+        <form v-if="category">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" class="form-control" v-model="categoryName" required>
+            <input type="text" class="form-control" v-model="category.categoryName" required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" class="form-control" v-model="description" required>
+            <input type="text" class="form-control" v-model="category.description" required>
           </div>
           <div class="form-group">
             <label>ImageURL</label>
-            <input type="url" class="form-control" v-model="imageUrl" required>
+            <input type="url" class="form-control" v-model="category.imageUrl" required>
           </div>
           <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
         </form>
@@ -34,32 +34,14 @@
 export default {
   data(){
     return {
-      id : null,
-      categoryName : null,
-      description : null,
-      imageUrl : null,
-      categoryIndex : null
+      category: null
     }
   },
   props : ["baseURL", "categories"],
   methods : {
     async editCategory() {
-      const newCategory = {
-        id : this.id,
-        categoryName : this.categoryName,
-        description : this.description,
-        imageUrl : this.imageUrl,
-        products : null
-      }
-
-      await axios({
-        method: 'post',
-        url: this.baseURL+"category/update/"+this.id,
-        data : JSON.stringify(newCategory),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      delete this.category["products"]
+      await axios.post(this.baseURL+"category/update/"+this.id, this.category)
       .then(res => {
           //sending the event to parent to handle
         this.$emit("fetchData");
@@ -79,11 +61,8 @@ export default {
       return;
     }
     this.id = this.$route.params.id;
-    this.categoryIndex = this.categories.findIndex(category => category.id == this.id);
-    //input fields
-    this.categoryName = this.categories[this.categoryIndex].categoryName;
-    this.description = this.categories[this.categoryIndex].description;
-    this.imageUrl = this.categories[this.categoryIndex].imageUrl;
+    this.category = this.categories.find(category => category.id == this.id);
+    console.log('category', this.category);
   }
 }
 </script>
