@@ -1,5 +1,5 @@
 <template>
-  <div class="card h-100">
+  <div class="card h-100 w-100">
     <div class="embed-responsive embed-responsive-16by9">
       <img class="card-img-top embed-responsive-item" :src="product.imageURL" alt="Product Image">
     </div>
