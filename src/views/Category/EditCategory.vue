@@ -40,6 +40,7 @@ export default {
   props : ["baseURL", "categories"],
   methods : {
     async editCategory() {
+      delete this.category["products"]
       await axios.post(this.baseURL+"category/update/"+this.id, this.category)
       .then(res => {
           //sending the event to parent to handle
