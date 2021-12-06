@@ -102,6 +102,13 @@ export default {
         );
     },
     addToCart(productId) {
+      if (!this.token) {
+        swal({
+          text: "Please log in first!",
+          icon: "error",
+        });
+        return;
+      }
       axios
         .post(`${this.baseURL}cart/add?token=${this.token}`, {
           productId: productId,

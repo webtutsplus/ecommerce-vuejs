@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-<!--    Logo Div-->
+    <!--    Logo Div-->
     <div class="row">
       <div class="col-12 text-center pt-3">
-        <router-link :to="{name : 'Home'}">
+        <router-link :to="{ name: 'Home' }">
           <img id="logo" src="../assets/icon.png" />
         </router-link>
       </div>
@@ -16,23 +16,48 @@
           <form @submit="signin" class="pt-4 pl-4 pr-4">
             <div class="form-group">
               <label>Email</label>
-              <input type="email" class="form-control" v-model="email" required>
+              <input
+                type="email"
+                class="form-control"
+                v-model="email"
+                required
+              />
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" class="form-control" v-model="password" required>
+              <input
+                type="password"
+                class="form-control"
+                v-model="password"
+                required
+              />
             </div>
-            <small class="form-text text-muted">By continuing, you agree to Simplecoding's Conditions of Use and Privacy Notice.</small>
+            <small class="form-text text-muted"
+              >By continuing, you agree to Simplecoding's Conditions of Use and
+              Privacy Notice.</small
+            >
             <button type="submit" class="btn btn-primary mt-2 py-0">
               Continue
-              <div v-if="loading" class="spinner-border spinner-border-sm" role="status">
+              <div
+                v-if="loading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+              >
                 <span class="sr-only">Loading...</span>
               </div>
             </button>
           </form>
-          <hr>
-          <small class="form-text text-muted pt-2 pl-4 text-center">New to Simplecoding?</small>
-          <p class="text-center"><router-link :to="{name: 'Signup'}" class="btn btn-dark text-center mx-auto px-5 py-1 mb-2">Create Your Simplecoding Account</router-link></p>
+          <hr />
+          <small class="form-text text-muted pt-2 pl-4 text-center"
+            >New to Simplecoding?</small
+          >
+          <p class="text-center">
+            <router-link
+              :to="{ name: 'Signup' }"
+              class="btn btn-dark text-center mx-auto px-5 py-1 mb-2"
+              >Create Your Simplecoding Account</router-link
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -41,55 +66,49 @@
 
 <script>
 export default {
-  name: 'Signin',
-  props : [ "baseURL"],
+  name: "Signin",
+  props: ["baseURL"],
   data() {
     return {
       email: null,
       password: null,
-      loading: null
-    }
+      loading: null,
+    };
   },
-  methods : {
+  methods: {
     async signin(e) {
       e.preventDefault();
       this.loading = true;
 
       const user = {
         email: this.email,
-        password: this.password
-      }
+        password: this.password,
+      };
 
-      await axios({
-        method: 'post',
-        url: this.baseURL + "user/signIn",
-        data : JSON.stringify(user),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => {
-        localStorage.setItem('token', res.data.token);
-        this.$emit("refreshNav");
-        this.$router.push({name:'Home'});
-      })
-      .catch(err => {
-        swal({
-          text: "Unable to Log you in!",
-          icon: "error",
-          closeOnClickOutside: false,
+      await axios
+        .post(`${this.baseURL}user/signIn`, user)
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          this.$emit("fetchData");
+          this.$router.push({ name: "Home" });
+        })
+        .catch((err) => {
+          swal({
+            text: "Unable to Log you in!",
+            icon: "error",
+            closeOnClickOutside: false,
+          });
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading = false;
         });
-        console.log(err);
-      })
-      .finally(() => {
-        this.loading = false;
-      })
-    }
+    },
   },
   mounted() {
     this.loading = false;
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -117,6 +136,4 @@ export default {
     width: 40%;
   }
 }
-
-
 </style>
