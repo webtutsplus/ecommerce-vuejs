@@ -104,9 +104,9 @@ export default {
     // get the token
     this.token = localStorage.getItem("token");
 
-    if (typeof this.$route.params.id === "undefined") {
-      this.$router.push({ name: "Home" });
-    }
+    // if (typeof this.$route.params.id === "undefined") {
+    //   this.$router.push({ name: "Home" });
+    // }
 
     // include stripe
     this.includeStripe(
