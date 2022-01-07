@@ -44,11 +44,14 @@
             />
           </p>
           <p id="item-total-price" class="mb-0">
-            Total :
+            Total Price:
             <span class="font-weight-bold">
               $ {{ cartItem.product.price * cartItem.quantity }}</span
             >
           </p>
+          <br /><a href="#" class="text-right" @click="deleteItem(cartItem.id)"
+            >Remove From Cart</a
+          >
         </div>
       </div>
       <div class="col-2"></div>
@@ -108,6 +111,27 @@ export default {
     // go to checkout page
     checkout() {
       this.$router.push({ name: "Checkout" });
+    },
+    deleteItem(itemId) {
+      axios
+        .delete(`${this.baseURL}cart/delete/${itemId}/?token=${this.token} `)
+        .then(
+          (response) => {
+            if (response.status == 200) {
+              this.$router.go(0);
+            }
+            this.$emit("fetchData");
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    showDetails(productId) {
+      this.$router.push({
+        name: "ShowDetails",
+        params: { id: productId },
+      });
     },
   },
   mounted() {
