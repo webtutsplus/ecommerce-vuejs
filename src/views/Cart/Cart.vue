@@ -60,7 +60,7 @@
 
     <!-- display total price -->
     <div class="total-cost pt-2 text-right">
-      <h5>Total : $ {{ totalcost }}</h5>
+      <h5>Total : $ {{ totalcost.toFixed(2) }}</h5>
       <button
         :disabled="isDisabled()"
         type="button"
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+const axios = require('axios');
 export default {
   data() {
     return {
@@ -83,8 +83,8 @@ export default {
       totalcost: 0,
     };
   },
-  name: "Cart",
-  props: ["baseURL"],
+  name: 'Cart',
+  props: ['baseURL'],
   methods: {
     isDisabled() {
       if (this.cartItems.length === 0) {
@@ -110,7 +110,7 @@ export default {
     },
     // go to checkout page
     checkout() {
-      this.$router.push({ name: "Checkout" });
+      this.$router.push({ name: 'Checkout' });
     },
     deleteItem(itemId) {
       axios
@@ -120,7 +120,7 @@ export default {
             if (response.status == 200) {
               this.$router.go(0);
             }
-            this.$emit("fetchData");
+            this.$emit('fetchData');
           },
           (error) => {
             console.log(error);
@@ -129,13 +129,13 @@ export default {
     },
     showDetails(productId) {
       this.$router.push({
-        name: "ShowDetails",
+        name: 'ShowDetails',
         params: { id: productId },
       });
     },
   },
   mounted() {
-    this.token = localStorage.getItem("token");
+    this.token = localStorage.getItem('token');
     this.listCartItems();
   },
 };
@@ -144,7 +144,7 @@ export default {
 <style scoped>
 h4,
 h5 {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #484848;
   font-weight: 700;
 }
