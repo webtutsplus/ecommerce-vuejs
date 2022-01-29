@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import Footer from "./components/Footer.vue";
+import Navbar from './components/Navbar.vue';
+import Footer from './components/Footer.vue';
 export default {
   data() {
     return {
-      baseURL: "https://limitless-lake-55070.herokuapp.com/",
+      baseURL: 'https://limitless-lake-55070.herokuapp.com/',
       //baseURL: "http://localhost:8080/",
       products: null,
       categories: null,
@@ -38,13 +38,13 @@ export default {
     async fetchData() {
       // fetch products
       await axios
-        .get(this.baseURL + "product/")
+        .get(this.baseURL + 'product/')
         .then((res) => (this.products = res.data))
         .catch((err) => console.log(err));
 
       //fetch categories
       await axios
-        .get(this.baseURL + "category/")
+        .get(this.baseURL + 'category/')
         .then((res) => (this.categories = res.data))
         .catch((err) => console.log(err));
 
@@ -68,7 +68,7 @@ export default {
     },
   },
   mounted() {
-    this.token = localStorage.getItem("token");
+    this.token = localStorage.getItem('token');
     this.fetchData();
   },
 };
