@@ -21,44 +21,21 @@ export default {
   data() {
     return {
       stripeAPIToken: process.env.VUE_APP_STRIPETOKEN,
-      stripe: "",
+      stripe: '',
       token: null,
       sessionId: null,
       checkoutBodyArray: [],
     };
   },
 
-  name: "Checkout",
-  props: ["baseURL"],
+  name: 'Checkout',
+  props: ['baseURL'],
   methods: {
     /*
-            Includes Stripe.js dynamically
-        */
-    includeStripe(URL, callback) {
-      let documentTag = document,
-        tag = "script",
-        object = documentTag.createElement(tag),
-        scriptTag = documentTag.getElementsByTagName(tag)[0];
-      object.src = "//" + URL;
-      if (callback) {
-        object.addEventListener(
-          "load",
-          function(e) {
-            callback(null, e);
-          },
-          false
-        );
-      }
-      scriptTag.parentNode.insertBefore(object, scriptTag);
-    },
-
-    /*
-            Configures Stripe by setting up the elements and
-            creating the card element.
-        */
-    configureStripe() {
-      this.stripe = Stripe(this.stripeAPIToken);
-    },
+      Configures Stripe by setting up the elements and
+      creating the card element.
+    */
+    configureStripe() {},
 
     getAllItems() {
       axios.get(`${this.baseURL}cart/?token=${this.token}`).then(
@@ -86,11 +63,11 @@ export default {
     goToCheckout() {
       axios
         .post(
-          this.baseURL + "order/create-checkout-session",
+          this.baseURL + 'order/create-checkout-session',
           this.checkoutBodyArray
         )
         .then((response) => {
-          localStorage.setItem("sessionId", response.data.sessionId);
+          localStorage.setItem('sessionId', response.data.sessionId);
           return response.data;
         })
         .then((session) => {
@@ -102,21 +79,9 @@ export default {
   },
   mounted() {
     // get the token
-    this.token = localStorage.getItem("token");
-
-    // if (typeof this.$route.params.id === "undefined") {
-    //   this.$router.push({ name: "Home" });
-    // }
-
-    // include stripe
-    this.includeStripe(
-      "js.stripe.com/v3/",
-      function() {
-        this.configureStripe();
-      }.bind(this)
-    );
-
+    this.token = localStorage.getItem('token');
     // get all the cart items
+    this.stripe = Stripe(this.stripeAPIToken);
     this.getAllItems();
   },
 };
